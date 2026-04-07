@@ -1,0 +1,5 @@
+-- retrive specific column (student_name and age)
+SELECT student_name, age FROM students;
+
+-- retive data whoes age is greater than 10
+SELECT * FROM students WHERE age > 10;

@@ -1,0 +1,25 @@
+-- Create Database student_db
+CREATE DATABASE school_db;
+
+-- Use the database
+USE school_db;
+
+-- Create Student table
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    age INT,
+    class VARCHAR(10),
+    address VARCHAR(100)
+);
+
+-- Insert 5 record into table
+INSERT INTO students (student_id, student_name, age, class, address) VALUES
+(1, 'Niyati', 26, 'Msc.IT', 'Delhi'),
+(2, 'Shalin', 26, 'Msc.IT', 'Ahmedabad'),
+(3, 'Ravi', 25, 'MCA', 'Mumbai'),
+(4, 'Devanshi', 22, 'MBA', 'Pune'),
+(5, 'Sonal', 24, 'Bsc', 'Surat');
+
+-- Retrive all record using SELECT
+SELECT * FROM students;
