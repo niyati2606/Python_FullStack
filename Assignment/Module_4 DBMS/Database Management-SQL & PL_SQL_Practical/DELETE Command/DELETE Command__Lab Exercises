@@ -1,0 +1,7 @@
+-- delete member who joined before 2020
+DELETE FROM members_backup 
+WHERE date_of_membership < '2020-1-1';
+
+-- delete book whos author is null
+DELETE FROM books
+WHERE author IS NULL;

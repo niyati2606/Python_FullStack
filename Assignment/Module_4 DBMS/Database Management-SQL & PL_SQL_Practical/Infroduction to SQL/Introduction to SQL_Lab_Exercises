@@ -1,0 +1,36 @@
+-- creating DATABASE library_db;
+CREATE DATABASE library_db;
+
+-- creating books table
+CREATE TABLE books (
+    book_id             INT PRIMARY KEY,
+    title               VARCHAR(100)   NOT NULL,
+    author              VARCHAR(100)   NOT NULL,
+    publisher           VARCHAR(100)   NOT NULL,
+    year_of_publication INT            NOT NULL,
+    price               DECIMAL(6, 2)  NOT NULL
+);
+
+-- insert 5 records
+INSERT INTO books (book_id, title, author, publisher, year_of_publication, price) VALUES
+(1, 'The Great Gatsby',      'F. Scott Fitzgerald', 'Scribner',              1925, 10.99),
+(2, 'To Kill a Mockingbird', 'Harper Lee',          'J.B. Lippincott & Co.', 1960, 12.99),
+(3, '1984',                  'George Orwell',       'Secker & Warburg',      1949,  9.99),
+(4, 'Pride and Prejudice',   'Jane Austen',         'T. Egerton',            1813,  8.49),
+(5, 'The Alchemist',         'Paulo Coelho',        'HarperCollins',         1988, 11.99);
+
+-- creating table members
+CREATE TABLE members (
+    member_id INT PRIMARY KEY,
+    member_name VARCHAR(100)  NOT NULL,
+    date_of_membership DATE NOT NULL,
+    email VARCHAR(100)  NOT NULL
+);
+
+-- insert 5 records into members table
+INSERT INTO members (member_id, member_name, date_of_membership, email) VALUES
+(1, 'niya',  '2026-01-25', 'niya@email.com'),
+(2, 'shalin',      '2026-03-22', 'shalin@email.com'),
+(3, 'ravi', '2020-06-10', 'ravi@email.com'),
+(4, 'niyati',    '2024-01-05', 'niyati@email.com'),
+(5, 'ns',   '2019-02-18', 'nr@email.com');

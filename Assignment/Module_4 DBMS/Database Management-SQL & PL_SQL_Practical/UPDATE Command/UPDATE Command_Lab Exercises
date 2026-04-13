@@ -1,0 +1,9 @@
+-- updating year_of_publication for a Specific Book
+UPDATE books
+SET  year_of_publication = 2016
+WHERE book_id = 1;
+
+-- Increase Price by 10% for Books Published Before 2015
+UPDATE books
+SET price = ROUND(price * 1.10, 2)
+WHERE  year_of_publication < 2015;

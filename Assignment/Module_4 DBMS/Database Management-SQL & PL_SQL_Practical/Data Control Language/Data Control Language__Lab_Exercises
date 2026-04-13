@@ -1,0 +1,11 @@
+-- create users librarian
+CREATE USER 'librarian'@'localhost' IDENTIFIED BY 'Lib@1234';
+
+-- granting select to librarian 
+GRANT SELECT ON library_db.books TO 'librarian'@'localhost';
+
+-- create user admin
+CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'Admin@123';
+
+-- grant insert and update permissions 
+GRANT INSERT, UPDATE ON library_db.members_backup TO 'Admin'@'localhost';

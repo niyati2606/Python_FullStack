@@ -1,0 +1,12 @@
+-- retrive books with price between 50 to 100
+SELECT *
+FROM   books
+WHERE  price BETWEEN 50 AND 100
+ORDER BY price ASC;
+
+-- top 3 Books Sorted by Author ASC
+SELECT *
+FROM   books
+WHERE  author IS NOT NULL
+ORDER BY author ASC
+LIMIT 3;

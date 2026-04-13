@@ -1,0 +1,17 @@
+-- Create the view
+CREATE VIEW emp_dept_view AS
+SELECT e.emp_id, e.emp_name, d.dept_name, e.salary
+FROM employees e
+INNER JOIN departments d
+ON e.dept_id = d.dept_id;
+
+--display the view
+SELECT * FROM emp_dept_view;
+
+-- modyfying the view
+CREATE OR REPLACE VIEW emp_dept_view AS
+SELECT e.emp_id, e.emp_name, d.dept_name, e.salary
+FROM employees e
+INNER JOIN departments d
+ON e.dept_id = d.dept_id
+WHERE e.salary >= 50000;

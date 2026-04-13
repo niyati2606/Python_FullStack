@@ -1,0 +1,7 @@
+-- adding column into course table
+ALTER TABLE courses 
+ADD course_duration VARCHAR(50);
+
+-- drop course_credits column from course table
+ALTER TABLE courses 
+DROP COLUMN course_credits;

@@ -1,0 +1,49 @@
+-- create table employee log
+CREATE TABLE employee_log (
+    log_id       INT PRIMARY KEY AUTO_INCREMENT,
+    emp_id       INT,
+    emp_name     VARCHAR(100),
+    dept_id      INT,
+    salary       DECIMAL(10,2),
+    action       VARCHAR(50) DEFAULT 'INSERT',
+    created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- insert a new employee and check the log
+DELIMITER $$
+
+CREATE TRIGGER trigger_log_new_employee
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_log (emp_id, emp_name, dept_id, salary, action)
+    VALUES (NEW.emp_id, NEW.emp_name, NEW.dept_id, NEW.salary, 'INSERT');
+END $$
+
+DELIMITER ;
+
+INSERT INTO employees (emp_name, salary, dept_id) VALUES ('NR', 48000, 5);
+SELECT * FROM employee_log;
+
+-- Add last_modified column to employees table
+ALTER TABLE employees
+ADD COLUMN last_modified DATETIME DEFAULT CURRENT_TIMESTAMP
+ON UPDATE CURRENT_TIMESTAMP;
+
+-- update a salary and check the timestamp
+DELIMITER $$
+
+CREATE TRIGGER trg_update_last_modified
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    SET NEW.last_modified = NOW();
+END $$
+
+DELIMITER ;
+
+UPDATE employees SET salary = 90000 WHERE emp_name = 'Ravi';
+SELECT emp_name, salary, last_modified FROM employees WHERE emp_name = 'Ravi';
+
+-- Check triggers exist
+SHOW TRIGGERS FROM company_db;

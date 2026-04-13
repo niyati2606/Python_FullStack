@@ -1,0 +1,8 @@
+-- drop teachers table
+DROP TABLE teachers;
+
+-- drop student table
+DROP TABLE students;
+
+--veryfying that table is removed
+SHOW TABLES;

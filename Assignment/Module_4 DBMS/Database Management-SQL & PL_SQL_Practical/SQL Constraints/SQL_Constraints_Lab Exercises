@@ -3,7 +3,8 @@ CREATE TABLE teachers (
     teacher_id INT PRIMARY KEY,
     teacher_name VARCHAR(50) NOT NULL,
     subject VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(10) UNIQUE,
 );
 
 -- adding teacher_id into student table

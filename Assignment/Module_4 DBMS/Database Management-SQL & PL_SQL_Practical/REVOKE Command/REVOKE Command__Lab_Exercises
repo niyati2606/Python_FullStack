@@ -1,0 +1,8 @@
+-- revoke insert permission of librarian
+REVOKE INSERT ON library_db.books FROM 'librarian'@'localhost';
+
+FLUSH PRIVILEGES;
+
+-- revoke permission of admin
+REVOKE ALL PRIVILEGES ON library_db.members_backup FROM 'Admin'@'localhost';
+FLUSH PRIVILEGES;

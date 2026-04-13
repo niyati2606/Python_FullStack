@@ -1,0 +1,16 @@
+-- print total numbers of employee
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_total_employees NUMBER;
+BEGIN
+    -- Fetch the count into the variable
+    SELECT COUNT(*) INTO v_total_employees
+    FROM employees;
+
+    -- Print the result
+    DBMS_OUTPUT.PUT_LINE('==============================');
+    DBMS_OUTPUT.PUT_LINE('Total Employees: ' || v_total_employees);
+    DBMS_OUTPUT.PUT_LINE('==============================');
+END;
+/

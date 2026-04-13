@@ -1,0 +1,12 @@
+-- retrive all course using select
+SELECT * FROM courses;
+
+-- sorting course by course_duration in descending order
+SELECT * 
+FROM courses
+ORDER BY course_duration DESC;
+
+-- showing only top 2 course using LIMIT
+SELECT * 
+FROM courses
+LIMIT 2;

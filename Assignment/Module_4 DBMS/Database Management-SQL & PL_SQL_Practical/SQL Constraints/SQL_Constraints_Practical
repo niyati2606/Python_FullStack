@@ -1,0 +1,33 @@
+-- Create table Teacher
+CREATE TABLE teachers (
+    teacher_id INT PRIMARY KEY,
+    teacher_name VARCHAR(50) NOT NULL,
+    subject VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(10) UNIQUE,
+);
+
+-- adding teacher_id into student table
+ALTER TABLE students
+ADD teacher_id INT;
+
+-- applying foreign key constraints
+ALTER TABLE students
+ADD CONSTRAINT fk_teacher
+FOREIGN KEY (teacher_id)
+REFERENCES teachers(teacher_id);
+
+-- inserting values in teacher table
+INSERT INTO teachers (teacher_id, teacher_name, subject, email) VALUES
+(101, 'Darshita Kalyani', 'RDBMS', 'dk@gmail.com'),
+(102, 'Vishal Narvani', 'WP-Python', 'vn@gmail.com'),
+(103, 'Ruchika Rami', 'Cuber Security', 'rr@gmail.com'),
+(104, 'Harshal Arolkar', 'Block Chain', 'ha@gmail.com'),
+(105, 'Mr. Singh', 'Social Studies', 'singh@gmail.com');
+
+-- inserting values in student table with teacher_Id
+INSERT INTO students (student_id, student_name, age, class, address, teacher_id) VALUES
+(9, 'Maitri', 24, 'Msc.it', 'Delhi', 101),
+(10, 'Zeel', 22, 'MCA', 'Ahmedabad', 103),
+(11, 'Heena', 26, 'MBA', 'Ahmedabad', 102),
+(12, 'Karan', 15, '9th', 'Surat', 105);

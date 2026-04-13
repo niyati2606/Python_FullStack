@@ -1,0 +1,7 @@
+-- CHECK Constraint to ensure book price
+ALTER TABLE books
+ADD CONSTRAINT chk_price CHECK (price > 0);
+
+-- UNIQUE Constraint to ensure email is unique
+ALTER TABLE members
+ADD CONSTRAINT uq_email UNIQUE (email);

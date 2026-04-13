@@ -1,0 +1,7 @@
+-- adding column into books table
+ALTER TABLE books
+ADD COLUMN genre VARCHAR(50);
+
+-- modify column email in members table
+ALTER TABLE members
+MODIFY COLUMN email VARCHAR(100) NOT NULL;

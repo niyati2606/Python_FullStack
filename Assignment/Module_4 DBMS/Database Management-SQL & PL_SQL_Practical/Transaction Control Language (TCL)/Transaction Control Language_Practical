@@ -1,0 +1,36 @@
+-- insert rows into course and use commit
+START TRANSACTION;
+
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(301, 'Data Structures', '5 months'),
+(302, 'Machine Learning', '6 months');
+
+COMMIT;
+
+-- insert additional rows and use ROLLBACK
+START TRANSACTION;
+
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(303, 'Artificial Intelligence', '6 months'),
+(304, 'Cloud Computing', '4 months');
+
+ROLLBACK;
+
+-- creating svepoint and rollback specific changes
+START TRANSACTION;
+
+-- First insert
+INSERT INTO courses VALUES (305, 'Cyber Security', '5 months');
+
+-- Create savepoint
+SAVEPOINT sp1;
+
+-- Update operation
+UPDATE courses
+SET course_duration = '8 months'
+WHERE course_id = 305;
+
+-- Rollback to savepoint (undo only update)
+ROLLBACK TO sp1;
+
+COMMIT;

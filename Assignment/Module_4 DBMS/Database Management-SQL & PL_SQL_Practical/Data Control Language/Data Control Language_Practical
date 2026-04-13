@@ -1,0 +1,15 @@
+-- create users
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'Admin@123';
+CREATE USER 'niyati'@'localhost' IDENTIFIED BY 'Niyati@123';
+
+-- granting permisson to user1(admin) 
+GRANT SELECT ON university_db.courses TO 'admin'@'localhost';
+
+
+-- GRANT INSERT ON school_db.courses TO 'admin'@'localhost';
+
+-- Revoke INSERT permission from user1
+REVOKE INSERT ON school_db.courses FROM 'admin'@'localhost';
+	
+-- Grant INSERT permission to user2
+GRANT INSERT ON school_db.courses TO 'niyati'@'localhost';

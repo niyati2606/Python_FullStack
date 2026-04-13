@@ -1,0 +1,53 @@
+--creating New DB
+CREATE DATABASE company_db;
+
+-- Departments table
+CREATE TABLE departments (
+    dept_id   INT PRIMARY KEY AUTO_INCREMENT,
+    dept_name VARCHAR(100) NOT NULL,
+    location  VARCHAR(100)
+);
+
+-- Employees table
+CREATE TABLE employees (
+    emp_id    INT PRIMARY KEY AUTO_INCREMENT,
+    emp_name  VARCHAR(100) NOT NULL,
+    salary    DECIMAL(10,2),
+    dept_id   INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+
+-- insert data in to department and employee
+INSERT INTO departments (dept_name) VALUES
+('Mobile'),
+('Front End'),
+('Back End'),
+('Cloud'),
+('HR');
+
+INSERT INTO employees (emp_name, salary, dept_id) VALUES
+('Shalin', 75000, 3),
+('Niyati', 60000, 1),
+('Niya', 55000, 1),
+('Devanshi', 70000, 2),
+('Ravi', 80000, 3);
+
+
+--Inner join to display emp_name with department
+SELECT 
+employees.emp_id, employees.emp_name, departments.dept_name 
+FROM 
+employees 
+INNER JOIN 
+departments ON employees.dept_id = departments.dept_id
+
+--LEFT JOIN to show all departments
+SELECT
+    departments.dept_id,
+    departments.dept_name,
+    employees.emp_id,
+    employees.emp_name,
+    employees.salary
+FROM departments
+LEFT JOIN employees
+    ON departments.dept_id = employees.dept_id;

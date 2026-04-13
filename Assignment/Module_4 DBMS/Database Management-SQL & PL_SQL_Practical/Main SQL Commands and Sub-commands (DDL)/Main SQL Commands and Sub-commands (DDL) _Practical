@@ -1,0 +1,9 @@
+-- creating table course
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(50),
+    course_credits INT
+);
+
+-- creating database university_db
+CREATE DATABASE university_db;

@@ -1,0 +1,16 @@
+-- insert records into course table
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(201, 'Data Science', '6 months'),
+(202, 'Computer Science', '4 months'),
+(203, 'Cyber Security', '3 months'),
+(204,'Python','4 months'),
+(205, 'Operating Systems', '5 months');
+
+-- updating course duration for sepcific course
+UPDATE courses
+SET course_duration = '8 months'
+WHERE course_id = 201;
+
+-- deleting specific course with specific course_id  
+DELETE FROM courses
+WHERE course_id = 205;

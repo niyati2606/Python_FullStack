@@ -1,0 +1,12 @@
+-- decribe structure of publishers table
+DESCRIBE publishers;
+
+-- drop publishers table
+DROP TABLE publishers;
+
+-- create members_backup table
+CREATE TABLE members_backup AS 
+SELECT * FROM members;
+
+--dropping the original members table
+DROP TABLE members;

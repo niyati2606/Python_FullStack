@@ -1,0 +1,18 @@
+-- COUNT employees per department
+SELECT  
+	dept_id, 
+    COUNT(emp_id) AS employees_count
+FROM employees
+GROUP BY dept_id;
+
+-- AVG salary per department
+SELECT
+    dept_id,
+    COUNT(emp_id)        AS employee_count,
+    AVG(salary)          AS avg_salary,
+    MIN(salary)          AS min_salary,
+    MAX(salary)          AS max_salary
+FROM employees
+GROUP BY dept_id
+ORDER BY avg_salary DESC;
+

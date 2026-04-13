@@ -1,0 +1,14 @@
+-- insert records into authors table
+INSERT INTO authors (author_id, first_name, last_name, country) VALUES
+(6, 'Chetan', 'Bhagat', 'India'),
+(7, 'Arundhati', 'Roy', 'India'),
+(8,'Amish', 'Tripathi', 'India');
+
+-- updating last name for sepcific author
+UPDATE authors
+SET    last_name = 'Desai'
+WHERE  author_id = 8;
+
+-- delete book from books table where price is higher then 100
+DELETE FROM books
+WHERE price > 100;
