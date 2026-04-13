@@ -1,0 +1,2 @@
+This is file management demo using Python
+File is appended by A operation
