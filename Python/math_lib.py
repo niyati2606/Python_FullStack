@@ -5,14 +5,14 @@ print("-----Factorial------")
 print(math.factorial(125))
 print("--------------------")
 
-'''
+
 print("")
 print("-----Addition------")
 a = int(input("Enter A : "))
 b = int(input("Enter B : "))
 c = a + b
 print("Addition = ",c)
-'''
+
    
 print("")
 print("-----Multiplication------")

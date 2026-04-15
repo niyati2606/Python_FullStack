@@ -1,16 +1,4 @@
-''' Odd Even '''
-
-
-a = int(input("Enter any Number : "))
-
-if a % 2 == 0:
-    print("Number is Even")
-else:
-    print("Number is Odd")
-
-        
-''' Find Max Number '''
-print("")
+# find max number from 2 numbers
 print("---Find Max from 2 number----")
 num1 = int(input("Enter Number1 : "))
 num2 = int(input("Enter Number2 : "))
