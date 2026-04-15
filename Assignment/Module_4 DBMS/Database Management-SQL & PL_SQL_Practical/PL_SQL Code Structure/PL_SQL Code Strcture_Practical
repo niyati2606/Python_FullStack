@@ -1,0 +1,61 @@
+-- check employee department using if-else
+DELIMITER //
+
+CREATE PROCEDURE check_employee_department(IN p_emp_id INT)
+BEGIN
+    DECLARE dept_name VARCHAR(50);
+
+    -- Get department name using JOIN
+    SELECT d.dept_name INTO dept_name
+    FROM employees e
+    JOIN departments d ON e.dept_id = d.dept_id
+    WHERE e.emp_id = p_emp_id;
+
+    -- IF-THEN logic
+    IF dept_name = 'HR' THEN
+        SELECT 'Employee works in HR department' AS Message;
+    ELSEIF dept_name = 'IT' THEN
+        SELECT 'Employee works in IT department' AS Message;
+    ELSE
+        SELECT CONCAT('Employee works in ', dept_name, ' department') AS Message;
+    END IF;
+
+END //
+
+DELIMITER ;
+
+CALL check_employee_department(1);
+
+===========================================================================================
+-- display employee names using for loop
+
+DELIMITER $$
+
+CREATE PROCEDURE show_employee_names()
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE emp_name VARCHAR(100);
+
+    DECLARE emp_cursor CURSOR FOR 
+        SELECT emp_name FROM employees;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN emp_cursor;
+
+    read_loop: LOOP
+        FETCH emp_cursor INTO emp_name;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        SELECT emp_name;
+    END LOOP;
+
+    CLOSE emp_cursor;
+END$$
+
+DELIMITER ;
+
+-- Call procedure
+CALL show_employee_names();

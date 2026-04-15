@@ -1,0 +1,60 @@
+--  INSERT → SAVEPOINT → UPDATE → ROLLBACK TO SAVEPOINT
+SELECT * FROM members ORDER BY member_id;
+
+START TRANSACTION;
+INSERT INTO members (member_id, member_name, date_of_membership, email)
+VALUES (11, 'Kiran Patel', '2024-04-01', 'kiran.patel@email.com');
+ 
+SELECT * FROM members WHERE member_id = 11;
+
+SAVEPOINT after_insert;
+ 
+UPDATE members SET member_name  = 'Kiran Kumar' WHERE member_id = 11;
+UPDATE members SET email = 'kiran.kumar@email.com' WHERE member_id = 11;
+UPDATE members SET date_of_membership = '2026-01-01'  WHERE member_id = 1;
+ 
+SELECT * FROM members WHERE member_id IN (1, 11);
+
+ROLLBACK TO SAVEPOINT after_insert;
+
+SELECT * FROM members WHERE member_id IN (1, 11);
+
+============================================================
+
+-- COMMIT multiple inserts, then ROLLBACK after SAVEPOINT
+SELECT book_id, title, price FROM books ORDER BY book_id;
+ 
+START TRANSACTION;
+ 
+INSERT INTO books (book_id, title, author_id, publisher, year_of_publication, price, genre) VALUES
+(11, 'The Oath of the Vayuputras', 1, 'Westland Press',   2013, 105.00, 'Mythology'),
+(12, 'Ram: Scion of Ikshvaku',     1, 'Westland Press',   2016,  99.00, 'Mythology'),
+(13, 'The Krishna Key',            3, 'Westland Press',   2012,  95.00, 'Thriller');
+ 
+SELECT book_id, title, price FROM books WHERE book_id IN (11, 12, 13);
+
+COMMIT;
+ 
+SELECT 'Books 11, 12, 13 committed permanently.' AS status;
+
+---------
+START TRANSACTION;
+ 
+-- Set SAVEPOINT before making further changes
+SAVEPOINT before_changes;
+ 
+UPDATE books SET price = 200.00 WHERE book_id = 11;
+UPDATE books SET price = 175.00 WHERE book_id = 12;
+ 
+INSERT INTO books (book_id, title, author_id, publisher, year_of_publication, price, genre)
+VALUES (14, 'Tempporary Entry', NULL, 'Unknown', 2026, 50.00, 'Mystery');
+ 
+SELECT book_id, title, price FROM books WHERE book_id IN (11, 12, 14);
+
+ROLLBACK TO SAVEPOINT before_changes;
+ 
+SELECT book_id, title, price FROM books WHERE book_id IN (11, 12, 14);
+
+COMMIT;
+
+SELECT book_id, title, price, genre FROM books ORDER BY book_id;

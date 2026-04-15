@@ -1,0 +1,58 @@
+-- Cursor: Fetch All Members
+
+DELIMITER $$
+CREATE PROCEDURE FetchAllMembers()
+BEGIN
+    DECLARE v_member_id   INT;
+    DECLARE v_member_name VARCHAR(100);
+    DECLARE v_date        DATE;
+    DECLARE v_email       VARCHAR(100);
+    DECLARE v_done        INT DEFAULT 0;
+
+    DECLARE cur_members CURSOR FOR
+        SELECT member_id, member_name, date_of_membership, email
+        FROM   members ORDER BY member_id;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done = 1;
+
+    OPEN cur_members;
+    read_loop: LOOP
+        FETCH cur_members INTO v_member_id, v_member_name, v_date, v_email;
+        IF v_done = 1 THEN LEAVE read_loop; END IF;
+        -- process each row
+    END LOOP;
+    CLOSE cur_members;
+END$$
+DELIMITER ;
+
+CALL FetchAllMembers();
+
+=================================================================================
+
+-- Cursor: Fetch Books by Author
+
+-- Retrieve all books by particular author
+DELIMITER $$
+ 
+CREATE PROCEDURE GetBooksByAuthor(
+    IN p_author_name VARCHAR(100)       -- IN parameter: full author name
+)
+BEGIN
+    SELECT
+        b.book_id,
+        b.title,
+        CONCAT(a.first_name, ' ', a.last_name) AS author_name,
+        b.publisher,
+        b.year_of_publication,
+        b.price,
+        b.genre
+    FROM   books b
+    INNER JOIN authors a ON b.author_id = a.author_id
+    WHERE  CONCAT(a.first_name, ' ', a.last_name) = p_author_name
+    ORDER BY b.year_of_publication ASC;
+END$$
+ 
+DELIMITER ;
+
+-- Call it
+CALL GetBooksByAuthor('Amish Tripathi');

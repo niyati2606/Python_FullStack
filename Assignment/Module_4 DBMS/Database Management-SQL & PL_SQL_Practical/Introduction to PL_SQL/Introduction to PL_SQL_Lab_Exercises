@@ -1,0 +1,52 @@
+-- insert book
+DELIMITER $$
+
+CREATE PROCEDURE insert_book(
+    IN p_book_id INT,
+    IN p_title VARCHAR(100),
+    IN p_author_id VARCHAR(100),
+    IN p_publisher VARCHAR(100),
+    IN p_year_of_publication INT,
+    IN p_price DECIMAL(10,2),
+    IN p_genre VARCHAR(50),
+    IN p_last_modified DATETIME
+)
+BEGIN
+    INSERT INTO books (
+        book_id,
+        title,
+        author_id,
+        publisher,
+        year_of_publication , 
+        price,
+        genre,
+        last_modified
+    )
+    VALUES (p_book_id, p_title, p_author_id,p_publisher,p_year_of_publication, p_price,p_genre,p_last_modified);
+
+    SELECT 'Book inserted successfully.' AS message;
+END $$
+
+DELIMITER ;
+
+-- call it
+CALL insert_book(1, 'Harry Potter', 1, "Penguin India",2016,80,"Cartoon",NOW());
+
+SELECT * FROM books;
+
+=======================================================================================================================
+-- get total books
+DELIMITER $$
+
+CREATE PROCEDURE get_total_books()
+BEGIN
+    DECLARE total INT;
+
+    SELECT COUNT(*) INTO total FROM books;
+
+    SELECT CONCAT('Total number of books : ', total) AS message;
+END $$
+
+DELIMITER ;
+
+CALL get_total_books();

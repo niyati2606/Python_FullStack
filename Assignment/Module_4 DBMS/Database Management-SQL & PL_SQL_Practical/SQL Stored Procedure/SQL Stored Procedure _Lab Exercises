@@ -1,0 +1,46 @@
+-- Retrieve all books by particular author
+DELIMITER $$
+ 
+CREATE PROCEDURE GetBooksByAuthor(
+    IN p_author_name VARCHAR(100)       -- IN parameter: full author name
+)
+BEGIN
+    SELECT
+        b.book_id,
+        b.title,
+        CONCAT(a.first_name, ' ', a.last_name) AS author_name,
+        b.publisher,
+        b.year_of_publication,
+        b.price,
+        b.genre
+    FROM   books b
+    INNER JOIN authors a ON b.author_id = a.author_id
+    WHERE  CONCAT(a.first_name, ' ', a.last_name) = p_author_name
+    ORDER BY b.year_of_publication ASC;
+END$$
+ 
+DELIMITER ;
+
+-- Call it
+CALL GetBooksByAuthor('Amish Tripathi');
+
+========================================================================================
+-- Procedure: Get Price by book_id 
+
+DELIMITER $$
+ 
+CREATE PROCEDURE GetBookPrice(
+    IN  p_book_id INT,                  -- IN  parameter: book_id to look up
+    OUT p_price   DECIMAL(6, 2)         -- OUT parameter: price returned to caller
+)
+BEGIN
+    SELECT price
+    INTO   p_price
+    FROM   books
+    WHERE  book_id = p_book_id;
+END$$
+ 
+DELIMITER ;
+
+--call it
+CALL GetBookPrice(3, @price);

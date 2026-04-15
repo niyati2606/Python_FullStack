@@ -1,0 +1,35 @@
+-- print total numbers of employee
+DELIMITER //
+
+CREATE PROCEDURE total_employees_proc()
+BEGIN
+    DECLARE v_total_employees INT;
+
+    SELECT COUNT(*) INTO v_total_employees
+    FROM employees;
+
+    SELECT CONCAT('Total Employees: ', v_total_employees) AS Result;
+END //
+
+DELIMITER ;
+
+CALL total_employees_proc();
+
+================================================================
+
+-- calculate total sales
+DELIMITER //
+
+CREATE PROCEDURE calculate_total_sales()
+BEGIN
+    DECLARE total_sales DECIMAL(10,2);
+
+    SELECT SUM(sale_amount) INTO total_sales
+    FROM orders;
+
+    SELECT total_sales AS Total_Sales;
+END //
+
+DELIMITER ;
+
+CALL calculate_total_sales();

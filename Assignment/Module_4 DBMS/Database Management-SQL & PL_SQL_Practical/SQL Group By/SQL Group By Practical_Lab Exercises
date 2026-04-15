@@ -1,0 +1,15 @@
+-- GROUP BY genre: Total number of books per genre
+SELECT
+    genre,
+    COUNT(*) AS total_books
+FROM   books
+GROUP BY genre
+ORDER BY total_books DESC, genre ASC;
+
+-- GROUP BY join year: Members who joined each year
+SELECT
+    YEAR(date_of_membership)  AS join_year,
+    COUNT(*) AS total_members
+FROM   members
+GROUP BY join_year
+ORDER BY join_year ASC;

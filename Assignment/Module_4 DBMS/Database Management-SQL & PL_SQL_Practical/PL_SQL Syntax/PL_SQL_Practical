@@ -1,0 +1,16 @@
+-- assigning values and display variable
+SET @book_id = 101;
+SET @price = 499;
+
+SELECT 
+    CONCAT('Book ID: ', @book_id) AS Book_ID,
+    CONCAT('Price: ', @price) AS Price;
+
+-- constant and arithmetic operation
+SET @price = 500;
+SET @discount = 50;
+
+SELECT 
+    @price AS Original_Price,
+    @discount AS Discount,
+    (@price - @discount) AS Final_Price;

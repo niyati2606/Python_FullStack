@@ -1,0 +1,96 @@
+-- IF-THEN-ELSE to check if a book's price
+DELIMITER $$
+
+CREATE PROCEDURE CheckBookPrice(
+    IN p_title  VARCHAR(100),
+    IN p_price  DECIMAL(10,2)
+)
+BEGIN
+    IF p_price > 100 THEN
+        SELECT  p_title  AS Book_Title,
+                p_price  AS Price,
+                'EXPENSIVE – Price is above 100.' AS Status;
+    ELSE
+        SELECT  p_title  AS Book_Title,
+                p_price  AS Price,
+                'AFFORDABLE – Price is 100 or below.' AS Status;
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- call it
+CheckBookPrice("The Rozabal Line",85)
+CheckBookPrice("The Rozabal Line",105)
+
+====================================================================
+-- get bok by id
+DELIMITER $$
+
+CREATE PROCEDURE GetBookByID(
+    IN p_book_id INT
+)
+BEGIN
+    DECLARE v_book_id     INT;
+    DECLARE v_title       VARCHAR(100);
+    DECLARE v_author_id   INT;
+    DECLARE v_publisher   VARCHAR(100);
+    DECLARE v_year        INT;
+    DECLARE v_price       DECIMAL(10,2);
+    DECLARE v_genre       VARCHAR(50);
+    DECLARE v_modified    DATETIME;
+    DECLARE v_found       INT DEFAULT 0;
+    DECLARE done          INT DEFAULT 0;
+
+    -- Cursor from YOUR actual books table
+    DECLARE book_cur CURSOR FOR
+        SELECT book_id, title, author_id, publisher,
+               year_of_publication, price, genre, last_modified
+        FROM books;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN book_cur;
+
+    search_loop: LOOP
+        FETCH book_cur INTO v_book_id, v_title, v_author_id,
+                            v_publisher, v_year, v_price,
+                            v_genre, v_modified;
+
+        IF done = 1 THEN
+            LEAVE search_loop;
+        END IF;
+
+        -- Match user entered Book ID
+        IF v_book_id = p_book_id THEN
+            SET v_found = 1;
+
+            SELECT  v_book_id    AS Book_ID,
+                    v_title      AS Title,
+                    v_author_id  AS Author_ID,
+                    v_publisher  AS Publisher,
+                    v_year       AS Year_of_Publication,
+                    v_price      AS Price,
+                    v_genre      AS Genre,
+                    v_modified   AS Last_Modified,
+                    CASE
+                        WHEN v_price > 100 THEN '*** PREMIUM BOOK ***'
+                        ELSE 'Affordable Book'
+                    END          AS Label;
+
+            LEAVE search_loop;
+        END IF;
+
+    END LOOP;
+
+    CLOSE book_cur;
+
+    -- If Book ID not found
+    IF v_found = 0 THEN
+        SELECT p_book_id AS Entered_Book_ID,
+               'No book found with this ID.' AS Message;
+    END IF;
+
+END$$
+
+DELIMITER ; 

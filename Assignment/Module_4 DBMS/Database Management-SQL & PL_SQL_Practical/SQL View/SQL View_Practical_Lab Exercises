@@ -1,0 +1,28 @@
+======================================================
+-- Create the view
+CREATE VIEW view_books_summary AS
+SELECT
+    b.book_id,
+    b.title,
+    CONCAT(a.first_name, ' ', a.last_name) AS author_name,
+    b.price
+FROM   books b
+LEFT JOIN authors a ON b.author_id = a.author_id;
+
+-- display the view
+SELECT * FROM book_details_view;
+
+========================================================
+-- View : Members who joined before 2020
+
+CREATE VIEW view_early_members AS
+SELECT
+    member_id,
+    member_name,
+    date_of_membership,
+    email
+FROM   members
+WHERE  date_of_membership < '2020-01-01';
+ 
+ -- display the view
+ SELECT * FROM view_early_members;

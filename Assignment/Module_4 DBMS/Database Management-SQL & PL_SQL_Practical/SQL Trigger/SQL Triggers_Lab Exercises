@@ -1,0 +1,35 @@
+-- adding last_modified column into books table
+ALTER TABLE books
+ADD COLUMN last_modified DATETIME DEFAULT NOW();
+
+SELECT * FROM books;
+
+-- creating trigger for last_modified timestamp of the books
+CREATE OR REPLACE TRIGGER update_last_modified
+BEFORE UPDATE ON books
+FOR EACH ROW
+SET NEW.last_modified = NOW();
+
+-- updating data in books table for test
+UPDATE books SET title = 'New Book' WHERE id = 1;
+SELECT id, title, last_modified FROM books WHERE id = 1;
+
+============================================================================
+-- creating table log changes
+CREATE TABLE log_changes (
+  log_id      INT AUTO_INCREMENT PRIMARY KEY,
+  book_id     INT,
+  book_title  VARCHAR(255),
+  deleted_at  DATETIME DEFAULT NOW()
+);
+
+-- creating trigger
+CREATE OR REPLACE TRIGGER log_book_delete
+AFTER DELETE ON books
+FOR EACH ROW
+INSERT INTO log_changes (book_id, book_title, deleted_at)
+VALUES (OLD.book_id, OLD.title, NOW());
+
+-- testing
+DELETE FROM books WHERE book_id = 1;
+SELECT * FROM log_changes;

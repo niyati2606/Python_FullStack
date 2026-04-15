@@ -1,0 +1,28 @@
+-- savepoint and rollback
+START TRANSACTION;
+
+INSERT INTO employees VALUES (201, 'Ravi', 30000, 1);
+
+SAVEPOINT sp1;
+
+INSERT INTO employees VALUES (202, 'Amit', 35000, 2);
+INSERT INTO employees VALUES (203, 'Neha', 40000, 3);
+
+-- Rollback only last inserts
+ROLLBACK TO sp1;
+
+COMMIT;
+
+=================================================================
+-- commit data, then rollback reamining
+START TRANSACTION;
+
+INSERT INTO employees VALUES (301, 'Kiran', 28000, 1);
+
+SAVEPOINT sp1;
+
+INSERT INTO employees VALUES (302, 'Pooja', 32000, 2);
+
+COMMIT;
+
+ROLLBACK;

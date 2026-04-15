@@ -1,0 +1,65 @@
+-- explicit cursor to retirive and display employee details
+DELIMITER $$
+
+CREATE PROCEDURE show_employee_details()
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_id INT;
+    DECLARE v_name VARCHAR(100);
+    DECLARE v_salary DECIMAL(10,2);
+
+    DECLARE emp_cursor CURSOR FOR 
+        SELECT emp_id, emp_name, salary FROM employees;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN emp_cursor;
+
+    emp_loop: LOOP
+        FETCH emp_cursor INTO v_id, v_name, v_salary;
+        IF done THEN
+            LEAVE emp_loop;
+        END IF;
+
+        SELECT v_id AS ID, v_name AS Name, v_salary AS Salary;
+    END LOOP;
+
+    CLOSE emp_cursor;
+END$$
+
+DELIMITER ;
+
+CALL show_employee_details();
+
+=======================================================================
+-- cursor to retrive all courses
+DELIMITER $$
+
+CREATE PROCEDURE show_courses()
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE c_id INT;
+    DECLARE c_name VARCHAR(100);
+
+    DECLARE course_cursor CURSOR FOR 
+        SELECT course_id, course_name FROM courses;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN course_cursor;
+
+    course_loop: LOOP
+        FETCH course_cursor INTO c_id, c_name;
+        IF done THEN
+            LEAVE course_loop;
+        END IF;
+
+        SELECT c_id AS CourseID, c_name AS CourseName;
+    END LOOP;
+
+    CLOSE course_cursor;
+END$$
+
+DELIMITER ;
+
+CALL show_courses();
