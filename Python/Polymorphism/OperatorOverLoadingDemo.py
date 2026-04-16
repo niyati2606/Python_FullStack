@@ -1,12 +1,14 @@
 class Point:
 
-    def __init__(self,x,y):
+    def __init__(self,x,y): # when the object of function is creates this fun
         print("init called")
         self.x=x
         self.y=y
+        
     def __str__(self):
         print("str called")
         return "{0},{1}".format(self.x,self.y)
+
     def __add__(self,obj):
         print("add called")
         x=self.x+obj.x
