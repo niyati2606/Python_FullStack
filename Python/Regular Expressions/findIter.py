@@ -1,0 +1,7 @@
+import re
+
+name = "Python is world's best proramming language"
+
+for i in re.finditer("world's",name) :
+    ans = i.span()
+    print(ans)
