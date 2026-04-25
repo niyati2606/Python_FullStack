@@ -10,6 +10,7 @@ def create_connection() :
             user = "root",
             password = "",
             database = "student_python"
+            
         )
 print("Checking SQL Connection :", create_connection())
 
