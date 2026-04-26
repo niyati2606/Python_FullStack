@@ -1,4 +1,10 @@
-age = 18
+class Parent:
+    def __init__(self):
+        print("Parent constructor")
 
-if age >= 18:
-    print("You are eligible to vote")
+class Child(Parent):
+    def __init__(self):
+        super().__init__()  # calling parent constructor
+        print("Child constructor")
+
+obj = Child()

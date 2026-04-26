@@ -48,14 +48,83 @@ def insert_data() :
         msg.showinfo("Insert Status", "Data Inserted Successfully..!!") 
     
 def search_data() :
-    print("Search Button Clicked")
+    e_firstName.delete(0,'end')
+    e_lastName.delete(0,'end')
+    e_email.delete(0,'end')
+    e_phone.delete(0,'end')
 
+    if e_id.get() == "" :
+        msg.showinfo("Search Status", "Please enter ID to search Data")
+    else :
+        connection = create_connection()
+        cursor = connection.cursor()
+        searchQuery = "search * from student_info where ID = %s)"
+        searchDetails = (e_id.get(),)
+        cursor.execute(searchQuery, searchDetails)
+        row = cursor.fetchall()
+        if row :
+            e_firstName.insert(0, row[0][1])
+            e_lastName.insert(0, row[0][2])
+            e_email.insert(0, row[0][3])
+            e_phone.insert(0, row[0][4])
+        else :
+            msg.showinfo("Search Status", "Data not Found")
+        connection.close()
+        
 def update_data() :
-    print("Update Button Clicked")
+    emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+    mobilePattern = r'^\d{10}$'
+
+    if e_id.get() == "" and e_firstName.get() == "" and e_lastName.get() == "" and e_email.get() == "" and e_phone.get() == "":
+        msg.showinfo("Update Status", "Please Enter All Details")
+    elif e_id.get() == "" :
+        msg.showinfo("Update Status", "Please Enter ID")
+    elif e_firstName.get() == "" :
+        msg.showinfo("Update Status", "Please Enter First Name")
+    elif e_lastName.get() == "" :
+        msg.showinfo("Update Status", "Please Enter Last Name")
+    elif e_email.get() == "" :
+        msg.showinfo("Update Status", "Please Enter EmailID")
+    elif not re.match(emailPattern, e_email.get()) :
+        msg.showinfo("Update Status", "Please Enter Valid EmailID")
+    elif e_phone.get() == "" :
+        msg.showinfo("Update Status", "Please Enter Phone Number")
+    elif not re.match(mobilePattern, e_phone.get()) :
+        msg.showinfo("Update Status", "Please Enter Valid Phone Number")        
+    else :
+        connection = create_connection()
+        cursor = connection.cursor()
+        updateQuery = "update student_info set firstName = %s, lastName = %s, email = %s, mobile = %s, ID = %s"
+        updatedDetails = (e_firstName.get(), e_lastName.get(), e_email.get(), e_phone.get(), e_id.get())
+        cursor.execute(updateQuery, updatedDetails)
+        connection.commit()
+        connection.close()
+        e_id.delete(0,'end')
+        e_firstName.delete(0,'end')
+        e_lastName.delete(0,'end')
+        e_email.delete(0,'end')
+        e_phone.delete(0,'end')
+        msg.showinfo("Update Status", "Data Updated Successfully..!!") 
 
 def delete_data() :
-    print("Delete Button Clicked")
-
+    if e_id.get() == "" :
+        msg.showinfo("Delete Status", "Please enter ID to Delete Data")
+    else :
+        connection = create_connection()
+        cursor = connection.cursor()
+        deleteQuery = "delete from student_info where ID = %s)"
+        deleteDetails = (e_id.get(),)
+        cursor.execute(deleteQuery, deleteDetails)
+        
+        e_id.delete(0,'end')
+        e_firstName.delete(0,'end')
+        e_lastName.delete(0,'end')
+        e_email.delete(0,'end')
+        e_phone.delete(0,'end')
+        msg.showinfo("Delete Status", "Data Deleted Sucessfully..!!!")
+        connection.commit()
+        connection.close()
+        
 root = Tk()
 root.geometry("350x380")
 root.title("Tkinter Example")
