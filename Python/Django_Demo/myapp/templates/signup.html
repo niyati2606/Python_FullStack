@@ -1,0 +1,180 @@
+{% extends 'header.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            color: red;
+        }
+
+        .wrap {
+            margin-left: 50px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 2rem;
+            width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 8px 6px;
+            vertical-align: middle;
+        }
+
+        td:first-child {
+            width: 150px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            background: #fafafa;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #185FA5;
+            background: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .upload-label {
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 13px;
+            color: #555;
+            cursor: pointer;
+            background: #fafafa;
+        }
+
+        .upload-label:hover {
+            background: #eee;
+        }
+
+        .file-name {
+            font-size: 12px;
+            color: #999;
+            margin-left: 8px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 4px 0;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #0C447C;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #185FA5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" placeholder="First name"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" placeholder="Last name"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" placeholder="example@email.com"></td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td><input type="tel" placeholder="98765 43210"></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><textarea rows="3" placeholder="Enter your address"></textarea></td>
+            </tr>
+            <tr>
+                <td>Profile Picture</td>
+                <td>
+                    <label class="upload-label" for="pic">Choose file</label>
+                    <span class="file-name" id="file-name">No file chosen</span>
+                    <input type="file" id="pic" accept="image/*" style="display:none"
+                        onchange="document.getElementById('file-name').textContent = this.files[0] ? this.files[0].name : 'No file chosen'">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" placeholder="Min. 8 characters"></td>
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td><input type="password" placeholder="Re-enter password"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn" type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}

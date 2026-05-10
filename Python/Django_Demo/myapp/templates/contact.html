@@ -1,0 +1,116 @@
+{% extends 'header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <style>
+        span {
+            color: red;
+        }
+        tr,
+        td {
+            padding: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        function checkName() {
+            var name = document.contact.contactname.value;
+            var reg = /^[A-Za-z]+$/;
+            if (name == "") {
+                document.getElementById("contactname").innerHTML = "Please Enter Name";
+            }
+            else if (!reg.test(name)) {
+                document.getElementById("contactname").innerHTML = "Please Enter Only Alphabets";
+            }
+            else {
+                document.getElementById("contactname").innerHTML = "";
+            }
+        }
+        function checkEmail() {
+            var email = document.contact.contactemail.value;
+            var reg=/^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+            if (email == "") {
+                document.getElementById("contactemail").innerHTML = "Please Enter Email";
+            }
+            else if (!reg.test(email)) {
+                document.getElementById("contactemail").innerHTML = "Please Enter Valid Email";
+            }
+            else {
+                document.getElementById("contactemail").innerHTML = "";
+            }
+        }
+        function checkMobile() {
+            var mobile = document.contact.contactmobile.value;
+            var reg=/^\d{10}$/;
+            if (mobile == "") {
+                document.getElementById("contactmobile").innerHTML = "Please Enter Mobile Number";
+            }
+            else if (!reg.test(mobile)) {
+                document.getElementById("contactmobile").innerHTML = "Please Enter Valid Mobile Number";
+            }
+            else {
+                document.getElementById("contactmobile").innerHTML = "";
+            }
+        }
+        function checkRemarks() {
+            var remarks = document.contact.contactremarks.value;
+            if (remarks == "") {
+                document.getElementById("contactremarks").innerHTML = "Please Enter Remarks";
+            }
+            else {
+                document.getElementById("contactremarks").innerHTML = "";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    {% if msg %}
+    <b style="color: blue;">{{msg}}</b>
+    {% endif %}
+    <form name="contact" method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="contactname" onblur="checkName();"></td>
+                <td><span id="contactname"></span></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="contactemail" onblur="checkEmail()"></td>
+                <td><span id="contactemail"></span></td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td><input type="text" name="contactmobile" onblur="checkMobile()"></td>
+                <td><span id="contactmobile"></span></td>
+            </tr>
+            <tr>
+                <td>Remarks</td>
+                <td><textarea rows="5" cols="22" name="contactremarks" onblur="checkRemarks()"></textarea></td>
+                <td><span id="contactremarks"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="SUBMIT" class="btn btn-primary">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <h3>Recent Contacts</h3>
+    <hr>
+    {% for i in contacts %}
+    Name : {{i.name}}<br>
+    Remarks : {{i.remarks}}<br>
+    <hr>
+    {% endfor %}
+    </div>
+</body>
+
+</html>
+{% endblock %}
