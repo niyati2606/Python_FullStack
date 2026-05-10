@@ -119,59 +119,112 @@
             background: #185FA5;
         }
     </style>
+    <script type="text/javascript">
+        function checkName() {
+            var name = document.signup.signupname.value;
+            var reg = /^[A-Za-z]+$/;
+            if (name == "") {
+                document.getElementById("signupname").innerHTML = "Please Enter Name";
+            }
+            else if (!reg.test(name)) {
+                document.getElementById("signupname").innerHTML = "Please Enter Only Alphabets";
+            }
+            else {
+                document.getElementById("signupname").innerHTML = "";
+            }
+        }
+        function checkEmail() {
+            var email = document.signup.signupemail.value;
+            var reg = /^[A-Za-z0-9-_.]+@[A-Za-z]+\.[A-Za-z]{2,4}$/;
+            if (email == "") {
+                document.getElementById("signupemail").innerHTML = "Please Enter Email";
+            }
+            else if (!reg.test(name)) {
+                document.getElementById("signupemail").innerHTML = "Please Enter Valid Email";
+            }
+            else {
+                document.getElementById("signupemail").innerHTML = "";
+            }
+        }
+        function checkMobile() {
+            var mobile = document.signup.signupmobile.value;
+            var reg = /^\d{10}$/;
+            if (mobile == "") {
+                document.getElementById("signupmobile").innerHTML = "Please Enter Mobile Number";
+            }
+            else if (!reg.test(mobile)) {
+                document.getElementById("signupmobile").innerHTML = "Please Enter Valid Mobile Number";
+            }
+            else {
+                document.getElementById("signupmobile").innerHTML = "";
+            }
+        }
+    </script>
 </head>
 
 <body>
+    {% if msg %}
+        <b style="color: blue;">{{msg}}</b>
+    {% endif %}
     <div class="wrap">
-        <table>
-            <tr>
-                <td>First Name</td>
-                <td><input type="text" placeholder="First name"></td>
-            </tr>
-            <tr>
-                <td>Last Name</td>
-                <td><input type="text" placeholder="Last name"></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="email" placeholder="example@email.com"></td>
-            </tr>
-            <tr>
-                <td>Mobile</td>
-                <td><input type="tel" placeholder="98765 43210"></td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td><textarea rows="3" placeholder="Enter your address"></textarea></td>
-            </tr>
-            <tr>
-                <td>Profile Picture</td>
-                <td>
-                    <label class="upload-label" for="pic">Choose file</label>
-                    <span class="file-name" id="file-name">No file chosen</span>
-                    <input type="file" id="pic" accept="image/*" style="display:none"
-                        onchange="document.getElementById('file-name').textContent = this.files[0] ? this.files[0].name : 'No file chosen'">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <hr>
-                </td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" placeholder="Min. 8 characters"></td>
-            </tr>
-            <tr>
-                <td>Confirm Password</td>
-                <td><input type="password" placeholder="Re-enter password"></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button class="btn" type="submit">Submit</button>
-                </td>
-            </tr>
-        </table>
+        <form name="signup" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td>
+                        <input type="text" placeholder="First name" name="signupfname" onblur="checkName();">
+                    </td>
+                    <td><span id="signupname"></span></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" placeholder="Last name" name="signuplname"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" placeholder="example@email.com" name="signupemail" onblur="checkEmail();">
+                    </td>
+                    <td><span id="signupemail"></span></td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td><input type="tel" placeholder="98765 43210" name="signupmobile" onblur="checkMobile();">
+                    </td>
+                    <td><span id="signupmobile"></span></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><textarea rows="3" placeholder="Enter your address" name="signupaddress"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Profile Picture</td>
+                    <td>
+                        <label class="upload-label" for="pic">Choose file</label>
+                        <span class="file-name" id="file-name">No file chosen</span>
+                        <input type="file" id="pic" accept="image/*" style="display:none" name="profile_picture"
+                            onchange="document.getElementById('file-name').textContent = this.files[0] ? this.files[0].name : 'No file chosen'">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" placeholder="Min. 8 characters" name="password"></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" placeholder="Re-enter password" name="confirmPassword"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn" type="submit">Submit</button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </body>

@@ -6,6 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+    tr,td{
+        padding: 10px;
+    }
+    </style>
+    
 </head>
 <body>
     {% if msg %}
@@ -15,12 +21,21 @@
         {% csrf_token %}
         <table>
             <tr>
+                <td colspan="2" align="center">
+                    <img src="{{user.profile_picture.url}}" style="width: 100px;height: 100px;border-radius: 50%;">
+                </td>
+            </tr>
+            <tr>
+                <td>Profile Picture</td>
+                <td><input type="file" name="profile_picture"></td>
+            </tr>
+            <tr>
                 <td>First Name</td>
-                <td><input type="text" name="fname" value="{{user.fname}}"></td>
+                <td><input type="text" name="fname" value="{{user.firstName}}"></td>
             </tr>
             <tr>
                 <td>Last Name</td>
-                <td><input type="text" name="lname" value="{{user.lname}}"></td>
+                <td><input type="text" name="lname" value="{{user.lastName}}"></td>
             </tr>
             <tr>
                 <td>Email</td>
@@ -33,15 +48,6 @@
             <tr>
                 <td>Address</td>
                 <td><textarea rows="5" cols="22" name="address">{{user.address}}</textarea></td>
-            </tr>
-            <tr>
-                <td>Profile Picture</td>
-                <td><input type="file" name="profile_picture"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <img src="{{user.profile_picture.url}}" style="width: 100px;height: 100px;border-radius: 50%;">
-                </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
