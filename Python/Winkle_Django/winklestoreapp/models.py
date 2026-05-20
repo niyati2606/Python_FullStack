@@ -45,3 +45,15 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return self.user.firstName+" - "+self.product.product_name
+
+class Cart(models.Model):
+    user=models.ForeignKey(BuyerUser,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    date=models.DateTimeField(default=timezone.now)
+    product_price=models.PositiveIntegerField()
+    product_qty=models.PositiveIntegerField(default=1)
+    total_price=models.PositiveIntegerField()
+    payment_status=models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.firstName+" - "+self.product.product_name

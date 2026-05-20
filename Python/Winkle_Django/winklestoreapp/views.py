@@ -1,57 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import BuyerUser, Product, Wishlist
+from .models import BuyerUser, Product, Wishlist,Cart
 
 # Create your views here.
 def index(request):
    all_products = Product.objects.all().order_by('-created_at')[:4]
-   return render(request, 'index.html', {
-      'all_products': all_products,
-   })
-
-def product_detail(request, product_id):
-   try:
-      product = Product.objects.get(id=product_id)
-   except Product.DoesNotExist:
-      return redirect('shop')
-   related_products = Product.objects.filter(category=product.category).exclude(id=product_id)[:4]
-   wishlist_flag = False
+   cart_product_ids = set()
    email = request.session.get('email')
    if email:
       try:
          user = BuyerUser.objects.get(email=email)
-         wishlist_flag = Wishlist.objects.filter(user=user, product=product).exists()
-         request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+         cart_product_ids = set(
+            Cart.objects.filter(user=user, payment_status=False).values_list('product_id', flat=True)
+         )
       except BuyerUser.DoesNotExist:
          pass
-   return render(request, 'product-single.html', {
-      'product':          product,
-      'related_products': related_products,
-      'wishlist_flag':    wishlist_flag,
+   return render(request, 'index.html', {
+      'all_products':     all_products,
+      'cart_product_ids': cart_product_ids,
    })
-
-def shop(request):
-   category     = request.GET.get('category', '').strip()
-   all_products = Product.objects.all().order_by('-created_at')
-   if category:
-      all_products = all_products.filter(category=category)
-   return render(request, 'shop.html', {
-      'all_products':    all_products,
-      'active_category': category,
-      'categories':      ['Men', 'Women', 'Kids', 'Others'],
-   })
-
-def contact(request) :
-   return render(request,'contact.html')
-
-def about(request) :
-   return render(request,'about.html')
-
-def blog(request) :
-   return render(request,'blog.html')
-
-def single_blog(request) :
-   return render(request,'blog-single.html')
 
 def login(request) :
    if request.method == 'POST':
@@ -178,14 +145,172 @@ def logout(request):
         del request.session['email']
         del request.session['firstName']
         del request.session['profile_picture']
+        del request.session['wishlist_count']
+        del request.session["cart_count"]
+
     except KeyError:
         pass
     messages.success(request, 'You have been logged out successfully.')
     return redirect('login')
 
-def cart(request) :
-   return render(request,'cart.html')
+#display all products added by sellers
+def shop(request):
+   category     = request.GET.get('category', '').strip()
+   all_products = Product.objects.all().order_by('-created_at')
+   if category:
+      all_products = all_products.filter(category=category)
+   cart_product_ids = set()
+   email = request.session.get('email')
+   if email:
+      try:
+         user = BuyerUser.objects.get(email=email)
+         cart_product_ids = set(
+            Cart.objects.filter(user=user, payment_status=False).values_list('product_id', flat=True)
+         )
+      except BuyerUser.DoesNotExist:
+         pass
+   return render(request, 'shop.html', {
+      'all_products':     all_products,
+      'active_category':  category,
+      'categories':       ['Men', 'Women', 'Kids', 'Others'],
+      'cart_product_ids': cart_product_ids,
+   })
 
+#product detail of particular product
+def product_detail(request, product_id):
+   try:
+      product = Product.objects.get(id=product_id)
+   except Product.DoesNotExist:
+      return redirect('shop')
+   related_products = Product.objects.filter(category=product.category).exclude(id=product_id)[:4]
+   wishlist_flag = False
+   cart_flag     = False
+   email = request.session.get('email')
+   if email:
+      try:
+         user = BuyerUser.objects.get(email=email)
+         wishlist_flag = Wishlist.objects.filter(user=user, product=product).exists()
+         cart_flag     = Cart.objects.filter(user=user, product=product, payment_status=False).exists()
+         request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+         request.session['cart_count']     = Cart.objects.filter(user=user, payment_status=False).count()
+      except BuyerUser.DoesNotExist:
+         pass
+   return render(request, 'product-single.html', {
+      'product':          product,
+      'related_products': related_products,
+      'wishlist_flag':    wishlist_flag,
+      'cart_flag':        cart_flag,
+   })
+
+#cart Functionality
+def cart(request):
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to view your cart.'})
+   user = BuyerUser.objects.get(email=email)
+   cart_items = Cart.objects.filter(user=user, payment_status=False).select_related('product')
+   net_amount = sum(item.total_price for item in cart_items)
+   request.session['cart_count'] = cart_items.count()
+   return render(request, 'cart.html', {'cart_items': cart_items, 'net_amount': net_amount})
+
+def add_to_cart(request, product_id):
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to add items to your cart.'})
+   try:
+      product = Product.objects.get(id=product_id)
+      user = BuyerUser.objects.get(email=email)
+      cart_item = Cart.objects.filter(user=user, product=product, payment_status=False).first()
+      if cart_item:
+         cart_item.product_qty += 1
+         cart_item.total_price = cart_item.product_qty * int(product.price)
+         cart_item.save()
+      else:
+         Cart.objects.create(
+            user=user,
+            product=product,
+            product_price=int(product.price),
+            product_qty=1,
+            total_price=int(product.price),
+            payment_status=False,
+         )
+      request.session['cart_count'] = Cart.objects.filter(user=user, payment_status=False).count()
+   except Product.DoesNotExist:
+      pass
+   return redirect('product_detail', product_id=product_id)
+
+def remove_frm_cart(request, cart_id):
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to manage your cart.'})
+   try:
+      user = BuyerUser.objects.get(email=email)
+      Cart.objects.filter(id=cart_id, user=user).delete()
+      request.session['cart_count'] = Cart.objects.filter(user=user, payment_status=False).count()
+   except Cart.DoesNotExist:
+      pass
+   return redirect('cart')
+
+#wishlist functionality
+def wishlist(request) :
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to view your wishlist.'})
+   user = BuyerUser.objects.get(email=email)
+   wishlist_items = Wishlist.objects.filter(user=user).select_related('product')
+   request.session['wishlist_count'] = wishlist_items.count()
+   return render(request, 'wishlist.html', {'wishlist_items': wishlist_items})
+
+def add_to_whishlist(request, product_id) :
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to add items to your wishlist.'})
+   try:
+      product = Product.objects.get(id=product_id)
+      user = BuyerUser.objects.get(email=email)
+      Wishlist.objects.get_or_create(user=user, product=product)
+      request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+   except Product.DoesNotExist:
+      pass
+   return redirect('product_detail', product_id=product_id)
+
+def remove_from_whishlist(request, product_id) :
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to manage your wishlist.'})
+   try:
+      product = Product.objects.get(id=product_id)
+      user = BuyerUser.objects.get(email=email)
+      Wishlist.objects.filter(user=user, product=product).delete()
+      request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+   except Product.DoesNotExist:
+      pass
+   next_page = request.GET.get('next', 'product')
+   if next_page == 'wishlist':
+      return redirect('wishlist')
+   return redirect('product_detail', product_id=product_id)
+
+def change_qty(request, product_id):
+    email = request.session.get('email')
+    if not email:
+        return redirect('login')
+    if request.method == 'POST':
+        try:
+            user     = BuyerUser.objects.get(email=email)
+            cart     = Cart.objects.get(product_id=product_id, user=user, payment_status=False)
+            qty      = int(request.POST.get('product_qty', 1))
+            if qty < 1:
+                qty = 1
+            cart.product_qty = qty
+            cart.total_price = cart.product_price * qty
+            cart.save()
+            request.session['cart_count'] = Cart.objects.filter(user=user, payment_status=False).count()
+        except (Cart.DoesNotExist, ValueError):
+            pass
+    return redirect('cart')
+
+
+#Seller 
 def seller_index(request):
    email = request.session.get('email')
    if not email:
@@ -270,7 +395,7 @@ def seller_profile(request) :
 
    return render(request, 'seller/seller-profile.html', {'user': user})
 
-
+#displaying products added by logged in seller
 def seller_products(request):
    email = request.session.get('email')
    if not email:
@@ -300,21 +425,38 @@ def seller_products(request):
       'active_category': active_category,
    })
 
-def delete_product(request, product_id):
+def add_product(request):
    email = request.session.get('email')
    if not email:
-      return render(request, 'login.html', {'error': 'Please login to delete a product.'})
+      return render(request, 'login.html', {'error': 'Please login to add a product.'})
 
    if request.method == 'POST':
-      try:
-         seller  = BuyerUser.objects.get(email=email)
-         product = Product.objects.get(id=product_id, seller=seller)
-         product.delete()
-         messages.success(request, 'Product deleted successfully.')
-      except Product.DoesNotExist:
-         messages.error(request, 'Product not found or you do not have permission to delete it.')
+      category      = request.POST.get('category', '').strip()
+      product_name  = request.POST.get('product_name', '').strip()
+      price         = request.POST.get('price', '').strip()
+      description   = request.POST.get('description', '').strip()
+      product_image = request.FILES.get('product_image')
 
-   return redirect('seller_products')
+      if not all([category, product_name, price, description, product_image]):
+         messages.error(request, 'All fields are required.')
+         return render(request, 'seller/seller-add-product.html')
+
+      try:
+         seller = BuyerUser.objects.get(email=email)
+         Product.objects.create(
+            seller        = seller,
+            category      = category,
+            product_name  = product_name,
+            price         = price,
+            description   = description,
+            product_image = product_image,
+         )
+         messages.success(request, 'Product added successfully!')
+         return redirect(seller_index)
+      except BuyerUser.DoesNotExist:
+         return render(request, 'login.html', {'error': 'Session expired. Please login again.'})
+
+   return render(request, 'seller/seller-add-product.html')
 
 def edit_product(request, product_id):
    email = request.session.get('email')
@@ -354,78 +496,30 @@ def edit_product(request, product_id):
 
    return render(request, 'seller/seller-edit-product.html', {'product': product})
 
-def add_product(request):
+def delete_product(request, product_id):
    email = request.session.get('email')
    if not email:
-      return render(request, 'login.html', {'error': 'Please login to add a product.'})
+      return render(request, 'login.html', {'error': 'Please login to delete a product.'})
 
    if request.method == 'POST':
-      category      = request.POST.get('category', '').strip()
-      product_name  = request.POST.get('product_name', '').strip()
-      price         = request.POST.get('price', '').strip()
-      description   = request.POST.get('description', '').strip()
-      product_image = request.FILES.get('product_image')
-
-      if not all([category, product_name, price, description, product_image]):
-         messages.error(request, 'All fields are required.')
-         return render(request, 'seller/seller-add-product.html')
-
       try:
-         seller = BuyerUser.objects.get(email=email)
-         Product.objects.create(
-            seller        = seller,
-            category      = category,
-            product_name  = product_name,
-            price         = price,
-            description   = description,
-            product_image = product_image,
-         )
-         messages.success(request, 'Product added successfully!')
-         return redirect(seller_index)
-      except BuyerUser.DoesNotExist:
-         return render(request, 'login.html', {'error': 'Session expired. Please login again.'})
+         seller  = BuyerUser.objects.get(email=email)
+         product = Product.objects.get(id=product_id, seller=seller)
+         product.delete()
+         messages.success(request, 'Product deleted successfully.')
+      except Product.DoesNotExist:
+         messages.error(request, 'Product not found or you do not have permission to delete it.')
 
-   return render(request, 'seller/seller-add-product.html')
+   return redirect('seller_products')
 
-def all_products(request) : 
-   seller=BuyerUser.objects.get(email=request.session['email'])
-   products=Product.objects.filter(seller=seller)
-   return render(request,'seller/seller-products.html',{'products' : products})
+def contact(request) :
+   return render(request,'contact.html')
 
-def wishlist(request) :
-   email = request.session.get('email')
-   if not email:
-      return render(request, 'login.html', {'error': 'Please login to view your wishlist.'})
-   user = BuyerUser.objects.get(email=email)
-   wishlist_items = Wishlist.objects.filter(user=user).select_related('product')
-   request.session['wishlist_count'] = wishlist_items.count()
-   return render(request, 'wishlist.html', {'wishlist_items': wishlist_items})
+def about(request) :
+   return render(request,'about.html')
 
-def add_to_whishlist(request, product_id) :
-   email = request.session.get('email')
-   if not email:
-      return render(request, 'login.html', {'error': 'Please login to add items to your wishlist.'})
-   try:
-      product = Product.objects.get(id=product_id)
-      user = BuyerUser.objects.get(email=email)
-      Wishlist.objects.get_or_create(user=user, product=product)
-      request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
-   except Product.DoesNotExist:
-      pass
-   return redirect('product_detail', product_id=product_id)
+def blog(request) :
+   return render(request,'blog.html')
 
-def remove_from_whishlist(request, product_id) :
-   email = request.session.get('email')
-   if not email:
-      return render(request, 'login.html', {'error': 'Please login to manage your wishlist.'})
-   try:
-      product = Product.objects.get(id=product_id)
-      user = BuyerUser.objects.get(email=email)
-      Wishlist.objects.filter(user=user, product=product).delete()
-      request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
-   except Product.DoesNotExist:
-      pass
-   next_page = request.GET.get('next', 'product')
-   if next_page == 'wishlist':
-      return redirect('wishlist')
-   return redirect('product_detail', product_id=product_id)
+def single_blog(request) :
+   return render(request,'blog-single.html')
