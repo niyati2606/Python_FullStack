@@ -22,4 +22,7 @@ urlpatterns = [
     path('seller/all-products/', views.seller_products, name='seller_products'),
     path('seller/edit-product/<int:product_id>/', views.edit_product, name='edit_product'),
     path('seller/delete-product/<int:product_id>/', views.delete_product, name='delete_product'),
-]
+    path('wishlist/',views.wishlist,name = 'wishlist'),
+    path('add-to-wishlist/<int:product_id>/',views.add_to_whishlist,name='add_to_whishlist'),
+    path('remove-from-wishlist/<int:product_id>/',views.remove_from_whishlist,name='remove_from_whishlist'),
+]   

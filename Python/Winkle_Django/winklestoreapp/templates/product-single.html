@@ -26,8 +26,7 @@
             <!-- Product Image -->
             <div class="col-lg-6 mb-5 ftco-animate">
                 {% if product.product_image %}
-                <img src="{{ product.product_image.url }}" class="img-fluid rounded"
-                    alt="{{ product.product_name }}"
+                <img src="{{ product.product_image.url }}" class="img-fluid rounded" alt="{{ product.product_name }}"
                     style="width:100%; height:460px; object-fit:cover;">
                 {% else %}
                 <img src="{% static 'images/product-1.jpg' %}" class="img-fluid rounded"
@@ -50,7 +49,8 @@
                     </p>
                 </div>
 
-                <p class="price mb-3"><span style="font-size:1.6rem; font-weight:700;">&#8377;{{ product.price }}</span></p>
+                <p class="price mb-3"><span style="font-size:1.6rem; font-weight:700;">&#8377;{{ product.price }}</span>
+                </p>
 
                 <p class="mb-4" style="line-height:1.8; color:#555;">{{ product.description }}</p>
 
@@ -76,37 +76,43 @@
                     </div>
                     <div class="w-100"></div> -->
 
-                    <!-- Quantity -->
-                    <div class="input-group col-md-6 d-flex mb-3">
-                        <span class="input-group-btn mr-2">
-                            <button type="button" class="quantity-left-minus btn" data-type="minus">
-                                <i class="ion-ios-remove"></i>
-                            </button>
-                        </span>
-                        <input type="text" id="quantity" name="quantity"
-                            class="form-control input-number text-center" value="1" min="1" max="100">
-                        <span class="input-group-btn ml-2">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus">
-                                <i class="ion-ios-add"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="w-100"></div>
+                <!-- Quantity -->
+                <div class="input-group col-md-6 d-flex mb-3">
+                    <span class="input-group-btn mr-2">
+                        <button type="button" class="quantity-left-minus btn" data-type="minus">
+                            <i class="ion-ios-remove"></i>
+                        </button>
+                    </span>
+                    <input type="text" id="quantity" name="quantity" class="form-control input-number text-center"
+                        value="1" min="1" max="100">
+                    <span class="input-group-btn ml-2">
+                        <button type="button" class="quantity-right-plus btn" data-type="plus">
+                            <i class="ion-ios-add"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="w-100"></div>
 
-                    <div class="col-md-12 mt-2">
-                        <p>
-                            <a href="#" class="btn btn-black py-3 px-5 mr-2">
-                                Add to Cart <i class="ion-ios-cart ml-1"></i>
-                            </a>
-                            <a href="#" class="btn btn-primary py-3 px-5 mr-2">
-                                Add to Whishlist
-                            </a>
-                        </p>
-                    </div>
+                <div class="col-md-12 mt-2">
+                    <p>
+                        <a href="#" class="btn btn-black py-3 px-5 mr-2">
+                            Add to Cart <i class="ion-ios-cart ml-1"></i>
+                        </a>
+                        {% if wishlist_flag %}
+                        <a href="{% url 'remove_from_whishlist' product.id %}" class="btn btn-danger py-3 px-5 mr-2">
+                            Remove from Wishlist
+                        </a>
+                        {% else %}
+                        <a href="{% url 'add_to_whishlist' product.id %}" class="btn btn-primary py-3 px-5 mr-2">
+                            Add to Wishlist
+                        </a>
+                        {% endif %}
+                    </p>
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 </section>
 

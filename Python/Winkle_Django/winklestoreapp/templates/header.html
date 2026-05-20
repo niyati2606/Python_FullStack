@@ -77,8 +77,8 @@
                         </li>
                         <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span
                                     class="icon-shopping_cart"></span>[0]</a></li>
-                        <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span
-                                    class="icon-heart"></span>[0]</a></li>
+                        <li class="nav-item cta cta-colored"><a href="{% url 'wishlist' %}" class="nav-link"><span
+                                    class="icon-heart"></span>[{{ request.session.wishlist_count|default:0 }}]</a></li>
 
                         {% if request.session.email %}
                         <li class="nav-item dropdown" style="display: flex; align-items: center;">
@@ -146,9 +146,8 @@
                         <div class="ftco-footer-widget mb-4 ml-md-5">
                             <h2 class="ftco-heading-2">Menu</h2>
                             <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                                <li><a href="#" class="py-2 d-block">About</a></li>
-                                <li><a href="#" class="py-2 d-block">Journal</a></li>
+                                <li><a href="{% url 'shop' %}" class="py-2 d-block">Shop</a></li>
+                                <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
                                 <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact Us</a></li>
                             </ul>
                         </div>

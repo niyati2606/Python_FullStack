@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import BuyerUser, Product
+from .models import BuyerUser, Product, Wishlist
 
 # Create your views here.
 def index(request):
@@ -15,9 +15,19 @@ def product_detail(request, product_id):
    except Product.DoesNotExist:
       return redirect('shop')
    related_products = Product.objects.filter(category=product.category).exclude(id=product_id)[:4]
+   wishlist_flag = False
+   email = request.session.get('email')
+   if email:
+      try:
+         user = BuyerUser.objects.get(email=email)
+         wishlist_flag = Wishlist.objects.filter(user=user, product=product).exists()
+         request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+      except BuyerUser.DoesNotExist:
+         pass
    return render(request, 'product-single.html', {
       'product':          product,
       'related_products': related_products,
+      'wishlist_flag':    wishlist_flag,
    })
 
 def shop(request):
@@ -65,6 +75,8 @@ def login(request) :
 
             if user.role == "buyer" :
                #messages.success(request, f'Welcome back, {user.firstName}!')
+               wishlists=Wishlist.objects.filter(user=user)
+               request.session['wishlist_count']=len(wishlists)
                return redirect('index')
             else :
                return redirect('seller_index')
@@ -379,3 +391,41 @@ def all_products(request) :
    seller=BuyerUser.objects.get(email=request.session['email'])
    products=Product.objects.filter(seller=seller)
    return render(request,'seller/seller-products.html',{'products' : products})
+
+def wishlist(request) :
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to view your wishlist.'})
+   user = BuyerUser.objects.get(email=email)
+   wishlist_items = Wishlist.objects.filter(user=user).select_related('product')
+   request.session['wishlist_count'] = wishlist_items.count()
+   return render(request, 'wishlist.html', {'wishlist_items': wishlist_items})
+
+def add_to_whishlist(request, product_id) :
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to add items to your wishlist.'})
+   try:
+      product = Product.objects.get(id=product_id)
+      user = BuyerUser.objects.get(email=email)
+      Wishlist.objects.get_or_create(user=user, product=product)
+      request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+   except Product.DoesNotExist:
+      pass
+   return redirect('product_detail', product_id=product_id)
+
+def remove_from_whishlist(request, product_id) :
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to manage your wishlist.'})
+   try:
+      product = Product.objects.get(id=product_id)
+      user = BuyerUser.objects.get(email=email)
+      Wishlist.objects.filter(user=user, product=product).delete()
+      request.session['wishlist_count'] = Wishlist.objects.filter(user=user).count()
+   except Product.DoesNotExist:
+      pass
+   next_page = request.GET.get('next', 'product')
+   if next_page == 'wishlist':
+      return redirect('wishlist')
+   return redirect('product_detail', product_id=product_id)

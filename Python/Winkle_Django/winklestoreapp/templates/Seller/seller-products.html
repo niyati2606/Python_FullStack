@@ -90,8 +90,7 @@
                                 class="btn btn-sm btn-outline-danger flex-fill"
                                 data-toggle="modal"
                                 data-target="#deleteModal"
-                                data-product-id="{{ product.id }}"
-                                data-product-name="{{ product.product_name }}">
+                                onclick="setDeleteTarget('{{ product.id }}', '{{ product.product_name|escapejs }}')">
                             <i class="ion-ios-trash mr-1"></i> Delete
                         </button>
                     </div>
@@ -300,23 +299,10 @@
 </style>
 
 <script>
-    // Wire up delete modal
-    document.getElementById('deleteModal').addEventListener('show.bs.modal', function (e) {
-        var btn = e.relatedTarget || document.activeElement;
-        var productId   = btn.getAttribute('data-product-id');
-        var productName = btn.getAttribute('data-product-name');
+    function setDeleteTarget(productId, productName) {
         document.getElementById('deleteProductName').textContent = productName;
         document.getElementById('deleteForm').action = '/seller/delete-product/' + productId + '/';
-    });
-
-    // jQuery fallback for Bootstrap 3/4 data-toggle modals
-    $('#deleteModal').on('show.bs.modal', function (e) {
-        var btn = $(e.relatedTarget);
-        var productId   = btn.data('product-id');
-        var productName = btn.data('product-name');
-        $('#deleteProductName').text(productName);
-        $('#deleteForm').attr('action', '/seller/delete-product/' + productId + '/');
-    });
+    }
 </script>
 
 {% endblock %}
