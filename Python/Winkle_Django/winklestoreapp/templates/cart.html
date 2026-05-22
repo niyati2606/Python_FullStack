@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- Page Banner -->
-<div class="hero-wrap hero-bread" style="background-image: url('{% static "images/bg_1.jpg" %}');">
+<div class="hero-wrap hero-bread" style="background-image: url(&quot;{% static 'images/bg_1.jpg' %}&quot;);">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -71,7 +71,7 @@
                                     <a href="{% url 'product_detail' item.product.id %}" class="product-name">
                                         {{ item.product.product_name }}
                                     </a>
-                                    <span class="price-tag">{{ item.product_price }}</span>
+                                    <span class="product-cat">{{ item.product_price }}</span>
                                 </td>
 
                                 <!-- Unit Price -->
@@ -150,7 +150,7 @@
                         <strong class="total-amt">&#8377;{{ net_amount }}</strong>
                     </div>
 
-                    <a href="#" class="btn btn-checkout btn-block">
+                    <a href="{% url 'payment' %}" class="btn btn-checkout btn-block">
                         Proceed to Checkout &nbsp;<i class="ion-ios-arrow-forward"></i>
                     </a>
                 </div>
@@ -167,7 +167,7 @@
             </div>
             <h4 class="mt-4">Your cart is empty</h4>
             <p class="text-muted mb-4">Looks like you haven't added anything yet.</p>
-            <a href="{% url 'shop' %}" class="btn btn-checkout px-5 py-3">
+            <a href="{% url 'shop' %}" class="btn btn-checkout px-5 py-3" style="width: 300px; display: block; margin: 0 auto;">
                 <i class="ion-ios-storefront mr-1"></i> Browse Products
             </a>
         </div>

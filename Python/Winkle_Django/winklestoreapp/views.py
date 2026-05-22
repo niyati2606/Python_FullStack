@@ -1,6 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import BuyerUser, Product, Wishlist,Cart
+import requests
+from django.http import JsonResponse,HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+import stripe
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+
+YOUR_DOMAIN = 'http://127.0.0.1:8000'
+stripe.api_key = settings.STRIPE_PRIVATE_KEY
 
 # Create your views here.
 def index(request):
@@ -202,6 +213,38 @@ def product_detail(request, product_id):
       'cart_flag':        cart_flag,
    })
 
+def payment_success(request):
+   email = request.session.get('email')
+   if not email:
+      session_id = request.GET.get('session_id')
+      if not session_id:
+         return redirect('login')
+      try:
+         stripe_session = stripe.checkout.Session.retrieve(session_id)
+         email = stripe_session.customer_details.email
+      except Exception:
+         return redirect('login')
+   try:
+      user = BuyerUser.objects.get(email=email)
+   except BuyerUser.DoesNotExist:
+      return redirect('login')
+   cart_items = Cart.objects.filter(user=user, payment_status=False)
+   net_amount = sum(item.total_price for item in cart_items)
+   cart_items.update(payment_status=True)
+   request.session['cart_count'] = 0
+   return render(request, 'success.html', {'net_amount': net_amount})
+
+def payment_cancel(request):
+   return render(request, 'cancel.html')
+
+def orders(request):
+   email = request.session.get('email')
+   if not email:
+      return render(request, 'login.html', {'error': 'Please login to view your orders.'})
+   user = BuyerUser.objects.get(email=email)
+   order_items = Cart.objects.filter(user=user, payment_status=True).select_related('product').order_by('-date')
+   return render(request, 'orders.html', {'order_items': order_items})
+
 #cart Functionality
 def cart(request):
    email = request.session.get('email')
@@ -250,6 +293,42 @@ def remove_frm_cart(request, cart_id):
    except Cart.DoesNotExist:
       pass
    return redirect('cart')
+
+#checkout and payment
+def create_checkout_session(request):
+   email = request.session.get('email')
+   if not email:
+      return redirect('login')
+   user = BuyerUser.objects.get(email=email)
+   cart_items = Cart.objects.filter(user=user, payment_status=False).select_related('product')
+   if not cart_items.exists():
+      return redirect('cart')
+   line_items = []
+   for item in cart_items:
+      line_items.append({
+         'price_data': {
+            'currency': 'inr',
+            'unit_amount': item.product_price * 100,
+            'product_data': {
+               'name': item.product.product_name,
+            },
+         },
+         'quantity': item.product_qty,
+      })
+   customer = stripe.Customer.create(
+      name=f"{user.firstName} {user.lastName}",
+      email=user.email,
+   )
+   session = stripe.checkout.Session.create(
+      payment_method_types=['card'],
+      line_items=line_items,
+      mode='payment',
+      customer=customer.id,
+      billing_address_collection='required',
+      success_url=YOUR_DOMAIN + '/payment-success/?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url=YOUR_DOMAIN + '/payment-cancel/',
+   )
+   return redirect(session.url)
 
 #wishlist functionality
 def wishlist(request) :
@@ -511,6 +590,48 @@ def delete_product(request, product_id):
          messages.error(request, 'Product not found or you do not have permission to delete it.')
 
    return redirect('seller_products')
+
+def forgot_password(request):
+   if request.method == 'POST':
+      email = request.POST.get('email', '').strip()
+      if BuyerUser.objects.filter(email=email).exists():
+         otp = random.randint(1000, 9999)
+         subject = "Forgot Password OTP - Winkle"
+         message = f"Your OTP for password reset is: {otp}\n\nThis OTP is valid for this session only."
+         send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
+         request.session['reset_email'] = email
+         request.session['otp'] = otp
+         return redirect('verify_otp')
+      return render(request, 'forgot_password.html', {'error': 'No account found with this email.'})
+   return render(request, 'forgot_password.html')
+
+def verify_otp(request):
+   if not request.session.get('reset_email'):
+      return redirect('forgot_password')
+   if request.method == 'POST':
+      entered = request.POST.get('otp', '').strip()
+      if str(request.session.get('otp')) == entered:
+         return redirect('reset_password')
+      return render(request, 'verify_otp.html', {'error': 'Invalid OTP. Please try again.'})
+   return render(request, 'verify_otp.html')
+
+def reset_password(request):
+   email = request.session.get('reset_email')
+   if not email:
+      return redirect('forgot_password')
+   if request.method == 'POST':
+      new_password     = request.POST.get('new_password', '')
+      confirm_password = request.POST.get('confirm_password', '')
+      if not new_password:
+         return render(request, 'reset_password.html', {'error': 'Password cannot be empty.'})
+      if new_password != confirm_password:
+         return render(request, 'reset_password.html', {'error': 'Passwords do not match.'})
+      user = BuyerUser.objects.get(email=email)
+      user.password = new_password
+      user.save()
+      del request.session['reset_email']
+      return render(request, 'login.html', {'success': 'Password reset successfully! Please login.'})
+   return render(request, 'reset_password.html')
 
 def contact(request) :
    return render(request,'contact.html')

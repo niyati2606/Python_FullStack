@@ -58,6 +58,7 @@
                                 aria-haspopup="true" aria-expanded="false">Account</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 {% if request.session.email %}
+                                <a class="dropdown-item" href="{% url 'orders' %}"> My Orders</a>
                                 <a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                                 {% else %}
@@ -76,25 +77,25 @@
                             </div>
                         </li>
                         <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}" class="nav-link"><span
-                                    class="icon-shopping_cart"></span>[{{ request.session.cart_count|default:0 }}]</a></li>
+                                    class="icon-shopping_cart"></span>[{{ request.session.cart_count|default:0 }}]</a>
+                        </li>
                         <li class="nav-item cta cta-colored"><a href="{% url 'wishlist' %}" class="nav-link"><span
                                     class="icon-heart"></span>[{{ request.session.wishlist_count|default:0 }}]</a></li>
 
                         {% if request.session.email %}
                         <li class="nav-item dropdown" style="display: flex; align-items: center;">
                             <a class="nav-link p-1 dropdown-toggle" href="{% url 'profile' %}" id="profileDropdown"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                               style="display: flex; align-items: center; gap: 6px; margin-top: 0;">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                style="display: flex; align-items: center; gap: 6px; margin-top: 0;">
                                 {% if request.session.profile_picture %}
-                                    <img src="{{ request.session.profile_picture }}"
-                                         alt="Profile"
-                                         class="rounded-circle"
-                                         style="width: 34px; height: 34px; object-fit: cover; border: 2px solid #f96d00;">
+                                <img src="{{ request.session.profile_picture }}" alt="Profile" class="rounded-circle"
+                                    style="width: 34px; height: 34px; object-fit: cover; border: 2px solid #f96d00;">
                                 {% else %}
-                                    <div class="rounded-circle d-inline-flex align-items-center justify-content-center"
-                                         style="width: 34px; height: 34px; background-color: #f96d00; flex-shrink: 0;">
-                                        <span class="ion-ios-person" style="color: #fff; font-size: 18px; line-height: 1;"></span>
-                                    </div>
+                                <div class="rounded-circle d-inline-flex align-items-center justify-content-center"
+                                    style="width: 34px; height: 34px; background-color: #f96d00; flex-shrink: 0;">
+                                    <span class="ion-ios-person"
+                                        style="color: #fff; font-size: 18px; line-height: 1;"></span>
+                                </div>
                                 {% endif %}
                                 <span style="font-size: 13px;">{{ request.session.firstName }}</span>
                             </a>
