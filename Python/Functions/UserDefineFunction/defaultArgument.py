@@ -6,3 +6,14 @@ def test(a=40, b=30, c=20, d=10) :
 
 # test(1,2,4,5 )
 test(b=25,d=35)
+
+
+
+count = 4
+
+def increase():
+    global count
+    count += 1
+
+increase()
+print(count)

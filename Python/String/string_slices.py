@@ -8,7 +8,7 @@ s = "Tops Technologies"
 '''
 
 s = "Hello, World Python Example"
-print(s[3:13])
+print(s[3:13]) 
 print(s[:15])
 print(s[2:])
 print(s[1:15:4])
