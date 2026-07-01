@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block VS Inline</title>
+</head>
+
+<body>
+
+    <!-- block inside blcok (allow)-->
+    <div>
+        Div tag
+        <h1>
+            this is h1 tag
+        </h1>
+    </div>
+
+    <!-- block inside inline (allow) -->
+    <div>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam ipsum quibusdam et ab accusamus voluptatibus
+        atque dignissimos cum, ipsa, commodi quod sit officia quaerat repellendus soluta. Neque aperiam earum modi?
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. <b>Labore quae repellendus autem illum expedita
+            aliquam,
+            porro harum aut! Minus nihil fugiat</b> doloremque aliquam <mark> expedita eos perspiciatis beatae harum
+            eum?</mark>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, iste sapiente sit unde eos, fugiat fuga magni
+        est aperiam illo pariatur ipsa dignissimos, accusantium voluptatem repudiandae mollitia modi! Autem,
+        accusantium.
+    </div>
+
+    <!-- inline inside inline (allow) -->
+    <b>Hello <mark>Google</mark> <i>!!!</i></b><br>
+
+    <!-- inline inside block (don't allow)-->
+     <b>Hello <mark>Google</mark> <h1>!!!</h1></b>
+
+</body>
+
+</html>

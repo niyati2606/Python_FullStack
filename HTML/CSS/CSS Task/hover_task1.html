@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Task</title>
+    <style>
+        .main{
+            height: 200px;
+            width: 200px;
+            border: 2px solid brown;
+            margin: 200px auto;
+            overflow: hidden;
+        }
+        .first{
+            height: 200px;
+            width: 200px;
+            background-color: rgba(142, 140, 140, 0.5);
+            transform: translate(100%, -100%);
+            transition: .7s;
+        }
+        .main:hover .first{
+            transform: translate(0%, 0%);
+        }
+        .second{
+            height: 200px;
+            width: 200px;
+            background-color: rgba(142, 140, 140, 0.5);
+            transform: translate(-100%, 0%);
+            transition: .7s;
+        }
+        .main:hover .second{
+            transform: translate(0%, -100%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="first">
+
+        </div>
+
+        <div class="second">
+
+        </div>
+    </div>
+</body>
+
+</html>

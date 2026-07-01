@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Construction Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: #f0f0f0;
+            border-radius: 5px;
+            padding: 36px 32px;
+            max-width: 320px;
+            width: 100%;
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            background: #f0820f;
+        }
+
+        .card-icon {
+            font-size: 28px;
+            color: #f0820f;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            color: #fff;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-title {
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 15px;
+            color: #888;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-desc {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="card-icon">
+            <i class="fas fa-pen-nib"></i>
+        </div>
+        <h3 class="card-title">Construction Manage</h3>
+        <p class="card-desc">Lorem ipsum dolor sit amet, elit. Id ab commodi magnam.</p>
+    </div>
+
+</body>
+
+</html>
