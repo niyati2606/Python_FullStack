@@ -1,0 +1,154 @@
+/* Short viewports (e.g. large laptop screens with limited height like 1536x730):
+   trim the large vertical padding on every section so content isn't
+   forced into excessive scrolling on a short screen. */
+@media only screen and (max-height: 800px) {
+    .header-content {
+        padding: 40px 0px;
+    }
+
+    .image_bg {
+        padding: 45px 0;
+    }
+
+    #index_section {
+        padding: 15px 0px;
+    }
+
+    #index_section3 {
+        padding: 15px;
+    }
+
+    #index_section4 {
+        padding: 15px;
+    }
+
+    #index_section5 {
+        padding: 20px;
+    }
+
+    #footer {
+        padding: 30px 0px;
+    }
+}
+
+@media only screen and (max-width:1120px) {
+    /* Fill the transparent bottom edge of header_bg.png so no white band shows */
+    #header {
+        background-color: #0e0a17;
+    }
+
+}
+
+@media only screen and (max-width:992px) {
+    .header-content .header-h1 {
+        width: 80%;
+    }
+
+    .header-content .header-p {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .nav-ul {
+        display: none;
+    }
+
+    .nav .icons .fa-magnifying-glass {
+        display: none;
+    }
+
+    .nav .icons .bar {
+        display: block;
+    }
+
+    .header-content {
+        padding: 20px 0px;
+    }
+
+    .header-content .header-h1 {
+        width: 100%;
+    }
+
+    .header-content .header-p {
+        width: 100%;
+    }
+
+    /* Menu cards: stack vertically */
+    .card_content .main_row {
+        flex-direction: column;
+    }
+
+    .card_content .main_row .main_col {
+        width: 70%;
+        margin: 10px auto;
+    }
+
+    /* Burger images section: stack vertically */
+    .image_content .image_row {
+        flex-direction: column;
+    }
+
+    .image_content .image_row .image_col {
+        width: 70%;
+        margin: 10px auto;
+    }
+
+    /* About section: stack text and image */
+    .about_content .about_row {
+        flex-direction: column;
+    }
+
+    .about_content .about_row .about_col,
+    .about_content .about_row .about_col2 {
+        width: 100%;
+    }
+
+    /* Contact form: stack the two columns */
+    .contact-form {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+    }
+
+    /* Footer: stack columns */
+    #footer .footer_row {
+        flex-direction: column;
+    }
+
+    #footer .footer_row .footer-col-4 {
+        width: 100%;
+        text-align: center;
+    }
+
+    #footer .footer_row .footer-col-6 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-data .footer_row .footer-sub-col {
+        width: 100%;
+        margin: 20px 0px;
+    }
+
+    .footer-data .footer-p {
+        margin: 20px auto;
+    }
+}
+
+
+@media only screen and (max-width:576px) {
+
+    .card_content .main_row .main_col,
+    .image_content .image_row .image_col {
+        width: 90%;
+    }
+
+    .about_content .about_row .about_col2 {
+        margin-top: 20px;
+    }
+}

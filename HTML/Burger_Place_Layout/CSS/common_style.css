@@ -7,10 +7,11 @@
 .container {
     width: 90%;
     margin: 0 auto;
+    /* background-color: #8c9e00; */
 }
 
 #header {
-    background-size: 100% 100%;
+    background-size: cover;
     background-image: url("../Images/header_bg.png");
     background-repeat: no-repeat;
 }
@@ -39,7 +40,7 @@
     text-decoration: none;
     padding: 4px 10px;
     border-right: 2px solid white;
-    font-size: 24px;
+    font-size: clamp(16px, 3.5vw, 22px);
     text-transform: uppercase;
     color: white;
     font-family: "Roboto";
@@ -47,23 +48,23 @@
 
 .nav .icons {
     color: white;
-    font-size: 24px;
+    font-size: clamp(16px, 3.5vw, 24px);
 }
 
-.header-content{
+.header-content {
     padding: 80px 0px;
 }
 
 .header-content .header-h1 {
     width: 65%;
-    font-size: 83px;
+    font-size: clamp(32px, 5vw + 1rem, 83px);
     color: #ffffff;
     font-family: "Roboto";
 }
 
 .header-content .header-p {
     width: 45%;
-    font-size: 35px;
+    font-size: clamp(18px, 2vw + 0.5rem, 35px);
     color: #ffffff;
     font-weight: 400;
     font-family: "Roboto";
@@ -72,10 +73,310 @@
 }
 
 .header-content .header-btn {
-    font-size: 30px;
+    font-size: clamp(18px, 3.5vw, 30px);
     color: #ffffff;
     font-family: "Roboto";
     border-radius: 36px;
     background-color: #8c9e00;
     padding: 10px 20px;
+
+}
+
+.nav .icons .search {
+    color: white;
+    font-size: clamp(16px, 3.5vw, 24px);
+}
+
+.nav .icons .bar {
+    color: white;
+    font-size: clamp(16px, 3.5vw, 24px);
+    display: none;
+}
+
+#index_section {
+    background-color: #eeb95e;
+    padding: 20px 0px;
+}
+
+.menu_h2 {
+    text-align: center;
+    font-size: clamp(32px, 5vw + 0.5rem, 66px);
+    text-transform: uppercase;
+    color: #0e0a17;
+    font-weight: bold;
+    font-family: "Roboto";
+}
+
+.card_content {
+    margin: 20px 0px;
+}
+
+.card_content .main_row .main_col {
+    /* border: 2px dotted blue; */
+    width: 33.33%;
+}
+
+.main_row {
+    display: flex;
+}
+
+.card_image {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.card_h4_title {
+    text-align: center;
+    font-size: clamp(18px, 3.5vw, 35px);
+    color: #0e0a17;
+    font-family: "Roboto";
+}
+
+.card_p_content {
+    width: 90%;
+    font-size: clamp(15px, 1.2vw + 0.5rem, 20px);
+    color: #0e0a17;
+    font-family: "Roboto";
+    margin: 10px auto;
+}
+
+.card_view_all {
+    color: white;
+    font-family: "Roboto";
+    background-color: red;
+    padding: 10px 20px;
+    font-size: clamp(18px, 3.5vw, 35px);
+    border: none;
+    border-radius: 32px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.image_bg {
+    background-size: cover;
+    background-position: center;
+    background-image: url("../Images/section_img.png");
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 90px 0;
+}
+
+.section_bg_image {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.section2_h1 {
+    font-size: clamp(18px, 3.5vw, 48px);
+    color: #ffffff;
+    font-family: "Roboto";
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section2_p {
+    width: auto;
+    height: auto;
+    font-size: clamp(14px, 3.5vw, 20px);
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Roboto";
+    text-align: center;
+    line-height: 1.6;
+    margin: 5px auto 0;
+}
+
+#index_section3 {
+    padding: 20px;
+    background-color: #eeb95e;
+    background-image: url("../images/shape.png");
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.image_content {
+    margin: 20px 0px;
+}
+
+.image_content .image_row {
+    display: flex;
+}
+
+.image_content .image_row .image_col {
+    /* border: 2px dotted blue; */
+    width: 33.33%;
+}
+
+.burger_image {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.image_text {
+    font-size: clamp(18px, 3.5vw, 30px);
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Roboto";
+    text-align: center;
+}
+
+#index_section4 {
+    padding: 20px;
+    background-color: #eeb95e;
+}
+
+.about_content {
+    margin: 20px 0px;
+}
+
+.about_content .about_row {
+    align-items: center;
+    display: flex;
+}
+
+.about_content .about_row .about_col {
+    width: 60%;
+}
+
+.about_content .about_row .about_col2 {
+    /* border: 2px dotted blue; */
+    width: 40%;
+}
+
+.about_image {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.about_h1 {
+    font-size: clamp(22px, 3vw + 0.5rem, 33px);
+    color: #0e0a17;
+    font-family: "Roboto";
+    margin: 10px auto;
+    width: 90%;
+}
+
+.about_p {
+    width: 90%;
+    font-size: clamp(16px, 3.5vw, 26px);
+    color: #0e0a17;
+    font-family: "Roboto";
+    margin: 10px auto;
+}
+
+#index_section5 {
+    padding: 30px;
+    background-color: #eeb95e;
+    background-image: url("../images/contact_us_bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.h1_contact {
+    font-size: 48px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Roboto";
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-form {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px 20px 20px;
+}
+
+.left,
+.right {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #777;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #c0c0c0;
+    text-transform: uppercase;
+}
+
+.contact-form button {
+    width: 230px;
+    height: 45px;
+    margin: auto;
+    background: #c40014;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
+#footer {
+    background-color: #222222;
+    padding: 50px 0px;
+}
+
+#footer .footer_row {
+    display: flex;
+}
+
+#footer .footer_row .footer-col-4 {
+    width: 40%;
+}
+
+#footer .footer_row .footer-col-6 {
+    width: 60%;
+}
+
+.footer-data .footer-h3-title {
+    font-size: clamp(19px, 3.5vw, 30px);
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Calistoga";
+}
+
+.footer-data .footer-p {
+    font-size: clamp(16px, 3.5vw, 22px);
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Nunito";
+    width: 90%;
+    margin: 25px 0px;
+}
+
+.footer-data .footer_row .footer-sub-col {
+    width: 33.33%;
+}
+
+.footer-ul {
+    margin-top: 20px;
+    list-style: none;
+}
+
+.footer-ul .footer-li {
+    margin: 15px 0px;
+}
+
+.footer-ul .footer-li .footer-a {
+    font-size: clamp(16px, 3.5vw, 22px);
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Nunito";
+    text-decoration: none;
 }
