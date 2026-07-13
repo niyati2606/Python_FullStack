@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable JS</title>
+</head>
+
+<body>
+
+    <!-- syntax : 
+        var-type var-name = value
+        int a = 5
+    -->
+
+    <script>
+
+        // 1) var  global 
+        var a = 10  //deaclartion allow
+        var a = 12 // re-delcalrtion allow 
+        a = 15 // re-assessment allow 
+
+        console.log("A : ", a)
+
+        // 2) let  local
+        let b = 30  //deaclartion allow
+        // let b = 35 // re-delcalrtion not  allow
+        b = 40 // re-assessment allow 
+        console.log("B : ", b)
+
+        // 3)  const unique
+        const z = 70  //deaclartion allow
+        // const z = 90  // re-delcalrtion not  allow
+        // z = 95 // re-assessment not allow
+
+        console.log("Z :", z)
+
+    </script>
+</body>
+
+</html>

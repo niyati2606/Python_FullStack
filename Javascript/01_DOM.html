@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM JS</title>
+</head>
+
+<body>
+
+    <h1 id="h1"></h1>
+    <h2 id="h2"></h2>
+
+    <!--DOM = Data Object Model-->
+    <!--Internal JS-->
+
+    <script>
+
+        //console log
+        console.log("Hello console..!!") //semicolon is not mandatory
+        console.log("Helloo"); console.log("Niya") //if we want to use console again in same line then semicolon is mandatory
+        console.log("Multiplication :", 50 * 2)
+
+        //DOM
+        // document.writeln("Hello.."); //this will print text on webpage
+        // document.writeln("<h1>First JS</h1>") //HTML tags will work in this method
+
+        //Inner Text
+        console.log(document.getElementById("h1"))
+        document.getElementById("h1").innerText = "Hello Niya.."; //only text will display
+
+        //Inner HTML
+        console.log(document.getElementById("h2"))
+        document.getElementById("h2").innerHTML = "<i>Hello Niya</i>" //text and tag both allowed
+    </script>
+</body>
+
+</html>

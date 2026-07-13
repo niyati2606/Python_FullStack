@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Case</title>
+</head>
+
+<body>
+    <script>
+
+        let a = 20;
+        let b = 10
+
+        let NP = 50
+        let choice = "6"
+        let n = 1
+
+        let num1 = 250
+        let num2 = 30
+        let num3 = 280
+
+
+        switch (choice) {
+            case "1":
+                console.log("Odd-Even")
+                if (a % 2 == 0) {
+                    console.log("Number is Even")
+                } else {
+                    console.log("Number is Odd")
+                }
+                break;
+
+            case "2":
+                console.log("Max from 2 number")
+                if (a > b) {
+                    console.log("A is Max")
+                } else {
+                    console.log("B is Max")
+                }
+                break
+
+            case "3":
+                console.log("Positive Negative Num")
+                if (NP >= 0) {
+                    console.log("Number is Positive")
+                } else {
+                    console.log("Number is Negative")
+                }
+                break
+
+            case "4":
+                console.log("Check Prime Number")
+                if (n <= 1) {
+                    console.log("Not a Prime Number")
+                }
+                for (let i = 2; i < n; i++) {
+                    if (n % i == 0) {
+                        console.log("Not a Prime Number")
+                        break;
+                    }
+                    console.log("Prime Number")
+                    break;
+                }
+                break
+
+            case "5":
+                 console.log("Max from 3 numbers")
+                if (num1 > num2) {
+                    if (num1 > num3) {
+                        console.log("Number1 is Max")
+                    } else {
+                        console.log("Number3 is Max")
+                    }
+                } else if (num2 > num3) {
+                    console.log("Number2 is Max")
+                } else {
+                    console.log("Number3 is Max")
+                }
+                break
+
+            case "6":
+                 console.log("Square root")
+                 let ans = a * a
+                 console.log("Square Root :",ans)
+                break
+
+            default:
+                console.log("Invalid choice")
+        }
+
+    </script>
+</body>
+
+</html>

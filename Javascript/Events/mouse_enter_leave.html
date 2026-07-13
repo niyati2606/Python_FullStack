@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Enter Leave</title>
+</head>
+<body>
+    
+    <h1 id="change_h1" onmouseenter="mouseEnterText()" onmouseleave="mouseLeaveText()">This is Demo of Mouse Enter and Leave</h1>
+    <button onclick="mouseEnterText()">Change Text</button>
+    
+    <script>
+    
+        let h1_data = document.getElementById("change_h1")
+
+        function mouseEnterText(){
+            h1_data.innerHTML = "Hello JS (On Mouse Enter)"
+        }
+
+        function mouseLeaveText(){
+            h1_data.innerHTML = "Hello Java Script (On Mouse Leave)"
+        }
+    
+    </script>
+
+</body>
+</html>

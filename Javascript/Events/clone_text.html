@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Event</title>
+</head>
+<body>
+    <h2>Clone Text from Input to Textarea on button click</h2>
+    
+    <!-- <input type="text" onkeypress="sendData()" placeholder="Enter text" id="inputBox"><br><br> -->
+    
+    <input type="text" onkeyup="sendData()" placeholder="Enter text" id="inputBox"><br><br>
+    <textarea name="" cols="20" rows="10" id="textArea"></textarea><br><br>
+
+    <button onclick="sendData()">Send Data</button>
+
+    <script>
+
+        let inputData = document.getElementById("inputBox")
+        let textAreaData = document.getElementById("textArea")
+
+        function sendData(){
+            textAreaData.innerText = inputData.value
+        }
+
+    </script>
+</body>
+</html>

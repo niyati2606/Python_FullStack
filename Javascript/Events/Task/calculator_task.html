@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            background: #f0f0f0;
+        }
+
+        .calculator {
+            background: #202020;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #display {
+            width: 100%;
+            box-sizing: border-box;
+            background: white;
+            border-radius: 14px;
+            padding: 24px 20px 18px;
+            margin-bottom: 20px;
+            text-align: right;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #555;
+            color: white;
+        }
+
+        .span2 {
+            grid-column: span 2;
+        }
+
+        .op {
+            color: var(--op-text);
+            background: #b78169;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly value="">
+
+        <div class="buttons">
+            <button class="func" onclick="clearAll()">AC</button>
+            <button class="func" onclick="deleteLast()">DEL</button>
+            <button class="func" onclick="toggleSign()">+/-</button>
+            <button class="op" onclick="appendNum('÷')">÷</button>
+
+
+            <button onclick="appendNum('7')">7</button>
+            <button onclick="appendNum('8')">8</button>
+            <button onclick="appendNum('9')">9</button>
+            <button class="op" onclick="appendNum('×')">×</button>
+
+            <button onclick="appendNum('4')">4</button>
+            <button onclick="appendNum('5')">5</button>
+            <button onclick="appendNum('6')">6</button>
+            <button class="op" onclick="appendNum('−')">−</button>
+
+            <button onclick="appendNum('1')">1</button>
+            <button onclick="appendNum('2')">2</button>
+            <button onclick="appendNum('3')">3</button>
+            <button class="op" onclick="appendNum('+')">+</button>
+
+            <button class="span2" onclick="appendNum('0')">0</button>
+            <button onclick="appendNum('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+
+        function appendNum(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function clearAll(value) {
+            document.getElementById("display").value = "";
+        }
+
+        function calculate() {
+            let display = document.getElementById("display");
+            try {
+                let expression = display.value
+                    .replace(/÷/g, "/")
+                    .replace(/×/g, "*")
+                    .replace(/−/g, "-");
+                display.value = eval(expression);
+            } catch {
+                display.value = "Error";
+            }
+        }
+
+        function deleteLast(){
+            let display = document.getElementById("display");
+            display.value = display.value.slice(0, -1);
+        }
+
+        function toggleSign(){
+            let display = document.getElementById("display");
+            if (display.value === "") return;
+            if (display.value.startsWith("-")) {
+                display.value = display.value.slice(1);
+            } else {
+                display.value = "-" + display.value;
+            }
+        }
+    </script>
+</body>
+
+</html>

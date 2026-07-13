@@ -1,0 +1,6 @@
+4 types of event
+
+Mouse event (onClick, ondoubleClick, onHover)
+Keyboard event (keyup, keydown, keypress)
+from event (onsubmit, onchange, onblur)
+browser event (resize, scroll, load) -- not in use

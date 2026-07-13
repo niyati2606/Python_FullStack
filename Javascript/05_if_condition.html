@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IF Else Condtions</title>
+</head>
+
+<body>
+
+    <script>
+        //simple if
+        let age = 12
+
+        if (age >= 18) {
+            console.log("Valid")
+        }
+
+        //if else
+        let num = 5
+
+        if (num % 2 == 0) {
+            console.log("Number is Even")
+        } else {
+            console.log("Number is odd")
+        }
+
+        //leader if else
+        let marks = 80
+        if (marks > 100 || marks < 0) {
+            console.log("Marks are invalid")
+        }
+        else if (marks >= 85 && marks <= 100) {
+            console.log("A grade Student")
+        }
+        else if (marks >= 70 && marks < 85) {
+            console.log("B grade Student")
+        }
+        else if (marks < 70 && marks >= 55) {
+            console.log("C grade Student")
+        }
+        else if (marks < 55 && marks >= 34) {
+            console.log("D grade Student")
+        }
+        else {
+            console.log("faild Student")
+        }
+
+        //nested if
+        let a = 20
+        let b = 3
+        let c = 15
+
+        if(a > b){
+            if(a > c){
+                console.log("A is max")
+            }else{
+                console.log("C is max")
+            }
+        }else if(b > c){
+            console.log("B is max")
+        }else{
+            console.log("C is max")
+        }
+    </script>
+
+</body>
+
+</html>
