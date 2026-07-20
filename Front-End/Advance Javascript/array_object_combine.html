@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrat and Object Combine</title>
+</head>
+
+<body>
+    <!-- 1) array inside array 
+    2) object inside object 
+    3) array inside object 
+    4) object inside array  -->
+
+    <script>
+
+        //array inside array
+        let arr = [1,3,5,[2,6,9,[7,8,5]]]
+        console.log(arr)
+        console.log(arr[2])
+        console.log(arr[3][2])
+        console.log(arr[3][3][1])
+
+        //object inside object
+        let student = {
+            id: 1,
+            name: "niya",
+            course: {
+                "fullstack": "Full-Stack",
+                "frontEnd": "Front-End",
+                "backEnd": "Back-End"
+            }
+        }
+
+        console.log(student)
+        console.log(student.course.fullstack)
+
+        //array inside object
+        let arr1 = [1, 3, 5, {
+            id: 1,
+            name: "niya",
+        }, 2, 4]
+
+        console.log(arr1[3].name)
+
+        //object insdie array
+        let studentData = {
+            id: 1,
+            name: "niya",
+            course: [
+                "Full-Stack",
+                "Front-End",
+                "Back-End"
+            ]
+        }
+
+        console.log(studentData.course[1])
+    </script>
+
+</body>
+
+</html>

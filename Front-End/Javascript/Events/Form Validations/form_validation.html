@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Validation</title>
+</head>
+
+<body>
+    <form action="">
+
+        <div>
+            <input type="text" placeholder="Enter First Name" id="firstName" onblur="return fromValidation(firstName, firstNameError)">
+            <span id="firstNameError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="text" placeholder="Enter Last Name" id="lastName" onblur="return fromValidation(lastName, lastNameError)">
+            <span id="lastNameError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="email" placeholder="Enter Email" id="email" onblur="return fromValidation(email, emailError)">
+            <span id="emailError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="tel" placeholder="Enter Phone Number" id="phone" onblur="return fromValidation(phone, phoneError)">
+            <span id="phoneError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="password" placeholder="Enter Password" id="password" onblur="return fromValidation(password, passwordError)">
+            <span id="passwordError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <script>
+        function fromValidation(inputValue, inputError) {
+
+            if (inputValue.value == "" || inputValue.value == null) {
+                inputError.innerHTML = "This Field is required..!!"
+                inputError.style.color = "red"
+                return false
+            } else {
+                inputError.innerHTML = ""
+                return false
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

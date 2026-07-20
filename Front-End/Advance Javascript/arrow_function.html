@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Function</title>
+</head>
+<body>
+    
+    <script>
+
+        function demo(){
+            console.log("Normal Function")
+        }
+
+        demo()
+
+        let testArrow=()=>{
+            console.log("Arrow Function Demo")
+        }
+
+        testArrow()
+
+        //redeclaration is allowed in normal function override the data
+        function demo(){
+            console.log("Normal Function JS")
+        }
+
+        demo()
+
+        //redeclaration isnot allowed in arrow function because of let
+        let testArrow1=()=>{
+            console.log("Arrow Function")
+        }
+
+        testArrow1()
+
+    </script>
+
+</body>
+</html>

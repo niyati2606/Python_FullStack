@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fibonacci series</title>
+</head>
+
+<body>
+
+    <input type="number" placeholder="Enter Number" id="num_input"><br><br>
+    <button onclick="fibonacci()">Display Fibonacci Series</button>
+
+    <h2 id="ans_h2"></h2>
+
+    <script>
+
+        function fibonacci() {
+            let num = parseInt(document.getElementById("num_input").value)
+            let a = 0
+            let b = 1
+            let result = a + ""
+
+            for (let i = 1; i < num; i++) {
+                result += " " + b
+                let next = a + b
+                a = b
+                b = next
+            }
+
+            document.getElementById("ans_h2").innerHTML = result
+        }
+
+    </script>
+
+</body>
+
+</html>

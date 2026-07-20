@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabatic Pattern</title>
+</head>
+
+<body>
+
+    <script>
+        let charCode = 65
+
+        for (let r = 1; r <= 4; r++) {
+            for (let c = 1; c <= r; c++) {
+                document.writeln(String.fromCharCode(charCode) + " ")
+                charCode++
+            }
+            document.writeln("<br>")
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From</title>
+</head>
+
+<body>
+    <form action="" onsubmit="return fromValidation()">
+
+        <div>
+            <input type="text" placeholder="Enter First Name" id="firstName">
+            <span id="firstNameError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="text" placeholder="Enter Last Name" id="lastName">
+            <span id="lastNameError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="email" placeholder="Enter Email" id="email">
+            <span id="emailError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="tel" placeholder="Enter Phone Number" id="phone">
+            <span id="phoneError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="password" placeholder="Enter Password" id="password">
+            <span id="passwordError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="password" placeholder="Enter Confirm Password" id="cPassword">
+            <span id="cpasswordError"></span>
+        </div>
+        <br>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <script>
+        let firstNameData = document.getElementById("firstName")
+        let firstNameError = document.getElementById("firstNameError")
+
+        let lastNameData = document.getElementById("lastName")
+        let lastNameError = document.getElementById("lastNameError")
+
+        let emailData = document.getElementById("email")
+        let emailError = document.getElementById("emailError")
+
+        let phoneData = document.getElementById("phone")
+        let phoneError = document.getElementById("phoneError")
+
+        let passwordData = document.getElementById("password")
+        let passwordError = document.getElementById("passwordError")
+
+        let confirmPasswordData = document.getElementById("cPassword")
+        let cpasswordError = document.getElementById("cpasswordError")
+
+        function fromValidation() {
+
+            if (firstNameData.value == "" || firstNameData.value == null) {
+                firstNameError.innerHTML = "First Name is required"
+                firstNameError.style.color = "red"
+                return false
+            } else {
+                firstNameError.innerHTML = ""
+            }
+
+            if (lastNameData.value == "" || lastNameData.value == null) {
+                lastNameError.innerHTML = "Last Name is required"
+                lastNameError.style.color = "red"
+                return false
+            } else {
+                lastNameError.innerHTML = ""
+            }
+
+            if (emailData.value == "" || emailData.value == null) {
+                emailError.innerHTML = "Email is required"
+                emailError.style.color = "red"
+                return false
+            } else {
+                emailError.innerHTML = ""
+            }
+
+            if (phoneData.value == "" || phoneData.value == null) {
+                phoneError.innerHTML = "Mobile Number is required"
+                phoneError.style.color = "red"
+                return false
+            } else {
+                phoneError.innerHTML = ""
+            }
+
+            if (passwordData.value == "" || passwordData.value == null) {
+                passwordError.innerHTML = "Password is required"
+                passwordError.style.color = "red"
+                return false
+            } else {
+                passwordError.innerHTML = ""
+            }
+
+            if (confirmPasswordData.value == "" || confirmPasswordData.value == null) {
+                cpasswordError.innerHTML = "Confrim Password is required"
+                cpasswordError.style.color = "red"
+                return false
+            }
+            else if (passwordData.value != confirmPasswordData.value) {
+                cpasswordError.innerHTML = "Password and Confrim Password does not match"
+                cpasswordError.style.color = "red"
+                return false
+            }else{
+                cpasswordError.innerHTML = ""
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

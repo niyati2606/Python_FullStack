@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array inbuilt functions</title>
+</head>
+
+<body>
+
+    <script>
+
+        let arr = [1, 2, 4, "niya", 3, 1, true, 0]
+
+        //length
+        console.log(arr.length)
+
+        //add data at last index
+        arr.push(100)
+        console.log(arr)
+
+        // remove data at last index
+        arr.pop()
+        console.log(arr)
+
+        // remove value at 0 index
+        arr.shift()
+        console.log(arr)
+
+        // add value at 0 index
+        arr.unshift(3)
+        console.log(arr)
+
+        // combine second array in first array
+        let arr1 = [6, 7, 8, 9, 10]
+        console.log(arr.concat(arr1))
+
+        //filter array values
+        const words = ["spray", "elite", "exuberant", "destruction", "present"];
+
+        const res = words.filter((word) => word.length > 5)
+        console.log(res)
+
+        //slice array values             
+        console.log(words.slice(3))
+        console.log(words.slice(1,4))
+
+        let tags = ['js', 'html', 'css'];
+        
+        //join array values by -
+        let sequence = tags.join('-'); 
+        console.log(sequence)
+
+        //sort array values
+        let sorted = tags.sort()
+        console.log(sorted)
+    </script>
+</body>
+
+</html>
