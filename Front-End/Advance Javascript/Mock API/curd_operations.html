@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curd Operations - Mock API</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios@1.13.2/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+
+    <script>
+
+        const getUser = async () => {
+
+            try {
+                const response = await axios.get("https://6a64a939b30b52361e1b3ede.mockapi.io/users/users")
+                console.log(response.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getUser()
+
+        let user = {
+            firstName: "niya",
+            lastName: "patel",
+            email: "niya@gmail.com",
+            phone: "1234567890"
+        }
+
+        const addUser = async () => {
+
+            try {
+                const response = await axios.post("https://6a64a939b30b52361e1b3ede.mockapi.io/users/users", user)
+                console.log(response.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        // addUser()
+
+        let updateData = {
+            id: "2",
+            firstName: "niyati",
+            lastName: "patel",
+            email: "niya@gmail.com",
+            phone: "1234567890"
+        }
+
+        const updateUser = async () => {
+
+            try {
+                const response = await axios.put(`https://6a64a939b30b52361e1b3ede.mockapi.io/users/users/${updateData.id}`, updateData)
+                console.log(response.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        // updateUser()
+
+        const fetchSingleUser = async (id) => {
+
+            try {
+                const response = await axios.get(`https://6a64a939b30b52361e1b3ede.mockapi.io/users/users/${id}`)
+                console.log(response.data)
+            }catch (err) {
+                console.log(err)
+            }
+        }
+
+        // fetchSingleUser(4)
+
+        const deleteUser = async (id) => {
+
+            try {
+                const response = await axios.delete(`https://6a64a939b30b52361e1b3ede.mockapi.io/users/users/${id}`)
+                console.log(response.data)
+            }catch (err) {
+                console.log(err)
+            }
+        }
+
+        // deleteUser(4)
+
+    </script>
+
+</body>
+
+</html>

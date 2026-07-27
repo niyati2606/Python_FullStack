@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Users- Mock API</title>
+</head>
+<body>
+    
+    <script>
+
+        function fetchUsers(){
+            
+            fetch("https://6a64a939b30b52361e1b3ede.mockapi.io/users/users",{
+                method : "GET"
+            }).then((response) => {
+                return response.json()
+            }).then((res) => {
+                console.log(res)
+            })
+        }
+
+        fetchUsers()
+
+    </script>
+
+</body>
+</html>
