@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOPs Class</title>
+</head>
+
+<body>
+
+    <script>
+
+        class Bank {
+
+            bankDetails(pin, balance) {
+                let name = "COSMOS"
+                let IFSCCode = "IFSC002N"
+                let bankPIN = pin
+                let bankBalance = balance
+
+                console.log("Bank Name : ", name)
+                console.log("Bank IFSC Code : ", IFSCCode)
+                console.log("Bank PIN : ", bankPIN)
+                console.log("Bank Balance : ", bankBalance)
+            }
+
+            deposit() {
+                console.log("Deposit Function")
+            }
+        }
+
+        const bankUser = new Bank()
+        //console.log(bankUser)
+        bankUser.bankDetails(2647, 85000)
+        bankUser.deposit()
+
+    </script>
+
+</body>
+
+</html>

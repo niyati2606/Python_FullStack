@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String inbuilt functions</title>
+</head>
+
+<body>
+
+    <script>
+
+        let str = "This is demo of string functions"
+
+        //string length
+        console.log(str.length)
+
+        //charAt() : returns character at specified index
+        console.log(str.charAt(5))
+
+        //charAt() : returns character at specified index (returns UTF-16 code between 0 to 65535)
+        console.log(str.charCodeAt(5))
+
+        //codePointAt() : code point value at the first position in a string
+        console.log(str.codePointAt(0))
+
+        //at() method returns the character at a specified index (position)
+        let name = "Niyati"
+        console.log(name.at(2))
+        console.log(name[3])
+
+        //concat() : join 2 or more string
+        let str1 = "hello"
+        let str2 = "javascript"
+        console.log(str1.concat(" " + str2))
+
+        //touppercase
+        console.log(name.toUpperCase())
+
+        //tolowercase
+        console.log(name.toLowerCase())
+
+        //iswellformed
+        console.log(name.isWellFormed())
+
+        let text = "Hello World \uD800";
+        console.log(text.isWellFormed())
+        //retrun new string and remove unformted value
+        console.log(text.toWellFormed())
+
+        let text1 = "      Hello JS!      ";
+        console.log(text1.trim())
+
+        //trim start and end
+        console.log(text1.trimStart())
+        console.log(text1.trimEnd())
+
+        //padStart() method pads a string from the start
+        let n = "5"
+        console.log(n.padStart(4, "x"))
+        console.log(n.padStart(4, "0"))
+
+        //padEnd() method pads a string from the end
+        console.log(n.padEnd(4, "x"))
+        console.log(n.padEnd(4, "0"))
+
+        //replace
+        let newText = "Please visit Microsoft!";
+        console.log(newText.replace("Microsoft", "Amazon"))
+
+    </script>
+
+</body>
+
+</html>

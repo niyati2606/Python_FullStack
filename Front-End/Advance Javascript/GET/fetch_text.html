@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Text </title>
+</head>
+
+<body>
+    <!-- fetch : inbulit method for js : back-end data view  -->
+    <!--
+        Get : all data 
+        post : new data 
+        put/patch: update data
+        delete : data remove
+
+        syntax : 
+        fetch('path',{
+           method: 
+        })
+        .then(convert code )
+        .then(printf)
+        .catch(error)    
+    -->
+
+    <script>
+        fetch("data.txt", {
+            method: "GET"
+        }).then((response) => {
+            return response.text()
+            return response.text()
+        }).then((err) => {
+            console.log(err)
+        })
+
+    </script>
+
+</body>
+
+</html>

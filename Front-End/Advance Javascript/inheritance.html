@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance</title>
+</head>
+
+<body>
+    <!--
+        4 types of inheritance
+            1) Single Inheritance
+            2) Multi-level Inheritance
+            3) Multiple Inheritance
+            4) Hierarchical Inheritance
+            5) Hybrid Inheritance
+     -->
+
+    <script>
+
+        console.log("========================================")
+        console.log("Single Inheritance")
+        console.log("========================================")
+        // Single Inheritance
+        class First {
+            functionA() {
+                console.log("Class First")
+            }
+        }
+
+        class Second extends First {
+            functionB() {
+                console.log("Class Second")
+            }
+        }
+
+        let demo = new Second()
+        demo.functionA()
+        demo.functionB()
+
+        console.log("========================================")
+        console.log("Multi-level Inheritance")
+        console.log("========================================")
+        // Multi-level Inheritance
+        class MultiFirst {
+            functionA() {
+                console.log("Class First")
+            }
+        }
+
+        class MultiSecond extends MultiFirst {
+            functionB() {
+                console.log("Class Second")
+            }
+        }
+
+        class MultiThird extends MultiSecond {
+            functionC() {
+                console.log("Class Third")
+            }
+        }
+
+        let multiLevel = new MultiThird()
+        multiLevel.functionA()
+        multiLevel.functionB()
+        multiLevel.functionC()
+
+        console.log("========================================")
+        console.log("Hierarchical Inheritance")
+        console.log("========================================")
+        // Hierarchical Inheritance
+        class HierarchicalFirst {
+            functionA() {
+                console.log("Class First")
+            }
+        }
+
+        class HierarchicalSecond extends HierarchicalFirst {
+            functionB() {
+                console.log("Class Second")
+            }
+        }
+
+        class HierarchicalThird extends HierarchicalFirst {
+            functionC() {
+                console.log("Class Third")
+            }
+        }
+
+        let hierarchical1 = new HierarchicalThird()
+        hierarchical1.functionA()
+        hierarchical1.functionC()
+
+        let hierarchical2 = new HierarchicalSecond()
+        hierarchical2.functionA()
+        hierarchical2.functionB()
+
+    </script>
+</body>
+
+</html>

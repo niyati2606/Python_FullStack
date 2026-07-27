@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>constructor and static</title>
+</head>
+
+<body>
+
+    <!-- constructor is a special function or method used to create and initialize an object instance -->
+    <!-- static function can access using class
+        Ex : classname.static function name 
+     -->
+
+    <script>
+        class ConstructorDemo {
+            constructor() {
+                console.log("constructor demo")
+            }
+
+            x = function demo() {
+                console.log("Demo Function")
+            }
+
+            test() {
+                console.log("This is Test function")
+            }
+
+            static staticTest(){
+                console.log("This is Static Function")
+            }
+        }
+
+        let demo = new ConstructorDemo()
+        demo.test()
+        demo.x()
+
+        //static function access
+        ConstructorDemo.staticTest()
+    </script>
+
+</body>
+
+</html>

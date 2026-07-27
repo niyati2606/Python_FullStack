@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Types</title>
+</head>
+
+<body>
+    <!-- 4 types 
+        1) store with parameter
+        2) store without parameter
+        3) without store with parameter
+        4) without store without parameter 
+    -->
+
+    <script>
+
+        class Test{
+
+            // store with parameter
+            class1 = function sum(num1,num2){
+                console.log("Sum :", num1 + num2)
+            }
+
+            // store with out parameter
+            class2 = function sub(){
+                let num1 = 50
+                let num2 = 20
+                console.log("Sub :", num1 - num2)
+            }
+
+            // with out store with parameter
+            mul(num1, num2){
+                console.log("Mul :",num1 * num2)
+            }
+
+            // without store without parameter
+            div(){
+                let num1 = 40 
+                let num2 = 20
+                console.log("Divison :", num1 / num2)
+            }
+        }
+
+        const demo = new Test;
+        //console.log(demo)
+        demo.class1(50,60)
+        demo.class2()
+        demo.mul(22,2)
+        demo.div()
+
+    </script>
+</body>
+
+</html>

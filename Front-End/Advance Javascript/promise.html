@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+
+<body>
+
+    <!-- 
+    Promise is an object representing the eventual completion or failure of an asynchronous operation
+
+    3 states : 
+    Pending: The initial state; the asynchronous operation is still actively running.
+    Fulfilled: The operation completed successfully, returning a final value.
+    Rejected: The operation failed, returning a reason or error object.
+    
+    syntax : let name = new Promise(()=>{})
+    -->
+
+    <script>
+
+        let promiseDemo = new Promise((response, error) => {
+
+            let x = 11
+            if (x == 11) {
+                response("True")
+            } else {
+                response("False")
+            }
+        })
+            .then((res) => {
+                test(res)
+            })
+            .catch((err) => {
+                test(err)
+            })
+
+
+        function test(data) {
+            console.log(data)
+        }
+        //  console.log(promiseDemo)
+
+    </script>
+
+</body>
+
+</html>

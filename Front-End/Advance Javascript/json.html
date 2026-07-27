@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON</title>
+</head>
+
+<body>
+    <!-- json : javascipt object noation 
+        key : value 
+        lighwight 
+        easy read and use it 
+
+        json : not read javascript
+    -->
+
+    <!-- 
+        let json = `[{
+            "id":"1",
+            "name":"hello",
+            "Course":"Front-end"
+        }]`
+
+        let object = [{
+            id : "1",
+            name : "Hello",
+            Coruse : "Fornt-end"
+        }]
+
+    -->
+
+    <script>
+        let jsondata = `[
+            {
+                "id":"1",
+                "name":"niya",
+                "course":"Front-end"
+            },
+            {
+                "id":"2",
+                "name":"shalin",
+                "course":"back-end"
+            },
+            {
+                "id":"3",
+                "name":"ravi",
+                "course":"Full-stack"
+            }
+        ]`
+
+        console.log(jsondata)
+
+        // json convert array/object
+        let objdata = JSON.parse(jsondata)
+        console.log(objdata)
+
+        objdata.forEach((data, index) => {
+            //            console.log(data)
+            document.writeln(`<h3>id : ${data.id} name : ${data.name} </h3>`)
+        });
+
+        let test = [
+            {
+                id: 1,
+                name: "nr",
+                course: "front-end"
+            },
+            {
+                id: 2,
+                name: "niya",
+                course: "back-end"
+            },
+            {
+                id: 3,
+                name: "ravi",
+                course: "full-stack"
+            }
+        ]
+
+        let str = JSON.stringify(test)
+        console.log(str)
+
+    </script>
+</body>
+
+</html>
