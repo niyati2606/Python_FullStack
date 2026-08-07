@@ -1,0 +1,18 @@
+Rest Parameter: 
+    it collects multiple arguments into array
+    uses function parameters ex : function(...args){}
+    returs array
+
+ Ex : 
+    function sum(...numbers){
+        let total = 0
+        for(let n in numbers){
+            total = total + numbers[n]
+        }
+        return total
+    }   
+
+Spread :
+    it expands elements of array, object and strings into individual elements
+    used in array, objects 
+        syntax : [...array],{object} 

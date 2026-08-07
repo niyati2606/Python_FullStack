@@ -1,0 +1,34 @@
+Class :
+
+Class in older syntax
+this componenet is inbuilt-class we entend to get state features
+this.state : initial state, have to declare inside the constructor
+this.setSgate() : this methos is use to update the state
+constructor, state, and methods all live inside the same class
+super keyword is required to declare in constructor
+state always understands object
+Event Handler - call back method {this.setState((name = "value"))}
+without event we cannot change the state
+
+Props : 
+it is simple type of param or property
+its only readble
+we can to update 
+its reusable
+main work of props in to transfer data from one component to another componenet
+2 types : function and class
+
+//class props : one component to another
+html to jsx
+how to declare : 
+constructor(props){
+	super(props)
+	this.data = props
+}
+
+//function props
+in function no constructor
+if we want to allow multiple data at one time have to use {}
+
+props will not change but its dispalys in another page
+state is changble but in same file

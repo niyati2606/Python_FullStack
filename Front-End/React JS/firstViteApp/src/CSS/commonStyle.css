@@ -1,0 +1,7 @@
+.h1Style {
+    background: linear-gradient(red, yellow, aqua);
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-align: center;
+}
