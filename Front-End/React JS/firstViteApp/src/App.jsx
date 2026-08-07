@@ -3,6 +3,7 @@ import ClassComponenet from "./Component/ClassComponenet"
 import FunctionComponent from "./Component/FunctionComponent"
 import DemoCSS from "./CSS/DemoCSS"
 import MainState from "./State/MainState"
+import MainProps from "./Props/MainProps"
 
 function App() {
 
@@ -17,7 +18,10 @@ function App() {
       {/* <DemoCSS /> */}
 
       {/* Class State */}
-      <MainState />
+      {/* <MainState /> */}
+
+      {/* Props */}
+      <MainProps />
     </>
   )
 }
