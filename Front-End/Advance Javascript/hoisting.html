@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoisting</title>
+</head>
+
+<body>
+
+    <!-- a variable can be used before it has been declared. -->
+
+    <script>
+
+        // 1. var → hoisted, value is undefined
+        console.log(x); // undefined
+        var x = 10;
+
+        // 2. let → hoisted but locked (TDZ)
+        console.log(y); // ReferenceError
+        let y = 20;
+
+        // 3. function declaration → fully hoisted, works early
+        sayHello(); // "Hello!"
+        function sayHello() {
+            console.log("Hello!");
+        }
+
+        // 4. function expression → only variable hoisted, not the function
+        sayHi(); // TypeError: sayHi is not a function
+        var sayHi = function () {
+            console.log("Hi!");
+        };
+
+
+    </script>
+
+</body>
+
+</html>
