@@ -18,10 +18,10 @@ function App() {
       {/* <DemoCSS /> */}
 
       {/* Class State */}
-      {/* <MainState /> */}
+      <MainState />
 
       {/* Props */}
-      <MainProps />
+      {/* <MainProps /> */}
     </>
   )
 }

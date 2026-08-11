@@ -1,14 +1,82 @@
-Class :
+Component : 
+Components are independent and reusable bits of code.
+2 types : 
+	Class Component
+	Function Component
+
+name starts with capital letter
+
+if we creating functioncomponent and classcomponent manualy then have to add below line to with out this we can not use that
+
+export default class/functionComponenetName
+
+-----------------------------------------------------------------------------------------------------------------------------------
+CSS : 
+to apply inline css have to use style but it understands object so need to write in {{}}
+ex : <h1 style={{background:"red",color:"white",padding:"40px"}}> inline css</h1>
+
+internal css is not in use but if we still want to use then declare in css style above retun function using variable and use that variable name to access it
+ex :
+let cssStyle = {
+    background:"green",
+    color:"white"
+}
+
+<h1 style={cssStyle}>internal css/h1>
+
+to apply external style have to use className insted of class and need to import external css file
+import './cssfilename'
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Class Component:
 
 Class in older syntax
+must to extend componenet after class name
+
+Ex : class classname extends component{
+	render(){
+		return(
+			//HTML Code
+		)
+	}
+}
+
+export default classname
+
 this componenet is inbuilt-class we entend to get state features
 this.state : initial state, have to declare inside the constructor
 this.setSgate() : this methos is use to update the state
 constructor, state, and methods all live inside the same class
 super keyword is required to declare in constructor
+it uses render to return the UI
 state always understands object
 Event Handler - call back method {this.setState((name = "value"))}
 without event we cannot change the state
+HTML is not allowed in class component (but we used it forefully and it also works)
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Function Component:
+	A function component is a React component written as a plain JavaScript function that returns JSX
+
+Ex : 
+const functionComponent = () => {
+	return(
+		//HTML code
+	)
+}
+
+export default functioncomponenet
+
+
+Just a function — no class, no extends, no render()
+Uses hooks (useState, useEffect, etc.) instead of this.state	
+it is easier to read nad maintain
+less in code compare to class
+there is no need to declare constructor
+
+-------------------------------------------------------------------------------------------------------------------------
 
 Props : 
 it is simple type of param or property
@@ -26,9 +94,67 @@ constructor(props){
 	this.data = props
 }
 
+ex : 
+child component : 
+class classname extends component{
+	constructor(props){
+	super(props)
+	this.data = props
+	}
+	
+	render(){
+		return(
+
+			<h1>{this.data.title}</h1>
+
+		)
+	}
+}
+
+Parent component : 
+function functionname() {
+	return(
+		<childcompoenetname title = ""/>
+	)
+} 
+
+in class componentt we will not get suggestion
+In a class component, props are used to receive data from the parent component and are accessed using this.props
+
 //function props
+In a function component, props are passed as an argument to the function and are used to receive data from the parent component.
 in function no constructor
 if we want to allow multiple data at one time have to use {}
 
 props will not change but its dispalys in another page
-state is changble but in same file
+state is changeble but in same file
+in function props received as parameter
+
+ex : 
+child component : 
+function functionComponent({name,title}){
+
+	return(
+		<h1>{title}</h1>
+		<p>name</p>
+	)
+	
+}
+
+Parent component : 
+function functionname() {
+	return(
+		<functionComponent name="" title=""/>
+	)
+} 
+
+in function props we will get suggestion about parameter in parent component which we added in child component
+-------------------------------------------------------------------------------------------------------------------------
+
+Hooks in React are special functions that let you use React features (like state and lifecycle methods) inside functional components,
+without needing to write a class.
+
+For example:
+
+useState — functional component hold and update state
+useEffect — run side effects (like API calls, subscriptions) after render 
