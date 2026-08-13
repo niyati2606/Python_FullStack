@@ -11,6 +11,12 @@ import AxiosUserData from "./useEffect/AxiosUserData"
 import FromData from "./Form Handling/FromData"
 import FormObject from "./Form Handling/FormObject"
 import FormObjectCommonFunction from "./Form Handling/FormObjectCommonFunction"
+import ProductData from "./useEffect/task/ProductData"
+import ProductData2 from "./useEffect/task/ProductData2"
+import UserDetailsCard from "./useEffect/task/UserDetailsCard"
+import UserData from "./useEffect/task/UserData"
+import ProductData3 from "./useEffect/task/ProductData3"
+import ProductData4 from "./useEffect/task/ProductData4"
 
 function App() {
 
@@ -38,10 +44,18 @@ function App() {
       {/* <FetchUseEffect /> */}
       {/* <AxiosUserData /> */}
 
+      {/* Task */}
+      {/* <ProductData /> */}
+      {/* <ProductData2 /> */}
+      {/* <UserDetailsCard /> */}
+      {/* <UserData /> */}
+      {/* <ProductData3/> */}
+      <ProductData4 />
+
       {/* Form Handling */}
       {/* <FromData /> */}
       {/* <FormObject /> */}
-      <FormObjectCommonFunction />
+      {/* <FormObjectCommonFunction /> */}
     </>
   )
 }
