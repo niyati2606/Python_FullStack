@@ -151,8 +151,8 @@ function functionname() {
 in function props we will get suggestion about parameter in parent component which we added in child component
 -------------------------------------------------------------------------------------------------------------------------
 
-Hooks in React are special functions that let you use React features (like state and lifecycle methods) inside functional components,
-without needing to write a class.
+Hooks are special functions in React that allow function components to use features like state and lifecycle methods.
+hooks are reusable
 
 For example:
 

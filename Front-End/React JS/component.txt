@@ -1,0 +1,27 @@
+create component 
+RCE is shortcut for create class componenet
+component key word is main without its not work
+
+class classname extends component
+
+first letter is complosry capital
+
+class name same as paer component file name
+
+after creating file need to declare in app.js
+
+
+function component
+
+RFCE - react class function class
+
+function name(){
+	return(
+	)
+}
+
+export default functionname
+
+RAFC - arrow function
+
+ES7+

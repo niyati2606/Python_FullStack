@@ -5,6 +5,9 @@ import DemoCSS from "./CSS/DemoCSS"
 import MainState from "./State/MainState"
 import MainProps from "./Props/MainProps"
 import FunctionComponentState from "./useState/FunctionComponentState"
+import UseEffectIntro from "./useEffect/UseEffectIntro"
+import FetchUseEffect from "./useEffect/FetchUseEffect"
+import AxiosUserData from "./useEffect/AxiosUserData"
 
 function App() {
 
@@ -21,11 +24,16 @@ function App() {
       {/* Class State */}
       {/* <MainState /> */}
 
-      {/* Function State */}
-      <FunctionComponentState/>
+      {/* Function State - useState */}
+      {/* <FunctionComponentState/> */}
 
       {/* Props */}
       {/* <MainProps /> */}
+
+      {/* useEffect */}
+      {/* <UseEffectIntro /> */}
+      {/* <FetchUseEffect /> */}
+      <AxiosUserData />
     </>
   )
 }
