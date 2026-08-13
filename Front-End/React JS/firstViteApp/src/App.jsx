@@ -8,6 +8,9 @@ import FunctionComponentState from "./useState/FunctionComponentState"
 import UseEffectIntro from "./useEffect/UseEffectIntro"
 import FetchUseEffect from "./useEffect/FetchUseEffect"
 import AxiosUserData from "./useEffect/AxiosUserData"
+import FromData from "./Form Handling/FromData"
+import FormObject from "./Form Handling/FormObject"
+import FormObjectCommonFunction from "./Form Handling/FormObjectCommonFunction"
 
 function App() {
 
@@ -33,7 +36,12 @@ function App() {
       {/* useEffect */}
       {/* <UseEffectIntro /> */}
       {/* <FetchUseEffect /> */}
-      <AxiosUserData />
+      {/* <AxiosUserData /> */}
+
+      {/* Form Handling */}
+      {/* <FromData /> */}
+      {/* <FormObject /> */}
+      <FormObjectCommonFunction />
     </>
   )
 }
