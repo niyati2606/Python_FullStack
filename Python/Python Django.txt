@@ -1,0 +1,31 @@
+Python Django
+
+python -m venv myenv  
+pip install django
+django-admin startproject doctorFinder . 
+django-admin startapp doctorFinderapp
+python .\manage.py migrate
+python .\manage.py createsuperuse
+
+username : niyati
+pass : Admin@123
+
+add app name in installed apps (projectlevel -> setting.py -> installedapp)
+
+change in urls.py (projectLevel -> urls.py ->)
+add include after path in import section
+   path('',include('appName.urls'))
+
+create urls.py file in app level folder
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('',views.index,name='index'),
+]
+
+add views in views.py
+# Create your views here.
+def index (request) : 
+    return render(request,'index.html')
+
