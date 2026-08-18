@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import AboutComponent1 from "./Component/AboutComponent1"
 import AboutComponent2 from "./Component/AboutComponent2"
 import FotterComponenet from "./Common/FotterComponenet"
+import NotFoundComponent from "./Common/NotFoundComponent"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="about2" element={<AboutComponent2 />} />
           </Route>
           <Route path="/contact" element={<ContactComponent />} />
+          <Route path="/*" element={<NotFoundComponent /> }/>
         </Routes>
         <FotterComponenet />
       </BrowserRouter>
