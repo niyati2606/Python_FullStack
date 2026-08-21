@@ -1,0 +1,9 @@
+Create/sign in to your free Netlify account.
+Choose Add new project → Import an existing project.
+Select GitHub.
+Authorize Netlify to access your GitHub repositories.
+Select your new React repository.
+Configure the deployment.
+Set the build command to:
+
+npm run build
