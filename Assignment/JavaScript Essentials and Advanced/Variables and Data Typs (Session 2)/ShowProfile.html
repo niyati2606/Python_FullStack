@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+
+<body>
+    <h1>Instagram Profile</h1>
+
+    <script>
+
+        function showProfile(name, followers, isPremium) {
+
+            console.log("Name:", name);
+            console.log("Premium:", isPremium);
+
+            // Dynamic typing: followers starts as a string
+            followers = "1000";
+            console.log("Followers:", followers);
+            console.log("Type:", typeof followers);
+
+            // Now followers becomes a number
+            followers = 1000;
+            console.log("Followers:", followers);
+            console.log("Type:", typeof followers);
+
+        }
+
+        showProfile("niyati", 1000, true)
+
+        function displayProfile(userName, followers) {
+
+            console.log(`${userName} has ${followers} followers`);
+        }
+
+        displayProfile("niya", 800)
+
+    </script>
+</body>
+
+</html>

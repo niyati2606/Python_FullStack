@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primitive and Reference</title>
+</head>
+
+<body>
+
+    <h1>Difference between Primitive and Reference types</h1>
+
+    <script>
+
+        // --- Primitive type (string) ---
+        let favFood = 'pizza'
+        let favFoodCopy = favFood
+
+        favFood = 'burger'
+
+        console.log(favFood)
+        console.log(favFoodCopy)
+
+        // --- Reference type (object) ---
+        let zomatoUser = { city: 'Ahmedabad' }
+        let zomatoUserCopy = zomatoUser
+
+        zomatoUser.city = 'Mumbai'
+
+        console.log(zomatoUser)
+        console.log(zomatoUserCopy)
+
+        // PRIMITIVE (favFood):
+        // `favFoodCopy = favFood` copies the actual VALUE 'pizza' into favFoodCopy.
+        // favFood and favFoodCopy become two totally separate values in memory.
+        // Reassigning favFood to 'burger' only changes favFood — favFoodCopy
+        // still holds its own independent copy: 'pizza'.
+
+        // REFERENCE TYPE (zomatoUser):
+        // `zomatoUserCopy = zomatoUser` does NOT copy the object itself.
+        // It copies the REFERENCE — both variables now point to the exact same
+        // object in memory. There's only ONE object, with two names for it.
+        // So when we do `zomatoUser.city = 'Mumbai'`, we're mutating that single
+        // shared object. Since zomatoUserCopy points to the same object,
+        // it "sees" the change too — both log { city: 'Mumbai' }.
+
+    </script>
+</body>
+
+</html>

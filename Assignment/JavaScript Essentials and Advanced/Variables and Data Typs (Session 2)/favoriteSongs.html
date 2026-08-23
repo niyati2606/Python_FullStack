@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Songs</title>
+</head>
+
+<body>
+
+    <h1>Favorite Songs</h1>
+    <script>
+        const favoriteSongs = ["Blinding Lights", "Bohemian Rhapsody", "Levitating"];
+
+        favoriteSongs.push("Circles");
+
+        console.log(favoriteSongs);
+        // Output: [ 'Blinding Lights', 'Bohemian Rhapsody', 'Levitating', 'Circles' ]
+
+        // Why this works:
+        // `const` only prevents REASSIGNMENT of the variable `favoriteSongs` itself —
+        // meaning you can't do `favoriteSongs = [...]` again later.
+        // It does NOT freeze or lock the contents of the array/object the variable points to.
+        // `favoriteSongs` still points to the same array in memory the whole time;
+        // push() just mutates that array in place (adds an element to it),
+        // it doesn't create a new array or reassign the variable, so const has no problem with it.
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primitive and Reference</title>
+</head>
+
+<body>
+
+    <h1>Difference between Primitive and Reference types</h1>
+
+    <script>
+
+        let user1 = "priya"
+        let user2 = user1
+
+        user1 = "riya"
+
+        console.log("User 1 : ", user1)
+        console.log("User 2 : ", user2)
+
+        let favApps1 = [
+            'instagram',
+            'spotify'
+        ]
+
+        let favApps2 = favApps1
+
+        favApps1.push('zomato')
+
+        console.log("Fav App Array 1 : ", favApps1)
+        console.log("Fav App Array 2 : ", favApps2)
+
+        // PRIMITIVES (string, number, boolean, etc.):
+        // When we did `user2 = user1`, JavaScript copied the VALUE 'Priya' into user2.
+        // user1 and user2 are now two completely independent variables in memory.
+        // So reassigning user1 to 'Riya' has zero effect on user2 — it stays 'Priya'.
+
+        // REFERENCE TYPES (arrays, objects):
+        // When we did `favApps2 = favApps1`, JavaScript did NOT copy the array itself.
+        // It copied the REFERENCE (memory address/pointer) to the same array.
+        // So favApps1 and favApps2 are two different variable names pointing to
+        // the SAME underlying array in memory.
+        // When we push('Zomato') via favApps1, we're mutating that one shared array —
+        // so the change is visible through favApps2 as well, even though we never
+        // touched favApps2 directly.
+
+        // KEY TAKEAWAY:
+        // Assigning a primitive copies the VALUE (independent copies).
+        // Assigning a reference type copies the REFERENCE (both variables point to
+        // the same object/array, so mutations through one are seen by the other).
+
+    </script>
+</body>
+
+</html>
