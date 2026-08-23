@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Color</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container text-center mt-5">
+        <h2> Mood Box</h2>
+
+        <input type="text" id="colorInput" class="form-control mt-3" placeholder="Type a color: pink, yellow...">
+
+        <div id="moodbox" class="mt-4 mx-auto border rounded" style="width: 300px; height: 200px;"></div>
+    </div>
+
+    <script>
+        function updateMoodColor() {
+            let color = document.getElementById("colorInput").value;
+            let moodbox = document.getElementById("moodbox");
+
+            moodbox.style.backgroundColor = color;
+        }
+
+        document.getElementById("colorInput").addEventListener("input", updateMoodColor);
+    </script>
+
+</body>
+
+</html>
