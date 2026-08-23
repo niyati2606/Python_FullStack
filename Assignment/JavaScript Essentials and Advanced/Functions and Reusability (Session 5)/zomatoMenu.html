@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Menu</title>
+</head>
+
+<body>
+
+    <script>
+        function showMenuItem(name, price, image) {
+            const div = document.createElement("div");
+
+            div.innerHTML = `
+               <img src="${image}" alt="${name}" width="250" height="160">
+                <h3>${name}</h3>
+                <p>Price: ₹${price}</p>
+            `;
+
+            div.style.padding = "15px";
+            div.style.margin = "10px";
+            div.style.border = "1px solid #ddd";
+            div.style.borderRadius = "8px";
+            div.style.width = "250px";
+
+            return div;
+        }
+
+        document.body.appendChild(
+            showMenuItem(
+                "Paneer Pizza",
+                250,
+                "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
+            )
+        );
+
+        document.body.appendChild(
+            showMenuItem(
+                "Veg Burger",
+                180,
+                "https://i2.wp.com/www.vegrecipesofindia.com/wp-content/uploads/2020/12/burger-recipe-4.jpg"
+            )
+        );
+
+        document.body.appendChild(
+            showMenuItem(
+                "Masala Dosa",
+                120,
+                "https://images.unsplash.com/photo-1668236543090-82eba5ee5976"
+            )
+        );
+    </script>
+
+</body>
+
+</html>
