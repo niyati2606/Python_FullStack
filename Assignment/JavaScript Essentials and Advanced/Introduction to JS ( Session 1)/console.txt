@@ -1,0 +1,8 @@
+console.log('Hello from the console!')
+
+//output
+Hello from the console!
+
+console.log('JS is running!')
+//outout
+JS in running!
