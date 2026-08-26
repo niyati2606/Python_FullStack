@@ -1,0 +1,5 @@
+Briefly explain (in 2-3 sentences) what event flow is in the DOM, and give one example of how event bubbling could affect a shopping cart app like Flipkart.
+
+Event flow is the order in which events travel through the DOM tree when triggered on an element — it has three phases: capturing (top-down, from the root to the target), target (the element itself), and bubbling (bottom-up, back from the target to the root). Bubbling is the default and most commonly used phase in practice.
+
+Example with a shopping cart app (Flipkart) : Say you have an "Add to Cart" button nested inside a whole product card, and the card itself also has a click listener (e.g., to open the product details page). If you click the "Add to Cart" button, the click event fires on the button first, then bubbles up to the card — triggering the card's click handler too, unintentionally opening the product page instead of (or along with) adding the item to cart. To prevent this, you'd call `event.stopPropagation()` inside the button's click handler so the event doesn't bubble up to the card.
