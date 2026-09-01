@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Status</title>
+</head>
+
+<body>
+
+    <h1>Payment Status</h1>
+
+    <script>
+        function makePayment() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    resolve("Payment successful!");
+                    reject("Please try again after sometime..")
+                }, 1000);
+            });
+        }
+
+        makePayment()
+            .then(function (message) {
+                console.log(message);
+            });
+    </script>
+</body>
+
+</html>

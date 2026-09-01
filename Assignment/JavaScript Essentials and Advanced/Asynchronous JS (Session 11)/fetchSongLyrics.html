@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Lyrics</title>
+</head>
+
+<body>
+
+    <h1 style="text-align: center; margin: 20px;">Fetch Song Lyrics</h1>
+
+    <script>
+        function fetchSongLyrics(song, callback) {
+            setTimeout(function () {
+                const lyrics = `These are the lyrics for "${song}"`;
+                callback(lyrics);
+            }, 2000);
+        }
+
+        fetchSongLyrics("Perfect", function (lyrics) {
+            console.log(lyrics);
+        });
+    </script>
+
+</body>
+
+</html>

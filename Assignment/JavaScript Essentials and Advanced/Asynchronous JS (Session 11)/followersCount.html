@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Followers Count</title>
+</head>
+<body>
+    <h1>Followers Count</h1>
+
+    <script>
+          const getFollowersCount = new Promise(function(resolve) {
+            setTimeout(function() {
+                const followers = Math.floor(Math.random() * 4001) + 1000;
+                resolve(followers);
+            }, 1000);
+        });
+
+        getFollowersCount.then(function(count) {
+            console.log(`You have ${count} new followers`);
+        });
+    </script>
+</body>
+</html>
