@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album List</title>
+</head>
+
+<body>
+
+    <h1>Album List</h1>
+
+    <script>
+        try {
+            fetch("https://jsonplaceholder.typicode.com/albums", {
+                method: "GET"
+            })
+                .then(response => response.json())
+                .then(albums => {
+                    console.log(albums)
+                    const filteredAlbums = albums.filter(album => album.userId === 2);
+                    filteredAlbums.forEach(album => console.log(album.title));
+                })
+        } catch (err) {
+            console.log("Error : ", err)
+        }
+    </script>
+</body>
+
+</html>
