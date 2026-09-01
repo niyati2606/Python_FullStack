@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Food</title>
+</head>
+
+<body>
+    <h1>Food Order</h1>
+
+    <script>
+        function orderFood(item, quantity = 1) {
+            return `You ordered ${quantity} ${item}${quantity > 1 ? 's' : ''}.`;
+        }
+
+        console.log(orderFood('Pizza'));
+
+        console.log(orderFood('Burger', 2));
+
+    </script>
+</body>
+
+</html>

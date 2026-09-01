@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Followers Summary</title>
+</head>
+<body>
+    <h1> Followers Summary (Rest Operator)</h1>
+
+    <script>
+
+        const getFollowersSummary  = (...followers) => {
+            let total = 0
+
+            for (let follower of followers){
+                total += follower;
+            }
+
+            return total
+        }
+
+        console.log("Total Followers :",getFollowersSummary (100,250,3000))
+    </script>
+</body>
+</html>

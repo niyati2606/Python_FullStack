@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+</head>
+<body>
+    <h1> Add to Cart Arrow Function (Rest Operator)</h1>
+
+    <script>
+
+        const addToCartArrow = (...prices) => {
+            let total = 0
+
+            for (let price of prices){
+                total += price;
+            }
+
+            return total
+        }
+
+        console.log("Total Price :",addToCartArrow(100,250,382))
+    </script>
+</body>
+</html>
