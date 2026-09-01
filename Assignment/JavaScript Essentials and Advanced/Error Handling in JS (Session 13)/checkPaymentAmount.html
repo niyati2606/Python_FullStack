@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Amount</title>
+</head>
+
+<body>
+    <h1>Validate Payment Amount</h1>
+
+    <script>
+        function checkPaymentAmount(amount) {
+            if (amount <= 0) {
+                throw new Error("Amount must be positive");
+            }
+
+            return "Payment accepted";
+        }
+
+        try {
+            console.log(checkPaymentAmount(500));
+        } catch (error) {
+            console.log(error.message);
+        }
+    </script>
+</body>
+
+</html>

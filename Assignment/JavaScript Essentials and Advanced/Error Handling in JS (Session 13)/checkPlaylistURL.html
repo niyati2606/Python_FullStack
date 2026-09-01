@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Playlist</title>
+</head>
+
+<body>
+    <h1>Playlist URL</h1>
+
+    <script>
+        function checkPlaylistURL(url) {
+            if (!url.startsWith("https://open.spotify.com/")) {
+                throw new Error("Invalid Spotify URL");
+            }
+
+            return "Valid Spotify URL";
+        }
+
+        try {
+            console.log(checkPlaylistURL("https://open.spotify.com/playlist/123"));
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+            console.log("Validation complete");
+        }
+    </script>
+</body>
+
+</html>

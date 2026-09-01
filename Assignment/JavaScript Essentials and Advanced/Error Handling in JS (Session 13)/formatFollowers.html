@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Format Followers</title>
+</head>
+
+<body>
+    <h2>Format Followers</h2>
+
+    <script>
+        function formatFollowers(count) {
+            try {
+                if (count < 0) {
+                    throw new Error("Negative count");
+                }
+
+                return count + " followers";
+            } catch (e) {
+                return e.message;
+            }
+        }
+
+        console.log(formatFollowers(1500));
+        console.log(formatFollowers(-10));
+    </script>
+</body>
+
+</html>

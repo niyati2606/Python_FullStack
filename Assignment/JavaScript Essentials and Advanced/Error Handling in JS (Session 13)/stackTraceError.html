@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Trace</title>
+</head>
+
+<body>
+    <h1>
+        Stack Trace
+    </h1>
+
+    <script>
+        const data = '{"name":"Pizza",}';
+
+        try {
+            JSON.parse(data);
+        } catch (error) {
+            console.log(error.stack);
+        }
+    </script>
+</body>
+
+</html>
+
+<!-- 
+Explaination  
+The stack trace shows that the JSON data is invalid and the error occurred when JSON.parse() was called on line 4.
+-->

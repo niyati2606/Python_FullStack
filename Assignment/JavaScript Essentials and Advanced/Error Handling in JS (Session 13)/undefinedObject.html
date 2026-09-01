@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undefined Object</title>
+</head>
+
+<body>
+    <h3>Undefined Object</h3>
+
+    <script>
+        let user;
+        try {
+            console.log(user.name);
+        } catch (e) {
+            console.error('User data not found');
+        }
+    </script>
+</body>
+
+</html>

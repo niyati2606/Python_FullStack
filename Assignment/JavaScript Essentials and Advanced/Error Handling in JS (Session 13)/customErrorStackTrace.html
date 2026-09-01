@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Error Stack Trace</title>
+</head>
+
+<body>
+    <h1>Custom Error Stack Trace</h1>
+
+    <script>
+        // The error means the payment amount is invalid because it is zero or negative.
+        // The problem is caused on the line where the custom Error is thrown.
+
+        function checkPaymentAmount(amount) {
+            if (amount <= 0) {
+                throw new Error("Amount must be positive");
+            }
+
+            return "Payment accepted";
+        }
+
+        try {
+            console.log(checkPaymentAmount(-100));
+        } catch (error) {
+            console.log(error.stack);
+        }
+    </script>
+</body>
+
+</html>

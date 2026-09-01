@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Product</title>
+</head>
+
+<body>
+    <h1>Flipkart Product Parsing</h1>
+
+    <script>
+
+        try {
+            const productData = '{"name":"Shoes","price":999}'
+            const product = JSON.parse(productData)
+
+            console.log(product)
+        }catch(err){
+            console.log("Parsing Error : ",err)
+        }finally{
+            console.log("Data Parsed Successfully..!")
+        }
+    </script>
+</body>
+
+</html>
