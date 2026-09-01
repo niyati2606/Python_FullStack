@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save Recent Search</title>
+</head>
+
+<body>
+
+  <h1>Save Recent Search</h1>
+
+  <script>
+    function saveRecentSearch(query) {
+      // Get existing searches from localStorage, or start with an empty array
+      const existingData = localStorage.getItem('recentSearches');
+      const recentSearches = existingData ? JSON.parse(existingData) : [];
+
+      // Add the new search term
+      recentSearches.push(query);
+
+      // Convert back to JSON and save to localStorage
+      localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+    }
+
+    // Example usage:
+    saveRecentSearch('Biryani');
+    saveRecentSearch('Sneakers');
+
+    console.log(JSON.parse(localStorage.getItem('recentSearches')));
+    
+  </script>
+</body>
+
+</html>

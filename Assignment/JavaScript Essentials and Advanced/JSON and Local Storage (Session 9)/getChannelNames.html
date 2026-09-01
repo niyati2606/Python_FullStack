@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Channels JSONString</title>
+</head>
+
+<body>
+  <h1>YouTube Channels JSON String</h1>
+
+  <script>
+
+    function getChannelNames(jsonString) {
+      const channels = JSON.parse(jsonString);
+      return channels.map(channel => channel.name);
+    }
+
+    const channelsJSON = JSON.stringify([
+      { name: "Tech Burner", subscribers: "9M" },
+      { name: "CarryMinati", subscribers: "40M" },
+      { name: "BB Ki Vines", subscribers: "26M" }
+    ]);
+
+    console.log(getChannelNames(channelsJSON));
+  </script>
+</body>
+
+</html>

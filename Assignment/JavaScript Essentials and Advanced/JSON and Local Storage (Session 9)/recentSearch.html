@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Recent Search</title>
+</head>
+
+<body>
+    <h1>Recent Search</h1>
+
+    <script>
+        function getRecentSearches() {
+            const saved = localStorage.getItem('recentSearches');
+
+            // If nothing is saved yet, saved will be null — return an empty array
+            if (saved === null) {
+                return [];
+            }
+
+            return JSON.parse(saved);
+        }
+
+        console.log(getRecentSearches()); // [] (if nothing saved yet)
+
+        localStorage.setItem('recentSearches', JSON.stringify(['Biryani', 'Sneakers']));
+
+        console.log(getRecentSearches());
+
+    </script>
+</body>
+
+</html>
