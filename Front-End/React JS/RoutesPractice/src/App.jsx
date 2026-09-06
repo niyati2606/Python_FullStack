@@ -8,6 +8,8 @@ import AboutComponent1 from "./Component/AboutComponent1"
 import AboutComponent2 from "./Component/AboutComponent2"
 import FotterComponenet from "./Common/FotterComponenet"
 import NotFoundComponent from "./Common/NotFoundComponent"
+import CustomHooksComponent from "./Component/CustomHooksComponent"
+import APICallCustomHook from "./Component/APICallCustomHook"
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
           </Route>
           <Route path="/contact" element={<ContactComponent />} />
           <Route path="/*" element={<NotFoundComponent /> }/>
+          <Route path="/customHooks" element={<CustomHooksComponent/>} />
+          <Route path="/customHooksAPI" element={<APICallCustomHook />} />
         </Routes>
         <FotterComponenet />
       </BrowserRouter>

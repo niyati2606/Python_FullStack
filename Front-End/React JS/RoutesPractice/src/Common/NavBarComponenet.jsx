@@ -22,6 +22,12 @@ function NavBarComponenet() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/contact" >contact</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/customHooks" >Custom Hooks</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/customHooksAPI" >API Call</NavLink>
+                            </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Dropdown
