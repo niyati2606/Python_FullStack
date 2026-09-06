@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Playlist</title>
+</head>
+
+<body>
+    <h1>Display List</h1>
+
+    <script>
+        class Playlist {
+            constructor(name, songs) {
+                this.name = name;
+                this.songs = songs;
+            }
+
+            displayPlaylist() {
+                console.log(`Playlist: ${this.name}`);
+                console.log(`Songs: ${this.songs.join(", ")}`);
+            }
+
+            getSongCount() {
+                return this.songs.length;
+            }
+
+            addSong(songName) {
+                this.songs.push(songName);
+            }
+
+        }
+
+        const myPlaylist = new Playlist("Chill Vibes", [
+            "Perfect",
+            "Until I Found You",
+            "Night Changes"
+        ]);
+
+        // Add two new songs
+        myPlaylist.addSong("Let Me Down Slowly");
+        myPlaylist.addSong("Dandelions");
+
+        myPlaylist.displayPlaylist();
+
+        console.log("Total Songs:", myPlaylist.getSongCount());
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+</head>
+
+<body>
+    <h1>Movies</h1>
+
+    <script>
+        class Movie {
+            constructor(title, genre) {
+                this.title = title;
+                this.genre = genre;
+            }
+
+            display() {
+                console.log(this.title + " - " + this.genre);
+            }
+        }
+
+        const movie = new Movie("Inception", "Sci-Fi");
+
+        movie.display();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Instance</title>
+</head>
+
+<body>
+    <h2>Playlist instance</h2>
+
+    <script>
+        class Playlist {
+            constructor(name, songs) {
+                this.name = name;
+                this.songs = songs;
+            }
+        }
+
+        const myPlaylist = new Playlist("Chill Vibes", [
+            "Perfect",
+            "Until I Found You",
+            "Night Changes"
+        ]);
+
+        console.log(myPlaylist);
+    </script>
+</body>
+
+</html>
