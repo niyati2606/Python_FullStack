@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Liner</title>
+</head>
+
+<body>
+    <h1>One Liner using Map and Reduce Method</h1>
+
+    <script>
+        const cartItems = [
+            { name: "T-Shirt", price: 799 },
+            { name: "Jeans", price: 1499 },
+            { name: "Shoes", price: 2499 }
+        ]
+
+        const totalPrice = cartItems.map(item => item.price).reduce((sum, price) => sum + price, 0)
+
+        console.log("Total Price: ₹" + totalPrice)
+    </script>
+</body>
+
+</html>

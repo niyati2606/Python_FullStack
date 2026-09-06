@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist</title>
+</head>
+
+<body>
+    <h1>Public Playlist - filter Method</h1>
+
+    <script>
+        const playlists = [
+            { name: "My Favorites", isPublic: true },
+            { name: "Workout Mix", isPublic: false },
+            { name: "Chill Vibes", isPublic: true },
+            { name: "Private Songs", isPublic: false }
+        ]
+
+        const publicPlaylists = playlists.filter(playlist => playlist.isPublic)
+
+        console.log(publicPlaylists)
+    </script>
+</body>
+
+</html>

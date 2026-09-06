@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+
+<body>
+    <h2>Instagram Post Likes - Reduce Method</h2>
+
+    <script>
+        const posts = [
+            { username: "niya26", likes: 120 },
+            { username: "sa18", likes: 250 },
+            { username: "niyati26", likes: 180 },
+            { username: "ns23", likes: 320 }
+        ]
+
+        const likeCounts = posts.reduce((total, like) => {
+            return total + like.likes;
+        }, 0)
+
+
+        console.log("Total Likes :",likeCounts)
+    </script>
+</body>
+
+</html>

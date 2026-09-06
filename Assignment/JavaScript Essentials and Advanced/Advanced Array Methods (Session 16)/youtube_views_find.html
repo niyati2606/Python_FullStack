@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Views</title>
+</head>
+
+<body>
+    <h1>YouTube Views - Find Method</h1>
+
+    <script>
+        const videos = [
+            { title: "JavaScript Tutorial", views: 500000 },
+            { title: "React Full Course", views: 1500000 },
+            { title: "Node.js Tutorial", views: 2000000 },
+            { title: "Python Course", views: 800000 }
+        ]
+
+        const firstPopularVideo = videos.find(video => video.views > 1000000)
+
+        console.log(firstPopularVideo)
+    </script>
+</body>
+
+</html>

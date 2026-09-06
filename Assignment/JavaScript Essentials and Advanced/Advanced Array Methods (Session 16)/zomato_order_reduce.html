@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Order</title>
+</head>
+
+<body>
+    <h1>Zomato Order - Reduct Method</h1>
+
+    <script>
+        const orders = [
+            { item: "Pizza", clicks: 150 },
+            { item: "Burger", clicks: 80 },
+            { item: "Biryani", clicks: 150 },
+            { item: "Pasta", clicks: 40 }
+        ]
+
+        const totalClicks = orders.reduce((total, order) => {
+            return total + order.clicks;
+        }, 0)
+
+        console.log("Total clicks:", totalClicks)
+    </script>
+</body>
+
+</html>

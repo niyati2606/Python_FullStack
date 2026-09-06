@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart Product</title>
+</head>
+
+<body>
+    <h2>Flipkart Product Array - Filter Method</h2>
+
+    <script>
+        const products = [
+            { name: "iPhone 15", price: 69999, isInStock: true },
+            { name: "Samsung Galaxy S24", price: 74999, isInStock: false },
+            { name: "OnePlus 12", price: 59999, isInStock: true },
+            { name: "Redmi Note 13", price: 18999, isInStock: false }
+        ];
+
+        const inStockProducts = products.filter(product => product.isInStock);
+
+        console.log(inStockProducts);
+    </script>
+</body>
+
+</html>

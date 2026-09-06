@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato cuisine</title>
+</head>
+
+<body>
+    <h2>Zomato cuisine - Find Method</h2>
+
+    <script>
+
+        const restaurants = [
+            { name: "Spice Villa", cuisine: "Indian" },
+            { name: "Dragon House", cuisine: "Chinese" },
+            { name: "Pasta Point", cuisine: "Italian" },
+            { name: "Wok Express", cuisine: "Chinese" }
+        ]
+
+        const chineseRestaurant = restaurants.find(
+            restaurant => restaurant.cuisine === "Chinese"
+        )
+
+        console.log(chineseRestaurant)
+
+    </script>
+</body>
+
+</html>
