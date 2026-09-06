@@ -158,3 +158,22 @@ For example:
 
 useState — functional component hold and update state
 useEffect — run side effects (like API calls, subscriptions) after render 
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Use Context
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+boot strap
+
+install boot strap
+add import line in index.js
+
+react bootstrao
+
+mdb bootstrap
+mui react 
