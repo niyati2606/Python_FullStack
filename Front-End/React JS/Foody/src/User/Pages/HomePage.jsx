@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Common/Header'
 import Footer from '../Common/Footer'
+import useAPICall from '../../Custom Hooks/useAPICall'
+import { Link } from 'react-router-dom'
 
 function HomePage() {
+
+    const { apidata: products, fetchAPIData: fetchProducts } = useAPICall("http://localhost:3000/products")
+    const { apidata: blogs, fetchAPIData: fetchBlogs } = useAPICall("http://localhost:3000/blogs")
+    const { apidata: features, fetchAPIData: fetchFeatures } = useAPICall("http://localhost:3000/features")
+
+    useEffect(() => {
+        //fetchAPIData()
+        fetchBlogs()
+        fetchFeatures()
+        fetchProducts()
+    }, [])
+
     return (
         <div>
             <Header />
             <div>
-
                 <div>
                     {/* Carousel Start */}
                     <div className="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
@@ -20,8 +33,8 @@ function HomePage() {
                                             <div className="row justify-content-start">
                                                 <div className="col-lg-7">
                                                     <h1 className="display-2 mb-5 animated slideInDown">Organic Food Is Good For Health</h1>
-                                                    <a href className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
-                                                    <a href className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                                    <Link to="/product" className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</Link>
+                                                    <Link to="/feature" className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -34,8 +47,8 @@ function HomePage() {
                                             <div className="row justify-content-start">
                                                 <div className="col-lg-7">
                                                     <h1 className="display-2 mb-5 animated slideInDown">Natural Food Is Always Healthy</h1>
-                                                    <a href className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</a>
-                                                    <a href className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</a>
+                                                    <Link to="/product" className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</Link>
+                                                    <Link to="/feature" className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,30 +95,26 @@ function HomePage() {
                                 <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
                             </div>
                             <div className="row g-4">
-                                <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div className="bg-white text-center h-100 p-4 p-xl-5">
-                                        <img className="img-fluid mb-4" src="img/icon-1.png" alt />
-                                        <h4 className="mb-3">Natural Process</h4>
-                                        <p className="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                                        <a className="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href>Read More</a>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                    <div className="bg-white text-center h-100 p-4 p-xl-5">
-                                        <img className="img-fluid mb-4" src="img/icon-2.png" alt />
-                                        <h4 className="mb-3">Organic Products</h4>
-                                        <p className="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                                        <a className="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href>Read More</a>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                    <div className="bg-white text-center h-100 p-4 p-xl-5">
-                                        <img className="img-fluid mb-4" src="img/icon-3.png" alt />
-                                        <h4 className="mb-3">Biologically Safe</h4>
-                                        <p className="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                                        <a className="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href>Read More</a>
-                                    </div>
-                                </div>
+                                {
+                                    features && features.slice(0, 3).map((features, index) => {
+                                        return (
+                                            <div
+                                                className="col-lg-4 col-md-6 wow fadeInUp"
+                                                key={features.features_id}>
+                                                <div className="bg-white text-center h-100 p-4 p-xl-5 shadow-sm rounded">
+                                                    <img
+                                                        className="img-fluid mb-4"
+                                                        src={features.features_icon}
+                                                        alt={features.features_title || 'Feature icon'}
+                                                        style={{ width: '80px', height: '80px', objectFit: 'contain' }}
+                                                    />
+                                                    <h4 className="mb-3">{features.features_title}</h4>
+                                                    <p className="mb-4">{features.features_description}</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
@@ -123,13 +132,13 @@ function HomePage() {
                                 <div className="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                                     <ul className="nav nav-pills d-inline-flex justify-content-end mb-5">
                                         <li className="nav-item me-2">
-                                            <a className="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">Vegetable</a>
+                                            <a className="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">All</a>
                                         </li>
                                         <li className="nav-item me-2">
-                                            <a className="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Fruits </a>
+                                            <a className="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Vegetables </a>
                                         </li>
                                         <li className="nav-item me-0">
-                                            <a className="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Fresh</a>
+                                            <a className="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Fruits</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -137,174 +146,30 @@ function HomePage() {
                             <div className="tab-content">
                                 <div id="tab-1" className="tab-pane fade show p-0 active">
                                     <div className="row g-4">
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-1.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
+                                        {products && products.slice(0, 4).map((productData, index) => {
+                                            return (
+                                                <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
+                                                    <div className="product-item">
+                                                        <div className="position-relative bg-light overflow-hidden">
+                                                            <img className="img-fluid w-100" src={productData.product_img} alt="img/product-1.jpg" />
+                                                            <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{productData.product_category}</div>
+                                                        </div>
+                                                        <div className="text-center p-4">
+                                                            <a className="d-block h5 mb-2" href>{productData.product_name}</a>
+                                                            <span className="text-primary me-1">${productData.product_price}</span>
+                                                        </div>
+                                                        <div className="d-flex border-top">
+                                                            <small className="w-50 text-center border-end py-2">
+                                                                <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
+                                                            </small>
+                                                            <small className="w-50 text-center py-2">
+                                                                <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
+                                                            </small>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-2.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-3.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-4.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-5.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-6.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-7.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-8.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            )
+                                        })}
                                         <div className="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                                             <a className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</a>
                                         </div>
@@ -312,174 +177,33 @@ function HomePage() {
                                 </div>
                                 <div id="tab-2" className="tab-pane fade show p-0">
                                     <div className="row g-4">
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-1.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-2.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-3.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-4.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-5.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-6.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-7.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-8.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {products && products
+                                            .filter((productData) => productData.product_category === "vegetables")
+                                            .slice(0, 4).
+                                            map((productData, index) => {
+                                                return (
+                                                    <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
+                                                        <div className="product-item">
+                                                            <div className="position-relative bg-light overflow-hidden">
+                                                                <img className="img-fluid w-100" src={productData.product_img} alt="img/product-1.jpg" />
+                                                                <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{productData.product_category}</div>
+                                                            </div>
+                                                            <div className="text-center p-4">
+                                                                <a className="d-block h5 mb-2" href>{productData.product_name}</a>
+                                                                <span className="text-primary me-1">${productData.product_price}</span>
+                                                            </div>
+                                                            <div className="d-flex border-top">
+                                                                <small className="w-50 text-center border-end py-2">
+                                                                    <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
+                                                                </small>
+                                                                <small className="w-50 text-center py-2">
+                                                                    <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
                                         <div className="col-12 text-center">
                                             <a className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</a>
                                         </div>
@@ -487,174 +211,33 @@ function HomePage() {
                                 </div>
                                 <div id="tab-3" className="tab-pane fade show p-0">
                                     <div className="row g-4">
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-1.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-2.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-3.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-4.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-5.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-6.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-7.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-3 col-lg-4 col-md-6">
-                                            <div className="product-item">
-                                                <div className="position-relative bg-light overflow-hidden">
-                                                    <img className="img-fluid w-100" src="img/product-8.jpg" alt />
-                                                    <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
-                                                </div>
-                                                <div className="text-center p-4">
-                                                    <a className="d-block h5 mb-2" href>Fresh Tomato</a>
-                                                    <span className="text-primary me-1">$19.00</span>
-                                                    <span className="text-body text-decoration-line-through">$29.00</span>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small className="w-50 text-center border-end py-2">
-                                                        <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
-                                                    </small>
-                                                    <small className="w-50 text-center py-2">
-                                                        <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {products && products
+                                            .filter((productData) => productData.product_category === "fruits")
+                                            .slice(0, 4).
+                                            map((productData, index) => {
+                                                return (
+                                                    <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
+                                                        <div className="product-item">
+                                                            <div className="position-relative bg-light overflow-hidden">
+                                                                <img className="img-fluid w-100" src={productData.product_img} alt="img/product-1.jpg" />
+                                                                <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{productData.product_category}</div>
+                                                            </div>
+                                                            <div className="text-center p-4">
+                                                                <a className="d-block h5 mb-2" href>{productData.product_name}</a>
+                                                                <span className="text-primary me-1">${productData.product_price}</span>
+                                                            </div>
+                                                            <div className="d-flex border-top">
+                                                                <small className="w-50 text-center border-end py-2">
+                                                                    <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
+                                                                </small>
+                                                                <small className="w-50 text-center py-2">
+                                                                    <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
                                         <div className="col-12 text-center">
                                             <a className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</a>
                                         </div>
@@ -743,36 +326,35 @@ function HomePage() {
                                 <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
                             </div>
                             <div className="row g-4">
-                                <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                    <img className="img-fluid" src="img/blog-1.jpg" alt />
-                                    <div className="bg-light p-4">
-                                        <a className="d-block h5 lh-base mb-4" href>How to cultivate organic fruits and vegetables in own firm</a>
-                                        <div className="text-muted border-top pt-4">
-                                            <small className="me-3"><i className="fa fa-user text-primary me-2" />Admin</small>
-                                            <small className="me-3"><i className="fa fa-calendar text-primary me-2" />01 Jan, 2045</small>
+                                {blogs && blogs.slice(0, 3).map((blog, index) => {
+                                    return (
+                                        <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={blog.id ?? index}>
+                                            <div className="blog-item bg-light rounded overflow-hidden shadow-sm h-100">
+                                                <div className="blog-img" style={{ height: 250, overflow: 'hidden' }}>
+                                                    <img
+                                                        className="img-fluid w-100 h-100"
+                                                        style={{ objectFit: 'cover' }}
+                                                        src={blog.blog_img}
+                                                        alt={blog.blog_title || 'Blog image'}
+                                                    />
+                                                </div>
+                                                <div className="p-4">
+                                                    <a className="d-block h5 lh-base mb-4" href={`/blog/${blog.id}`}>
+                                                        {blog.blog_title}
+                                                    </a>
+                                                    <div className="text-muted border-top pt-4">
+                                                        <small className="me-3">
+                                                            <i className="fa fa-user text-primary me-2" />{blog.blog_author}
+                                                        </small>
+                                                        <small className="me-3">
+                                                            <i className="fa fa-calendar text-primary me-2" />{blog.blog_date}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                    <img className="img-fluid" src="img/blog-2.jpg" alt />
-                                    <div className="bg-light p-4">
-                                        <a className="d-block h5 lh-base mb-4" href>How to cultivate organic fruits and vegetables in own firm</a>
-                                        <div className="text-muted border-top pt-4">
-                                            <small className="me-3"><i className="fa fa-user text-primary me-2" />Admin</small>
-                                            <small className="me-3"><i className="fa fa-calendar text-primary me-2" />01 Jan, 2045</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                    <img className="img-fluid" src="img/blog-3.jpg" alt />
-                                    <div className="bg-light p-4">
-                                        <a className="d-block h5 lh-base mb-4" href>How to cultivate organic fruits and vegetables in own firm</a>
-                                        <div className="text-muted border-top pt-4">
-                                            <small className="me-3"><i className="fa fa-user text-primary me-2" />Admin</small>
-                                            <small className="me-3"><i className="fa fa-calendar text-primary me-2" />01 Jan, 2045</small>
-                                        </div>
-                                    </div>
-                                </div>
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,152 @@
+{
+  "admin": [
+    {
+      "admin_id": 1,
+      "admin_name": "admin",
+      "admin_email": "admin@gmail.com",
+      "admin_password": "12345678",
+      "id": "SfO3O_dxzvM"
+    }
+  ],
+  "users": [
+    {
+      "user_id": 1,
+      "user_name": "ravi",
+      "user_email": "ravi@gmail.com",
+      "user_password": "ravi@123",
+      "user_status": "unblock",
+      "id": "I6gpgLZjvSU"
+    },
+    {
+      "user_id": 2,
+      "user_name": "niya",
+      "user_email": "niya@gmail.com",
+      "user_password": "niya@123",
+      "user_status": "block",
+      "id": "0-n1hmuRHw8"
+    }
+  ],
+  "products": [
+    {
+      "product_id": 1,
+      "product_name": "Beet Root",
+      "product_price": "30",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/128539ed-aab5-4437-ad3b-343f5e4a365b.jpg",
+      "id": "y1m7JBu30Sg"
+    },
+    {
+      "product_id": 4,
+      "product_name": "Green Kiwi",
+      "product_price": "20",
+      "product_category": "fruits",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/194f3e56-19d1-4186-9fe8-081ce954e272.jpg",
+      "id": "dHHqI10VQ0A"
+    },
+    {
+      "product_id": 5,
+      "product_name": "Dragon Fruit",
+      "product_price": "40",
+      "product_category": "fruits",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=540/da/cms-assets/cms/product/rc-upload-1786342682033-1035.png",
+      "id": "xwglhDVTxYk"
+    },
+    {
+      "product_id": 6,
+      "product_name": "Spinach",
+      "product_price": "28",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=540/da/cms-assets/cms/product/rc-upload-1781857542047-352.png",
+      "id": "HIKRTstsvhE"
+    },
+    {
+      "product_id": "1789030920479",
+      "product_name": "Button Mushroom",
+      "product_price": "70",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/ddc29f5a-dca3-4297-86a8-fe573e385e81.jpg",
+      "id": "vWWp5-unNnE"
+    },
+    {
+      "product_id": "1789293286276",
+      "product_name": "potato",
+      "product_price": "25",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=450/da/cms-assets/cms/product/rc-upload-1779767007480-819.png",
+      "id": "rjB0Ny9EIsE"
+    },
+    {
+      "product_id": "1789293361755",
+      "product_name": "Spring Onion",
+      "product_price": "30",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/e647bc46-633d-468d-b596-e7f231186036.jpg",
+      "id": "qehEyvo3EII"
+    },
+    {
+      "product_id": "1789293469191",
+      "product_name": "custard apple",
+      "product_price": "50",
+      "product_category": "fruits",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/e782785a-2843-4b70-84b2-042ec900d3e8.jpg",
+      "id": "ZPxFR7t7wkY"
+    },
+    {
+      "product_id": "1789293554351",
+      "product_name": "Blueberry",
+      "product_price": "70",
+      "product_category": "fruits",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/28319e0f-9d16-493f-b399-ce672366ff0f.jpg",
+      "id": "Zf0BW1Sm2Gk"
+    }
+  ],
+  "features": [
+    {
+      "features_id": 1,
+      "features_icon": "https://awards.brandingforum.org/wp-content/uploads/2022/11/UWayfNyE-1024x1024.jpeg",
+      "features_title": "Farm Fresh",
+      "features_description": "Sourced directly from local farms every morning, so nothing sits in storage longer than a day.",
+      "id": "Sh56n1_igdc"
+    },
+    {
+      "features_id": 2,
+      "features_icon": "https://static.cdn.packhelp.com/wp-content/uploads/2021/01/26103953/badges-1024x533.png",
+      "features_title": "Eco Friendly Packaging",
+      "features_description": "All packaging is biodegradable or reusable, cutting down on plastic waste at every step.",
+      "id": "nCBRmXLSFgw"
+    },
+    {
+      "features_id": 3,
+      "features_icon": "https://thumbs.dreamstime.com/z/quality-checked-blue-grunge-round-stamp-quality-checked-stamp-quality-checked-stamp-quality-checked-blue-grunge-round-stamp-459397513.jpg?ct=jpeg",
+      "features_title": "Quality Checked",
+      "features_description": "Every batch passes a multi-point inspection before it's approved for sale.",
+      "id": "Ix4pmmFXxtc"
+    },
+    {
+      "features_id": "1789120849458",
+      "features_title": "Fast Delivery",
+      "features_description": "Orders placed before noon are delivered the same day, straight to your doorstep.",
+      "features_icon": "https://c8.alamy.com/comp/WT2GXR/fast-delivery-ribbon-fast-delivery-round-green-sign-fast-delivery-WT2GXR.jpg",
+      "id": "R4KmviCGmIg"
+    }
+  ],
+  "blogs": [
+    {
+      "blog_id": 1,
+      "blog_img": "https://cdn.earshot.in/series/6141bc52a99272053c2888ee/main-en.jpg",
+      "blog_title": "How to cultivate organic fruits and vegetables in own firm",
+      "blog_author": "Admin",
+      "blog_date": "01 Jan, 2025",
+      "id": "TXP2dzQZcg8"
+    },
+    {
+      "blog_id": "1789226323558",
+      "blog_title": "How to cultivate organic fruits and vegetables in own firm",
+      "blog_author": "Admin",
+      "blog_date": "2026-09-07",
+      "blog_img": "https://cdn.shopaccino.com/rootz/articles/from-farm-to-your-kitchen-how-organic-vegetables-actually-reach-you-4132631005289160_l.png?v=686",
+      "id": "owN16ZrPVuU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

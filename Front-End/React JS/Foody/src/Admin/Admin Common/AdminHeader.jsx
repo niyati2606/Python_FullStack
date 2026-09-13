@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-function Header() {
+function AdminHeader() {
     return (
         <div>
             {/* Navbar Start */}
@@ -16,10 +16,11 @@ function Header() {
                         <a className="text-body ms-3" href><i className="fab fa-facebook-f" /></a>
                         <a className="text-body ms-3" href><i className="fab fa-twitter" /></a>
                         <a className="text-body ms-3" href><i className="fab fa-linkedin-in" /></a>
-/                    </div>
+                        <a className="text-body ms-3" href><i className="fab fa-instagram" /></a>
+                    </div>
                 </div>
                 <nav className="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
-                    <NavLink to="/" className="navbar-brand ms-4 ms-lg-0">
+                    <NavLink to="/adminbashboard" className="navbar-brand ms-4 ms-lg-0">
                         <h1 className="fw-bold text-primary m-0">F<span className="text-secondary">oo</span>dy</h1>
                     </NavLink>
                     <button type="button" className="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -27,17 +28,45 @@ function Header() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <div className="navbar-nav ms-auto p-4 p-lg-0">
-                            <NavLink to="/" className="nav-item nav-link active">Home</NavLink>
-                            <NavLink to="/about" className="nav-item nav-link">About Us</NavLink>
-                            <NavLink to="/product" className="nav-item nav-link">Products</NavLink>
+                            <NavLink to="/adminbashboard" className="nav-item nav-link active">Home</NavLink>
+                            <NavLink to="/adminaboutus" className="nav-item nav-link">About Us</NavLink>
                             <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Products</a>
+                                <div className="dropdown-menu m-0">
+                                    <NavLink to="/manageproducts" className="dropdown-item">Manage Product</NavLink>
+                                    <NavLink to="/addproducts" className="dropdown-item">Add Product</NavLink>
+                                </div>
+                            </div>
+                            <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Features</a>
+                                <div className="dropdown-menu m-0">
+                                    <NavLink to="/managefeatures" className="dropdown-item">Manage Features</NavLink>
+                                    <NavLink to="/addfeatures" className="dropdown-item">Add Features</NavLink>
+                                </div>
+                            </div>
+                            <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Blog</a>
+                                <div className="dropdown-menu m-0">
+                                    <NavLink to="/manageblogs" className="dropdown-item">Manage Blog</NavLink>
+                                    <NavLink to="/addblogs" className="dropdown-item">Add Blog</NavLink>
+                                </div>
+                            </div>
+                            <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Testimonial</a>
+                                <div className="dropdown-menu m-0">
+                                    <NavLink to="/managetestimonial" className="dropdown-item">Manage Testimonial</NavLink>
+                                    <NavLink to="/addtestimonial" className="dropdown-item">Add Testimonial</NavLink>
+                                </div>
+                            </div>
+                            {/* <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div className="dropdown-menu m-0">
                                     <NavLink to="/blog" className="dropdown-item">Blog Grid</NavLink>
                                     <NavLink to="/feature" className="dropdown-item">Our Features</NavLink>
                                     <NavLink to="/testimonial" className="dropdown-item">Testimonial</NavLink>
                                 </div>
-                            </div>
+                            </div> */}
+
                             <NavLink to="/contact" className="nav-item nav-link">Contact Us</NavLink>
                         </div>
                         <div className="d-none d-lg-flex ms-2">
@@ -47,17 +76,14 @@ function Header() {
                             <a className="btn-sm-square bg-white rounded-circle ms-3" href>
                                 <small className="fa fa-user text-body" />
                             </a>
-                            <a className="btn-sm-square bg-white rounded-circle ms-3" href>
-                                <small className="fa fa-shopping-bag text-body" />
-                            </a>
                         </div>
                     </div>
                 </nav>
-            </div>
+            </div >
             {/* Navbar End */}
 
-        </div>
+        </div >
     )
 }
 
-export default Header
+export default AdminHeader
