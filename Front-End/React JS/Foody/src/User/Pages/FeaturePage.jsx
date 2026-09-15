@@ -3,24 +3,33 @@ import Header from '../Common/Header'
 import HeadetTitle from '../Common/HeadetTitle'
 import Footer from '../Common/Footer'
 import axios from 'axios'
+import useAPICall from '../../Custom Hooks/useAPICall'
 
 function FeaturePage() {
 
-    const [features, setFeatures] = useState([])
+    // const [features, setFeatures] = useState([])
+
+    // useEffect(() => {
+    //     fetchFeatures()
+    // }, [])
+
+    // const fetchFeatures = async () => {
+    //     try {
+    //         const res = await axios.get("http://localhost:3000/features")
+    //         console.log(res.data)
+    //         setFeatures(res.data)
+    //     } catch (error) {
+    //         console.log("product not found", error)
+    //     }
+    // }
+
+    const { apidata, fetchAPIData } = useAPICall("http://localhost:3000/features")
 
     useEffect(() => {
-        fetchFeatures()
+        fetchAPIData()
     }, [])
 
-    const fetchFeatures = async () => {
-        try {
-            const res = await axios.get("http://localhost:3000/features")
-            console.log(res.data)
-            setFeatures(res.data)
-        } catch (error) {
-            console.log("product not found", error)
-        }
-    }
+
 
     return (
         <div>
@@ -36,7 +45,7 @@ function FeaturePage() {
                     </div>
                     <div className="row g-4">
                         {
-                            features && features.map((features, index) => {
+                            apidata && apidata.map((features, index) => {
                                 return (
                                     <div
                                         className="col-lg-4 col-md-6 wow fadeInUp"

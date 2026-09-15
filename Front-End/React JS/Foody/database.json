@@ -78,18 +78,10 @@
     {
       "product_id": "1789293361755",
       "product_name": "Spring Onion",
-      "product_price": "30",
+      "product_price": "33",
       "product_category": "vegetables",
       "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/e647bc46-633d-468d-b596-e7f231186036.jpg",
       "id": "qehEyvo3EII"
-    },
-    {
-      "product_id": "1789293469191",
-      "product_name": "custard apple",
-      "product_price": "50",
-      "product_category": "fruits",
-      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/e782785a-2843-4b70-84b2-042ec900d3e8.jpg",
-      "id": "ZPxFR7t7wkY"
     },
     {
       "product_id": "1789293554351",
@@ -105,7 +97,7 @@
       "features_id": 1,
       "features_icon": "https://awards.brandingforum.org/wp-content/uploads/2022/11/UWayfNyE-1024x1024.jpeg",
       "features_title": "Farm Fresh",
-      "features_description": "Sourced directly from local farms every morning, so nothing sits in storage longer than a day.",
+      "features_description": "Sourced directly from local farms every morning, so nothing sits in storage longer than a day",
       "id": "Sh56n1_igdc"
     },
     {
@@ -134,18 +126,44 @@
     {
       "blog_id": 1,
       "blog_img": "https://cdn.earshot.in/series/6141bc52a99272053c2888ee/main-en.jpg",
-      "blog_title": "How to cultivate organic fruits and vegetables in own firm",
+      "blog_title": "How to cultivate organic fruits and vegetables in own firm.",
       "blog_author": "Admin",
-      "blog_date": "01 Jan, 2025",
+      "blog_date": "2026-09-09",
       "id": "TXP2dzQZcg8"
     },
     {
       "blog_id": "1789226323558",
       "blog_title": "How to cultivate organic fruits and vegetables in own firm",
       "blog_author": "Admin",
-      "blog_date": "2026-09-07",
+      "blog_date": "2026-09-03",
       "blog_img": "https://cdn.shopaccino.com/rootz/articles/from-farm-to-your-kitchen-how-organic-vegetables-actually-reach-you-4132631005289160_l.png?v=686",
       "id": "owN16ZrPVuU"
+    }
+  ],
+  "testimonials": [
+    {
+      "testimonial_id": 1,
+      "client_name": "Client Name",
+      "profession": "Profession",
+      "quote": "Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.",
+      "client_img": "https://randomuser.me/api/portraits/men/32.jpg",
+      "id": "T8HJbgUQnXg"
+    },
+    {
+      "testimonial_id": 2,
+      "client_name": "Client Name",
+      "profession": "Profession",
+      "quote": "Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.",
+      "client_img": "https://randomuser.me/api/portraits/women/44.jpg",
+      "id": "0HVm-gg9Cp4"
+    },
+    {
+      "testimonial_id": "1789462680051",
+      "client_name": "test",
+      "profession": "home maker",
+      "quote": "Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit",
+      "client_img": "https://randomuser.me/api/portraits/men/32.jpg",
+      "id": "_8zxy-A8Ymk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

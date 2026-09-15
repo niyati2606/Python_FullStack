@@ -18,6 +18,7 @@ import AddBlogsPage from './Admin/Admin Pages/Blogs/AddBlogsPage'
 import AdminAboutUsPage from './Admin/Admin Pages/AdminAboutUsPage'
 import ManageTestimonialPage from './Admin/Admin Pages/Testimonial/ManageTestimonialPage'
 import AddTestimonialPage from './Admin/Admin Pages/Testimonial/AddTestimonialPage'
+import { Slide, ToastContainer, toast } from 'react-toastify'
 
 function App() {
   return (
@@ -36,11 +37,11 @@ function App() {
           <Route path='*' element={<NotFound />} />
 
           <Route path='/adminbashboard' element={<AdminHomePage />} />
-          <Route path='/adminaboutus' element={<AdminAboutUsPage />}/>
+          <Route path='/adminaboutus' element={<AdminAboutUsPage />} />
           <Route path='/manageproducts' element={<ManageProductsPage />} />
           <Route path='/addproducts' element={<AddProductPage />} />
           <Route path='/manageblogs' element={<ManageBlogPage />} />
-          <Route path='/addblogs' element={<AddBlogsPage/>}/>
+          <Route path='/addblogs' element={<AddBlogsPage />} />
           <Route path='/managefeatures' element={<ManageFeaturesPage />} />
           <Route path='/addfeatures' element={<AddFeaturesPage />} />
           <Route path='/managetestimonial' element={<ManageTestimonialPage />} />
@@ -48,6 +49,20 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     </div>
   )
 }

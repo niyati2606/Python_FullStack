@@ -5,6 +5,7 @@ import axios from 'axios'
 import useAPICall from '../../../Custom Hooks/useAPICall'
 import { data } from 'react-router-dom'
 import AdminSidebar from '../../Admin Common/AdminSideBar'
+import { toast } from 'react-toastify'
 
 function ManageProductsPage() {
 
@@ -44,7 +45,7 @@ function ManageProductsPage() {
             const response = await axios.get(`http://localhost:3000/products/${product_id}`)
             setProduct(response.data)
         } catch (error) {
-            console.log("API Error : ", error)
+            toast.error("Internal Server Error : ", error)
         }
     }
 
@@ -53,10 +54,10 @@ function ManageProductsPage() {
 
         try {
             const deleteResponse = await axios.delete(`http://localhost:3000/products/${id}`)
-            console.log(deleteResponse.data)
+            toast.success("Product Deleted Successfully..!!")
             fetchAPIData()
         } catch (error) {
-
+            toast.error("Internal Server Error : ", error)
         }
     }
 
@@ -87,8 +88,9 @@ function ManageProductsPage() {
             await axios.put(`http://localhost:3000/products/${editproduct.id}`, editproduct)
             fetchAPIData() // refresh table
             document.getElementById('closeEditModalBtn').click() // close modal programmatically
+            toast.success("Product Updated Successfully..!!")
         } catch (error) {
-            console.log("Error updating product:", error)
+            toast.error("Internal Server Error : ", error)
         }
     }
 
@@ -217,13 +219,13 @@ function ManageProductsPage() {
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div className="modal-body">
-                                                    <div className="mb-3 text-center">
+                                                    {/* <div className="mb-3 text-center">
                                                         <img
                                                             src={editproduct.product_img}
                                                             alt={editproduct.product_name}
                                                             style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 10 }}
                                                         />
-                                                    </div>
+                                                    </div> */}
                                                     <div className="mb-3">
                                                         <label className="form-label">Product Name</label>
                                                         <input

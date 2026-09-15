@@ -4,6 +4,7 @@ import AdminHeaderTitle from '../../Admin Common/AdminHeaderTitle'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import AdminSidebar from '../../Admin Common/AdminSideBar'
+import { toast } from 'react-toastify/unstyled'
 
 function AddBlogsPage() {
 
@@ -23,8 +24,6 @@ function AddBlogsPage() {
       blog_id: new Date().getTime().toString(),
       [event.target.name]: event.target.value
     })
-
-    console.log(blog)
   }
 
   const addBlogData = async (event) => {
@@ -33,12 +32,9 @@ function AddBlogsPage() {
     try {
 
       if (blog.blog_title == "" || blog.blog_img == "" || blog.blog_author == "") {
-        alert("Please fill require details..!!")
+        toast.error("Please fill all Details")
       } else {
-
         const addFeatureResponse = await axios.post("http://localhost:3000/blogs", blog)
-        console.log(addFeatureResponse.data)
-
         setBlog({
           blog_id: "",
           blog_title: "",
@@ -48,10 +44,10 @@ function AddBlogsPage() {
         })
 
         redirect("/manageblogs")
-        alert("Feature Added Successfully..!!")
+        toast.success("Feature Added Successfully..!!")
       }
     } catch (error) {
-      console.log("Internel Server Error :", error)
+      toast.error("Internal Server Error : ", error)
     }
   }
 

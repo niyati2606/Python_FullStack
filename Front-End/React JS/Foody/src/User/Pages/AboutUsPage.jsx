@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Common/Header'
 import Footer from '../Common/Footer'
 import HeadetTitle from '../Common/HeadetTitle'
+import useAPICall from '../../Custom Hooks/useAPICall'
 
 function AboutUsPage() {
+
+    const { apidata, fetchAPIData } = useAPICall("http://localhost:3000/features")
+
+    useEffect(() => {
+        fetchAPIData()
+    }, [])
+
     return (
         <div>
             <Header />
-            <HeadetTitle name="About" title="About Us"/>
+            <HeadetTitle name="About" title="About Us" />
             <div>
                 {/* About Start */}
                 <div className="container-xxl py-5">
@@ -53,30 +61,26 @@ function AboutUsPage() {
                             <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
                         </div>
                         <div className="row g-4">
-                            <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div className="bg-white text-center h-100 p-4 p-xl-5">
-                                    <img className="img-fluid mb-4" src="img/icon-1.png" alt />
-                                    <h4 className="mb-3">Natural Process</h4>
-                                    <p className="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                                    <a className="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href>Read More</a>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                                <div className="bg-white text-center h-100 p-4 p-xl-5">
-                                    <img className="img-fluid mb-4" src="img/icon-2.png" alt />
-                                    <h4 className="mb-3">Organic Products</h4>
-                                    <p className="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                                    <a className="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href>Read More</a>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                                <div className="bg-white text-center h-100 p-4 p-xl-5">
-                                    <img className="img-fluid mb-4" src="img/icon-3.png" alt />
-                                    <h4 className="mb-3">Biologically Safe</h4>
-                                    <p className="mb-4">Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed vero dolor duo.</p>
-                                    <a className="btn btn-outline-primary border-2 py-2 px-4 rounded-pill" href>Read More</a>
-                                </div>
-                            </div>
+                            {
+                                apidata && apidata.map((features, index) => {
+                                    return (
+                                        <div
+                                            className="col-lg-4 col-md-6 wow fadeInUp"
+                                            key={features.features_id}>
+                                            <div className="bg-white text-center h-100 p-4 p-xl-5 shadow-sm rounded">
+                                                <img
+                                                    className="img-fluid mb-4"
+                                                    src={features.features_icon}
+                                                    alt={features.features_title || 'Feature icon'}
+                                                    style={{ width: '80px', height: '80px', objectFit: 'contain' }}
+                                                />
+                                                <h4 className="mb-3">{features.features_title}</h4>
+                                                <p className="mb-4">{features.features_description}</p>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>

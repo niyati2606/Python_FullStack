@@ -1,13 +1,18 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-function AdminLayout() {
+function AdminLayout({ isOpen, onClose }) {
     return (
-        <div className="admin-sidebar d-flex flex-column flex-shrink-0">
+        <div className={`admin-sidebar d-flex flex-column flex-shrink-0 ${isOpen ? 'show' : ''}`}>
             <div className="admin-sidebar-brand">
-                <NavLink to="/adminbashboard" className="navbar-brand m-0">
-                    <h1 className="fw-bold text-primary m-0">F<span className="text-secondary">oo</span>dy</h1>
-                </NavLink>
+                <div className="d-flex justify-content-between align-items-center">
+                    <NavLink to="/adminbashboard" className="navbar-brand m-0">
+                        <h1 className="fw-bold text-primary m-0">F<span className="text-secondary">oo</span>dy</h1>
+                    </NavLink>
+                    <button className="admin-sidebar-close" onClick={onClose} aria-label="Close sidebar">
+                        <i className="fa fa-times" />
+                    </button>
+                </div>
                 <small className="text-muted">Admin panel</small>
             </div>
 

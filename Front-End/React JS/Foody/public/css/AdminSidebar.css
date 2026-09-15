@@ -78,7 +78,42 @@
 
 .admin-main {
     flex: 1;
-    min-width: 0; /* prevents wide tables from pushing the sidebar around */
+    min-width: 0;
+    /* prevents wide tables from pushing the sidebar around */
+}
+
+.admin-sidebar-toggler {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 0.4rem;
+    background: #ffffff;
+    color: #333333;
+    font-size: 1.1rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1015;
+    /* below sidebar (1030) and backdrop (1020) is fine since it's only visible when sidebar is closed */
+}
+
+.admin-sidebar-toggler:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.admin-sidebar-close {
+    display: none;
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+}
+
+.admin-sidebar-backdrop {
+    display: none;
 }
 
 @media (min-width: 992px) {
@@ -99,5 +134,22 @@
 
     .admin-main {
         margin-left: 0;
+    }
+
+    .admin-sidebar-toggler {
+        display: flex;
+    }
+
+    .admin-sidebar-close {
+        display: inline-block;
+    }
+
+    .admin-sidebar-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1020;
+        /* below sidebar's 1030, above main content */
     }
 }

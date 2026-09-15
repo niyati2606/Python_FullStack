@@ -4,6 +4,7 @@ import AdminHeaderTitle from '../../Admin Common/AdminHeaderTitle'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import AdminSidebar from '../../Admin Common/AdminSideBar'
+import { toast } from 'react-toastify'
 
 function AddFeaturesPage() {
 
@@ -22,8 +23,6 @@ function AddFeaturesPage() {
             features_id: new Date().getTime().toString(),
             [event.target.name]: event.target.value
         })
-
-        console.log(features)
     }
 
     const addFeaturesData = async (event) => {
@@ -36,20 +35,17 @@ function AddFeaturesPage() {
             } else {
 
                 const addFeatureResponse = await axios.post("http://localhost:3000/features", features)
-                console.log(addFeatureResponse.data)
-
                 setFeatures({
                     features_id: "",
                     features_title: "",
                     features_description: "",
                     features_icon: ""
                 })
-
                 redirect("/managefeatures")
-                alert("Feature Added Successfully..!!")
+                toast.success("Feature Added Successfully..!!")
             }
         } catch (error) {
-            console.log("Internel Server Error :", error)
+            toast.error("Internal Server Error : ", error)
         }
     }
 

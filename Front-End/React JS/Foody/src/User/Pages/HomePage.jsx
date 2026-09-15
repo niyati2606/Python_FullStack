@@ -81,7 +81,7 @@ function HomePage() {
                                     <p><i className="fa fa-check text-primary me-3" />Tempor erat elitr rebum at clita</p>
                                     <p><i className="fa fa-check text-primary me-3" />Aliqu diam amet diam et eos</p>
                                     <p><i className="fa fa-check text-primary me-3" />Clita duo justo magna dolore erat amet</p>
-                                    <a className="btn btn-primary rounded-pill py-3 px-5 mt-3" href>Read More</a>
+                                    <Link to="/about" className="btn btn-primary rounded-pill py-3 px-5 mt-3" href>Read More</Link>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@ function HomePage() {
                                             )
                                         })}
                                         <div className="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                                            <a className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</a>
+                                            <Link to="/product" className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@ function HomePage() {
                                                 )
                                             })}
                                         <div className="col-12 text-center">
-                                            <a className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</a>
+                                            <Link to="/product" className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@ function HomePage() {
                                                 )
                                             })}
                                         <div className="col-12 text-center">
-                                            <a className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</a>
+                                            <Link to="/product" className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</Link>
                                         </div>
                                     </div>
                                 </div>

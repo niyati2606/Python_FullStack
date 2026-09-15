@@ -4,6 +4,7 @@ import AdminHeaderTitle from '../../Admin Common/AdminHeaderTitle'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import AdminSidebar from '../../Admin Common/AdminSideBar'
+import { toast } from 'react-toastify'
 
 function AddProductPage() {
 
@@ -23,10 +24,7 @@ function AddProductPage() {
       product_id: new Date().getTime().toString(),
       [event.target.name]: event.target.value
     })
-
-    console.log(product)
   }
-
 
   const addProductData = async (event) => {
     event.preventDefault()
@@ -34,9 +32,8 @@ function AddProductPage() {
 
     try {
       if (product.product_name == "" || product.product_price == "" || product.product_img == "" || product.product_category == "") {
-        alert("Please Add All Details")
+        toast.error("Please fill all Details")
       } else {
-
         const addProductResponse = await axios.post("http://localhost:3000/products", product)
         console.log(addProductResponse.data)
         setProduct({
@@ -46,12 +43,11 @@ function AddProductPage() {
           product_category: "",
           product_img: ""
         })
-
         redirect("/manageproducts")
-        console.log("Product Added Successfully...!!!")
+        toast.success("Product Added Successfully...!!!")
       }
     } catch (error) {
-      console.log("Api Error : ", error)
+      toast.error("Internal Server Error : ", error)
     }
   }
 
