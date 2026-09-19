@@ -1,0 +1,12 @@
+What changed and why:
+
+1. Real request cancellation instead of a boolean flag. The previous version used a local `ignore` variable to *discard* a stale response after it arrived — the request still ran to completion in the background. Now a `AbortController` is created per effect run and passed as `signal` to axios; the cleanup function calls `controller.abort()`, which actually cancels the in-flight HTTP request when the user types again. This is both more correct and more efficient (no wasted network calls).
+
+2. Differentiated error messages. Previously every failure funneled into one generic `"Something went wrong"` message, whether it was a bad response from OMDb, a dropped connection, or something else. Now the `catch` block checks:
+   - `err.response` → the server responded but with an error status (shows the status code)
+   - `err.request` → the request was sent but got no response (network/connectivity issue)
+   - neither → something failed before the request even went out
+   
+   Cancellations (`axios.isCancel(err)`) are explicitly ignored rather than surfacing a false "error" to the user, since they're expected behavior, not failures.
+
+3. Readability: pulled the API key/URL into named constants and switched to axios's `params` object instead of manually concatenating a URL string, so the query and API key can't accidentally get mangled by string interpolation again (which was the original bug).

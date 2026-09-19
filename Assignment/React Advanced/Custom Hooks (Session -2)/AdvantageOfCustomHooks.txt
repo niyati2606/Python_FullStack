@@ -1,0 +1,13 @@
+A custom hook like `useFetchData` lets you pull out the repetitive logic of making an API call — managing loading state, error state, and 
+the fetched data — into one reusable function instead of rewriting that same `useState`/`useEffect` boilerplate in every component that needs
+data. Any component can then just call the hook with a URL and get back `{ data, loading, error }`, keeping components focused on rendering UI 
+rather than managing fetch logic themselves. 
+
+This also means if you need to change how fetching works later (e.g., adding auth headers or retry logic), you update it in one place and every
+component using the hook benefits.
+
+Two examples in a Flipkart-style app:
+
+1. Product listing page — `useFetchData('/api/products')` to fetch and display the grid of products.
+2. Product details page — `useFetchData('/api/products/${productId}')` to fetch a single product's full details (specs, reviews, price) 
+    when a user clicks into it.

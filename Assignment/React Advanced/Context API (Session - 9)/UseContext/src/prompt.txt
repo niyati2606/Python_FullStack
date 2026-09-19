@@ -1,0 +1,4 @@
+Create a React shopping cart reducer using useReducer and Context API. 
+The reducer should support ADD_TO_CART, REMOVE_FROM_CART, and CLEAR_CART actions. 
+Then create a CartContext provider that stores the cart state and dispatch function and makes them available to 
+child components.

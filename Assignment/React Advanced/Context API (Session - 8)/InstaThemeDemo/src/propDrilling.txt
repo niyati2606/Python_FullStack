@@ -1,0 +1,5 @@
+Prop drilling would require passing the theme prop through multiple components, even when intermediate components don't need it.
+
+For example, PostCard → PostContent → PostBody would all need to pass the theme manually.
+Using ThemeContext, PostBody can directly access the theme without receiving it as a prop.
+This makes the code simpler and avoids unnecessary prop passing between components.
