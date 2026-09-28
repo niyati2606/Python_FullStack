@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Playlist</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Create Playlist</h1> <!-- Playlist Form -->
+        <div class="card p-4 shadow">
+            <form id="playlistForm">
+                <div class="mb-3"> <label class="form-label">Playlist Name</label> <input type="text" id="playlistName"
+                        class="form-control" placeholder="Enter playlist name" required> </div>
+                <div class="mb-3"> <label class="form-label">Description</label> <textarea id="playlistDescription"
+                        class="form-control" placeholder="Enter playlist description" required></textarea> </div>
+                <button type="submit" class="btn btn-success"> Create Playlist </button>
+            </form>
+        </div>
+
+        <h2 class="mt-5">My Playlists</h2>
+        <div id="playlistList" class="row mt-3">
+
+        </div>
+    </div>
+
+    <script>
+        let playlists = [];
+
+        // Get form and list elements 
+        const playlistForm = document.getElementById("playlistForm");
+        const playlistList = document.getElementById("playlistList");
+
+        // Add new playlist 
+        playlistForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("playlistName").value
+            const description = document.getElementById("playlistDescription").value
+
+            // Create playlist object 
+            const playlist = {
+                id: Date.now(),
+                name: name,
+                description: description
+            }; // Store playlist in array 
+            playlists.push(playlist)
+
+            // Display playlists 
+            displayPlaylists()
+
+            // Clear form 
+            playlistForm.reset()
+        });
+
+        // Display playlists
+        function displayPlaylists() {
+
+            playlistList.innerHTML = "";
+
+            playlists.forEach(function (playlist) {
+                playlistList.innerHTML += `
+            <div class="col-md-4 mb-3">
+                <div class="card shadow h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            ${playlist.name}
+                        </h5>
+
+                        <p class="card-text">
+                            ${playlist.description}
+                        </p>
+
+                        <button
+                            class="btn btn-primary btn-sm"
+                            onclick="editPlaylist(${playlist.id})">
+                            Edit
+                        </button>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="deletePlaylist(${playlist.id})">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+            });
+        }
+
+
+        // Edit playlist
+        function editPlaylist(id) {
+            const playlist = playlists.find(function (playlist) {
+                return playlist.id === id;
+            });
+
+            if (playlist) {
+                const newName = prompt(
+                    "Enter new playlist name:",
+                    playlist.name
+                );
+
+                if (newName === null) {
+                    return;
+                }
+
+                const newDescription = prompt(
+                    "Enter new description:",
+                    playlist.description
+                );
+
+                if (newDescription === null) {
+                    return;
+                }
+
+                // Update playlist
+                playlist.name = newName;
+                playlist.description = newDescription;
+
+                // Refresh UI
+                displayPlaylists();
+            }
+        }
+
+
+        // Delete playlist
+        function deletePlaylist(id) {
+            playlists = playlists.filter(function (playlist) {
+                return playlist.id !== id;
+            });
+
+            // Refresh UI
+            displayPlaylists();
+        }
+
+        displayPlaylists()
+    </script>
+</body>
+
+</html>
