@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">Flipkart Shopping Cart</h2>
+
+    <button id="addProduct" class="btn btn-primary mb-4">
+        Add Random Product
+    </button>
+
+    <!-- Cart Container -->
+    <div id="cartContainer" class="row g-3">
+
+        <!-- Product 1 -->
+        <div class="col-md-4 product-card">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn-close float-end remove-btn"></button>
+
+                    <h5 class="card-title">Smartphone</h5>
+                    <p class="card-text">₹15,999</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="col-md-4 product-card">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn-close float-end remove-btn"></button>
+
+                    <h5 class="card-title">Headphones</h5>
+                    <p class="card-text">₹2,499</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    const cartContainer = document.getElementById("cartContainer");
+    const addProduct = document.getElementById("addProduct");
+
+    const products = [
+        {
+            name: "Laptop",
+            price: "₹55,999"
+        },
+        {
+            name: "Smart Watch",
+            price: "₹3,999"
+        },
+        {
+            name: "Bluetooth Speaker",
+            price: "₹1,999"
+        },
+        {
+            name: "Keyboard",
+            price: "₹1,499"
+        }
+    ];
+
+
+    // Add new product dynamically
+    addProduct.addEventListener("click", function () {
+
+        const randomProduct =
+            products[Math.floor(Math.random() * products.length)];
+
+        const productCard = document.createElement("div");
+
+        productCard.className = "col-md-4 product-card";
+
+        productCard.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn-close float-end remove-btn"></button>
+
+                    <h5 class="card-title">
+                        ${randomProduct.name}
+                    </h5>
+
+                    <p class="card-text">
+                        ${randomProduct.price}
+                    </p>
+                </div>
+            </div>
+        `;
+
+        cartContainer.appendChild(productCard);
+    });
+
+
+    // ONE event listener for ALL remove buttons
+    cartContainer.addEventListener("click", function (event) {
+
+        if (event.target.classList.contains("remove-btn")) {
+
+            const productCard =
+                event.target.closest(".product-card");
+
+            productCard.remove();
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

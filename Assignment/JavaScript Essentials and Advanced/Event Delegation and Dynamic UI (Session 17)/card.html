@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Card</title>
+</head>
+
+<body>
+    <div id="cardContainer">
+
+        <div class="card">
+            <h5>Product 1</h5>
+            <button class="remove-btn">X</button>
+        </div>
+
+        <div class="card">
+            <h5>Product 2</h5>
+            <button class="remove-btn">X</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        const cardContainer = document.getElementById("cardContainer");
+
+        // Single event listener
+        cardContainer.addEventListener("click", function (event) {
+
+            // Check if X button was clicked
+            if (event.target.classList.contains("remove-btn")) {
+
+                // Find and remove only the clicked card
+                const card = event.target.closest(".card");
+
+                card.remove();
+            }
+
+        });
+
+    </script>
+    ```
+
+</body>
+
+</html>

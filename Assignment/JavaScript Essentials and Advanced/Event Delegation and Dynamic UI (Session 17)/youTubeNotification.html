@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>YouTube Notifications</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .notification-card {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">🔔 YouTube Notifications</h2>
+
+    <button id="addNotification" class="btn btn-primary mb-4">
+        Load New Notification
+    </button>
+
+    <!-- Notification Feed -->
+    <div id="notificationFeed">
+
+        <!-- Notification 1 -->
+        <div class="notification-card card mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h6>New video from CodeWithHarry</h6>
+                    <p class="text-muted mb-0">
+                        "Learn JavaScript Event Delegation"
+                    </p>
+                </div>
+
+                <button class="btn btn-outline-danger dismiss-btn">
+                    Dismiss
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Notification 2 -->
+        <div class="notification-card card mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h6>New subscriber!</h6>
+                    <p class="text-muted mb-0">
+                        Someone subscribed to your channel.
+                    </p>
+                </div>
+
+                <button class="btn btn-outline-danger dismiss-btn">
+                    Dismiss
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    const notificationFeed =
+        document.getElementById("notificationFeed");
+
+    const addNotification =
+        document.getElementById("addNotification");
+
+
+    // Dynamically load a new notification
+    addNotification.addEventListener("click", function () {
+
+        const notification =
+            document.createElement("div");
+
+        notification.className =
+            "notification-card card mb-3";
+
+        notification.innerHTML = `
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+                    <h6>New video uploaded 🎥</h6>
+
+                    <p class="text-muted mb-0">
+                        Your favorite creator uploaded a new video.
+                    </p>
+                </div>
+
+                <button class="btn btn-outline-danger dismiss-btn">
+                    Dismiss
+                </button>
+
+            </div>
+        `;
+
+        notificationFeed.appendChild(notification);
+    });
+
+
+    // ONE event listener for all notifications
+    notificationFeed.addEventListener("click", function (event) {
+
+        if (event.target.classList.contains("dismiss-btn")) {
+
+            const notification =
+                event.target.closest(".notification-card");
+
+            // Start fade-out animation
+            notification.classList.add("fade-out");
+
+            // Remove after animation completes
+            setTimeout(function () {
+                notification.remove();
+            }, 500);
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
