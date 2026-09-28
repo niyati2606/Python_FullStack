@@ -1,0 +1,378 @@
+import React, { useEffect } from 'react'
+import Header from '../Common/Header'
+import Footer from '../Common/Footer'
+import useAPICall from '../../Custom Hooks/useAPICall'
+import { Link } from 'react-router-dom'
+
+function HomePage() {
+
+    const { apidata: products, fetchAPIData: fetchProducts } = useAPICall("http://localhost:3000/products")
+    const { apidata: blogs, fetchAPIData: fetchBlogs } = useAPICall("http://localhost:3000/blogs")
+    const { apidata: features, fetchAPIData: fetchFeatures } = useAPICall("http://localhost:3000/features")
+    const { apidata: testimonial, fetchAPIData: fetchtestimonial } = useAPICall("http://localhost:3000/testimonials")
+
+    useEffect(() => {
+        //fetchAPIData()
+        fetchBlogs()
+        fetchFeatures()
+        fetchProducts()
+        fetchtestimonial()
+
+    }, [])
+
+    useEffect(() => {
+        if (!testimonial?.length) return;
+
+        const $carousel = $(".testimonial-carousel");
+        const canLoop = testimonial.length > 3;
+
+        $carousel.owlCarousel({
+            autoplay: true,
+            smartSpeed: 1000,
+            center: canLoop,
+            loop: canLoop,
+            margin: 24,
+            dots: true,
+            nav: false,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+            },
+        });
+
+        const t = setTimeout(() => $carousel.trigger("refresh.owl.carousel"), 300);
+
+        return () => {
+            clearTimeout(t);
+            $carousel.trigger("destroy.owl.carousel");
+        };
+    }, [testimonial]);
+
+    return (
+        <div>
+            <Header />
+            <div>
+                <div>
+                    {/* Carousel Start */}
+                    <div className="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+                        <div id="header-carousel" className="carousel slide" data-bs-ride="carousel">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img className="w-100" src="img/carousel-1.jpg" alt="Image" />
+                                    <div className="carousel-caption">
+                                        <div className="container">
+                                            <div className="row justify-content-start">
+                                                <div className="col-lg-7">
+                                                    <h1 className="display-2 mb-5 animated slideInDown">Organic Food Is Good For Health</h1>
+                                                    <Link to="/product" className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</Link>
+                                                    <Link to="/feature" className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="carousel-item">
+                                    <img className="w-100" src="img/carousel-2.jpg" alt="Image" />
+                                    <div className="carousel-caption">
+                                        <div className="container">
+                                            <div className="row justify-content-start">
+                                                <div className="col-lg-7">
+                                                    <h1 className="display-2 mb-5 animated slideInDown">Natural Food Is Always Healthy</h1>
+                                                    <Link to="/product" className="btn btn-primary rounded-pill py-sm-3 px-sm-5">Products</Link>
+                                                    <Link to="/feature" className="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Services</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button className="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                                <span className="carousel-control-prev-icon" aria-hidden="true" />
+                                <span className="visually-hidden">Previous</span>
+                            </button>
+                            <button className="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                                <span className="carousel-control-next-icon" aria-hidden="true" />
+                                <span className="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    {/* Carousel End */}
+                    {/* About Start */}
+                    <div className="container-xxl py-5">
+                        <div className="container">
+                            <div className="row g-5 align-items-center">
+                                <div className="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                                    <div className="about-img position-relative overflow-hidden p-5 pe-0">
+                                        <img className="img-fluid w-100" src="img/about.jpg" />
+                                    </div>
+                                </div>
+                                <div className="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                                    <h1 className="display-5 mb-4">Best Organic Fruits And Vegetables</h1>
+                                    <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                                    <p><i className="fa fa-check text-primary me-3" />Tempor erat elitr rebum at clita</p>
+                                    <p><i className="fa fa-check text-primary me-3" />Aliqu diam amet diam et eos</p>
+                                    <p><i className="fa fa-check text-primary me-3" />Clita duo justo magna dolore erat amet</p>
+                                    <Link to="/about" className="btn btn-primary rounded-pill py-3 px-5 mt-3" href>Read More</Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* About End */}
+                    {/* Feature Start */}
+                    <div className="container-fluid bg-light bg-icon my-5 py-6">
+                        <div className="container">
+                            <div className="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: 500 }}>
+                                <h1 className="display-5 mb-3">Our Features</h1>
+                                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                            </div>
+                            <div className="row g-4">
+                                {
+                                    features && features.slice(0, 3).map((features, index) => {
+                                        return (
+                                            <div
+                                                className="col-lg-4 col-md-6 wow fadeInUp"
+                                                key={features.features_id}>
+                                                <div className="bg-white text-center h-100 p-4 p-xl-5 shadow-sm rounded">
+                                                    <img
+                                                        className="img-fluid mb-4"
+                                                        src={features.features_icon}
+                                                        alt={features.features_title || 'Feature icon'}
+                                                        style={{ width: '80px', height: '80px', objectFit: 'contain' }}
+                                                    />
+                                                    <h4 className="mb-3">{features.features_title}</h4>
+                                                    <p className="mb-4">{features.features_description}</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    {/* Feature End */}
+                    {/* Product Start */}
+                    <div className="container-xxl py-5">
+                        <div className="container">
+                            <div className="row g-0 gx-5 align-items-end">
+                                <div className="col-lg-6">
+                                    <div className="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: 500 }}>
+                                        <h1 className="display-5 mb-3">Our Products</h1>
+                                        <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                                    <ul className="nav nav-pills d-inline-flex justify-content-end mb-5">
+                                        <li className="nav-item me-2">
+                                            <a className="btn btn-outline-primary border-2 active" data-bs-toggle="pill" href="#tab-1">All</a>
+                                        </li>
+                                        <li className="nav-item me-2">
+                                            <a className="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-2">Vegetables </a>
+                                        </li>
+                                        <li className="nav-item me-0">
+                                            <a className="btn btn-outline-primary border-2" data-bs-toggle="pill" href="#tab-3">Fruits</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="tab-content">
+                                <div id="tab-1" className="tab-pane fade show p-0 active">
+                                    <div className="row g-4">
+                                        {products && products.map((productData, index) => {
+                                            return (
+                                                <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
+                                                    <div className="product-item">
+                                                        <div className="position-relative bg-light overflow-hidden">
+                                                            <img className="img-fluid w-100" src={productData.product_img} alt="img/product-1.jpg" />
+                                                            <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{productData.product_category}</div>
+                                                        </div>
+                                                        <div className="text-center p-4">
+                                                            <a className="d-block h5 mb-2" href>{productData.product_name}</a>
+                                                            <span className="text-primary me-1">${productData.product_price}</span>
+                                                        </div>
+                                                        <div className="d-flex border-top">
+                                                            <small className="w-50 text-center border-end py-2">
+                                                                <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
+                                                            </small>
+                                                            <small className="w-50 text-center py-2">
+                                                                <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                        <div className="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                                            <Link to="/product" className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-2" className="tab-pane fade show p-0">
+                                    <div className="row g-4">
+                                        {products && products
+                                            .filter((productData) => productData.product_category === "vegetables")
+                                            .slice(0, 4).
+                                            map((productData, index) => {
+                                                return (
+                                                    <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
+                                                        <div className="product-item">
+                                                            <div className="position-relative bg-light overflow-hidden">
+                                                                <img className="img-fluid w-100" src={productData.product_img} alt="img/product-1.jpg" />
+                                                                <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{productData.product_category}</div>
+                                                            </div>
+                                                            <div className="text-center p-4">
+                                                                <a className="d-block h5 mb-2" href>{productData.product_name}</a>
+                                                                <span className="text-primary me-1">${productData.product_price}</span>
+                                                            </div>
+                                                            <div className="d-flex border-top">
+                                                                <small className="w-50 text-center border-end py-2">
+                                                                    <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
+                                                                </small>
+                                                                <small className="w-50 text-center py-2">
+                                                                    <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        <div className="col-12 text-center">
+                                            <Link to="/product" className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-3" className="tab-pane fade show p-0">
+                                    <div className="row g-4">
+                                        {products && products
+                                            .filter((productData) => productData.product_category === "fruits")
+                                            .slice(0, 4).
+                                            map((productData, index) => {
+                                                return (
+                                                    <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
+                                                        <div className="product-item">
+                                                            <div className="position-relative bg-light overflow-hidden">
+                                                                <img className="img-fluid w-100" src={productData.product_img} alt="img/product-1.jpg" />
+                                                                <div className="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">{productData.product_category}</div>
+                                                            </div>
+                                                            <div className="text-center p-4">
+                                                                <a className="d-block h5 mb-2" href>{productData.product_name}</a>
+                                                                <span className="text-primary me-1">${productData.product_price}</span>
+                                                            </div>
+                                                            <div className="d-flex border-top">
+                                                                <small className="w-50 text-center border-end py-2">
+                                                                    <a className="text-body" href><i className="fa fa-eye text-primary me-2" />View detail</a>
+                                                                </small>
+                                                                <small className="w-50 text-center py-2">
+                                                                    <a className="text-body" href><i className="fa fa-shopping-bag text-primary me-2" />Add to cart</a>
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        <div className="col-12 text-center">
+                                            <Link to="/product" className="btn btn-primary rounded-pill py-3 px-5" href>Browse More Products</Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Product End */}
+                    {/* Firm Visit Start */}
+                    <div className="container-fluid bg-primary bg-icon mt-5 py-6">
+                        <div className="container">
+                            <div className="row g-5 align-items-center">
+                                <div className="col-md-7 wow fadeIn" data-wow-delay="0.1s">
+                                    <h1 className="display-5 text-white mb-3">Visit Our Firm</h1>
+                                    <p className="text-white mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p>
+                                </div>
+                                <div className="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
+                                    <a className="btn btn-lg btn-secondary rounded-pill py-3 px-5" href>Visit Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Firm Visit End */}
+                    {/* Testimonial Start */}
+                    <div className="container-fluid bg-light bg-icon py-6 mb-5">
+                        <div className="container">
+                            <div className="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: 500 }}>
+                                <h1 className="display-5 mb-3">Customer Review</h1>
+                                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                            </div>
+                            <div className="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                                {
+
+                                    testimonial && testimonial.map((test, index) => {
+
+                                        //  console.log("testimonila ---", testimonial)
+                                        return (
+                                            <div className="testimonial-item position-relative bg-white p-5 mt-4">
+                                                <i className="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5" />
+                                                <p className="mb-4 quote-text">{test.quote}</p>
+                                                <div className="d-flex align-items-center">
+                                                    <img className="flex-shrink-0 rounded-circle" src={test.client_img} alt={test.client_name} />
+                                                    <div className="ms-3">
+                                                        <h5 className="mb-1">{test.client_name}</h5>
+                                                        <span>{test.profession}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    {/* Testimonial End */}
+                    {/* Blog Start */}
+                    <div className="container-xxl py-5">
+                        <div className="container">
+                            <div className="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style={{ maxWidth: 500 }}>
+                                <h1 className="display-5 mb-3">Latest Blog</h1>
+                                <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                            </div>
+                            <div className="row g-4">
+                                {blogs && blogs.slice(0, 3).map((blog, index) => {
+                                    return (
+                                        <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={blog.id ?? index}>
+                                            <div className="blog-item bg-light rounded overflow-hidden shadow-sm h-100">
+                                                <div className="blog-img" style={{ height: 250, overflow: 'hidden' }}>
+                                                    <img
+                                                        className="img-fluid w-100 h-100"
+                                                        style={{ objectFit: 'cover' }}
+                                                        src={blog.blog_img}
+                                                        alt={blog.blog_title || 'Blog image'}
+                                                    />
+                                                </div>
+                                                <div className="p-4">
+                                                    <a className="d-block h5 lh-base mb-4" href={`/blog/${blog.id}`}>
+                                                        {blog.blog_title}
+                                                    </a>
+                                                    <div className="text-muted border-top pt-4">
+                                                        <small className="me-3">
+                                                            <i className="fa fa-user text-primary me-2" />{blog.blog_author}
+                                                        </small>
+                                                        <small className="me-3">
+                                                            <i className="fa fa-calendar text-primary me-2" />{blog.blog_date}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    {/* Blog End */}
+                </div>
+
+            </div>
+            <Footer />
+        </div>
+    )
+}
+
+export default HomePage
