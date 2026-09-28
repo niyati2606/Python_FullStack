@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Slide, ToastContainer, toast } from 'react-toastify'
 import HomePage from './User/Pages/HomePage'
 import AboutUsPage from './User/Pages/AboutUsPage'
 import ProductPage from './User/Pages/ProductPage'
@@ -18,7 +19,10 @@ import AddBlogsPage from './Admin/Admin Pages/Blogs/AddBlogsPage'
 import AdminAboutUsPage from './Admin/Admin Pages/AdminAboutUsPage'
 import ManageTestimonialPage from './Admin/Admin Pages/Testimonial/ManageTestimonialPage'
 import AddTestimonialPage from './Admin/Admin Pages/Testimonial/AddTestimonialPage'
-import { Slide, ToastContainer, toast } from 'react-toastify'
+import AdminLoginPage from './Admin/Admin Pages/AdminLoginPage'
+import LoginPage from './User/Pages/LoginPage'
+import SignupPage from './User/Pages/SignupPage'
+import EditProfilePage from './User/Pages/EditProfilePage'
 
 function App() {
   return (
@@ -32,11 +36,14 @@ function App() {
           <Route path='/feature' element={<FeaturePage />} />
           <Route path='/testimonial' element={<TestimonialPage />} />
           <Route path='/contact' element={<ContactUsPage />} />
-
+          <Route path='/userlogin' element={<LoginPage />} />
+          <Route path='/userSignup' element={<SignupPage />}/>
+          <Route path='/editProfile' element={<EditProfilePage/>}/>
 
           <Route path='*' element={<NotFound />} />
 
-          <Route path='/adminbashboard' element={<AdminHomePage />} />
+          <Route path='/adminlogin' element={<AdminLoginPage />} />
+          <Route path='/admindashboard' element={<AdminHomePage />} />
           <Route path='/adminaboutus' element={<AdminAboutUsPage />} />
           <Route path='/manageproducts' element={<ManageProductsPage />} />
           <Route path='/addproducts' element={<AddProductPage />} />

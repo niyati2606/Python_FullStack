@@ -14,6 +14,7 @@
       "user_name": "ravi",
       "user_email": "ravi@gmail.com",
       "user_password": "ravi@123",
+      "user_phone": "1234567890",
       "user_status": "unblock",
       "id": "I6gpgLZjvSU"
     },
@@ -24,6 +25,28 @@
       "user_password": "niya@123",
       "user_status": "block",
       "id": "0-n1hmuRHw8"
+    },
+    {
+      "user_name": "niyati",
+      "user_email": "niyatirpatel99@gmail.com",
+      "user_password": "12345678",
+      "id": "LHbW_cjbp_Y",
+      "status": "unblock"
+    },
+    {
+      "user_name": "niyati",
+      "user_email": "ns@gmail.com",
+      "user_password": "12345678",
+      "id": "XxwWB3t7JCE",
+      "user_status": "unblock"
+    },
+    {
+      "user_name": "niya patel",
+      "user_email": "niyatipatel@gmail.com",
+      "user_password": "12345678",
+      "user_phone": "1234567890",
+      "id": "wpyc_Ldvn5Y",
+      "user_status": "unblock"
     }
   ],
   "products": [
@@ -142,6 +165,22 @@
   ],
   "testimonials": [
     {
+      "testimonial_id": "1789462680051",
+      "client_name": "test",
+      "profession": "home maker",
+      "quote": "Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit",
+      "client_img": "https://randomuser.me/api/portraits/men/32.jpg",
+      "id": "_8zxy-A8Ymk"
+    },
+    {
+      "testimonial_id": "1790576320029",
+      "client_name": "test",
+      "profession": "test",
+      "quote": "test",
+      "client_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTogynmqMdpVUyqwkm-TWGlXjUOuqbvieE-OvwAbkl-xQ&s=10",
+      "id": "g67ODW9wduc"
+    },
+    {
       "testimonial_id": 1,
       "client_name": "Client Name",
       "profession": "Profession",
@@ -158,12 +197,12 @@
       "id": "0HVm-gg9Cp4"
     },
     {
-      "testimonial_id": "1789462680051",
+      "testimonial_id": "3",
       "client_name": "test",
       "profession": "home maker",
       "quote": "Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit",
       "client_img": "https://randomuser.me/api/portraits/men/32.jpg",
-      "id": "_8zxy-A8Ymk"
+      "id": "f6H2TuzkS7M"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

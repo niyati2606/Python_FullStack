@@ -9,8 +9,8 @@ function AdminHeaderTitle({title, name}) {
                     <h1 className="display-3 mb-3 animated slideInDown">{title}</h1>
                     <nav aria-label="breadcrumb animated slideInDown">
                         <ol className="breadcrumb mb-0">
-                            <li className="breadcrumb-item"><Link className="text-body" to="/adminbashboard">Home</Link></li>
-                            <li className="breadcrumb-item"><Link className="text-body" to="/adminbashboard">Pages</Link></li>
+                            <li className="breadcrumb-item"><Link className="text-body" to="/admindashboard">Home</Link></li>
+                            <li className="breadcrumb-item"><Link className="text-body" to="/admindashboard">Pages</Link></li>
                             <li className="breadcrumb-item text-dark active" aria-current="page">{name}</li>
                         </ol>
                     </nav>

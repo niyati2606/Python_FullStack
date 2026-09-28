@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import AdminLayout from './AdminLayout'
+import { useNavigate } from 'react-router-dom'
 
 function AdminSidebar({ children }) {
     const [isOpen, setIsOpen] = useState(false)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!localStorage.getItem("adminID")) {
+            navigate("/adminlogin")
+        }
+    }, [])
 
     useEffect(() => {
         document.body.style.overflow = isOpen ? 'hidden' : ''

@@ -1,23 +1,53 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function AdminLayout({ isOpen, onClose }) {
+    const navigate = useNavigate()
+
+    const userName = localStorage.getItem("adminName")
+    console.log("Admin : ", userName)
+
+    const handleLogout = () => {
+        // TODO: replace with your real auth/logout logic
+        localStorage.removeItem('adminID')
+        localStorage.removeItem("adminName")
+        navigate('/adminlogin')
+    }
+
+    const handleLogin = () => {
+        navigate('/adminlogin')
+    }
+
     return (
-        <div className={`admin-sidebar d-flex flex-column flex-shrink-0 ${isOpen ? 'show' : ''}`}>
+        <div className={`admin-sidebar ${isOpen ? 'show' : ''}`}>
             <div className="admin-sidebar-brand">
                 <div className="d-flex justify-content-between align-items-center">
-                    <NavLink to="/adminbashboard" className="navbar-brand m-0">
+                    <NavLink to="/admindashboard" className="navbar-brand m-0">
                         <h1 className="fw-bold text-primary m-0">F<span className="text-secondary">oo</span>dy</h1>
                     </NavLink>
                     <button className="admin-sidebar-close" onClick={onClose} aria-label="Close sidebar">
                         <i className="fa fa-times" />
                     </button>
                 </div>
-                <small className="text-muted">Admin panel</small>
+                {
+                    // Acii 
+                    (() => {
+                        if (localStorage.getItem("adminID")) {
+                            return (
+                                // <NavLink className="nav-item nav-link">{localStorage.getItem("Aname")}</NavLink>
+                                <small className="text-muted">{userName}</small>
+                            )
+                        }
+                    })()
+                }
             </div>
 
+            {/* <div className="admin-sidebar-greeting">
+                <span className="fw-semibold">Hello, Admin</span>
+            </div> */}
+
             <div className="admin-sidebar-nav nav flex-column">
-                <NavLink to="/adminbashboard" className="nav-item nav-link">
+                <NavLink to="/admindashboard" className="nav-item nav-link">
                     <i className="fa fa-tachometer-alt me-2" />Dashboard
                 </NavLink>
                 <NavLink to="/adminaboutus" className="nav-item nav-link">
@@ -68,10 +98,34 @@ function AdminLayout({ isOpen, onClose }) {
                     </div>
                 </div>
 
-                {/* <NavLink to="/adminbashboard" className="nav-item nav-link">
+                {/* <NavLink to="/admindashboard" className="nav-item nav-link">
                     <i className="fa fa-envelope me-2" />Contact Us
                 </NavLink> */}
             </div>
+
+            {
+                (() => {
+                    if (localStorage.getItem("adminID")) {
+                        return (
+                            // <NavLink onClick={logout} className="nav-item nav-link">Logout</NavLink>
+                            <div className="admin-sidebar-footer">
+                                <button className="btn btn-outline-danger w-100" onClick={handleLogout}>
+                                    <i className="fa fa-sign-out-alt me-2" />Logout
+                                </button>
+                            </div>
+                        )
+                    }
+                    else {
+                        return (
+                            <div className="admin-sidebar-footer">
+                                <button className="btn btn-outline-success w-100" onClick={handleLogin}>
+                                    <i className="fa fa-sign-in-alt me-2" />Login
+                                </button>
+                            </div>
+                        )
+                    }
+                })()
+            }
         </div>
     )
 }

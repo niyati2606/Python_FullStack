@@ -1,7 +1,24 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function Header() {
+
+    const navigate = useNavigate()
+
+    const userName = localStorage.getItem("usertName")
+
+    useEffect(() => {
+        if (!localStorage.getItem("userID")) {
+            navigate("/userlogin")
+        }
+    }, [])
+
+    const handlelogout = () => {
+        localStorage.removeItem("userID")
+        localStorage.removeItem("userName")
+        navigate("/userlogin")
+    }
+
     return (
         <div>
             {/* Navbar Start */}
@@ -16,7 +33,7 @@ function Header() {
                         <a className="text-body ms-3" href><i className="fab fa-facebook-f" /></a>
                         <a className="text-body ms-3" href><i className="fab fa-twitter" /></a>
                         <a className="text-body ms-3" href><i className="fab fa-linkedin-in" /></a>
-/                    </div>
+                    </div>
                 </div>
                 <nav className="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
                     <NavLink to="/" className="navbar-brand ms-4 ms-lg-0">
@@ -39,13 +56,40 @@ function Header() {
                                 </div>
                             </div>
                             <NavLink to="/contact" className="nav-item nav-link">Contact Us</NavLink>
+                            <div className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">hello {userName}</a>
+                                <div className="dropdown-menu m-0">
+                                    {
+                                        (() => {
+                                            if (localStorage.getItem("userID")) {
+                                                return (
+                                                    <NavLink to="/editProfile" className="dropdown-item">Edit Profile</NavLink>
+                                                )
+                                            }
+                                        })()
+                                    }
+
+                                    {
+                                        (() => {
+                                            if (localStorage.getItem("userID")) {
+                                                return (
+                                                    <button onClick={handlelogout} className="dropdown-item">Log out</button>
+                                                )
+                                            } else {
+                                                return (
+                                                    <NavLink to="/userlogin" className="dropdown-item">Login</NavLink>
+                                                )
+                                            }
+                                        })()
+                                    }
+
+                                    {/* <NavLink onClick={handlelogout} className="dropdown-item">Logout</NavLink> */}
+                                </div>
+                            </div>
                         </div>
                         <div className="d-none d-lg-flex ms-2">
                             <a className="btn-sm-square bg-white rounded-circle ms-3" href>
                                 <small className="fa fa-search text-body" />
-                            </a>
-                            <a className="btn-sm-square bg-white rounded-circle ms-3" href>
-                                <small className="fa fa-user text-body" />
                             </a>
                             <a className="btn-sm-square bg-white rounded-circle ms-3" href>
                                 <small className="fa fa-shopping-bag text-body" />

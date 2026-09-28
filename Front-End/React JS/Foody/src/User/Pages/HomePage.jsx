@@ -9,13 +9,45 @@ function HomePage() {
     const { apidata: products, fetchAPIData: fetchProducts } = useAPICall("http://localhost:3000/products")
     const { apidata: blogs, fetchAPIData: fetchBlogs } = useAPICall("http://localhost:3000/blogs")
     const { apidata: features, fetchAPIData: fetchFeatures } = useAPICall("http://localhost:3000/features")
+    const { apidata: testimonial, fetchAPIData: fetchtestimonial } = useAPICall("http://localhost:3000/testimonials")
 
     useEffect(() => {
         //fetchAPIData()
         fetchBlogs()
         fetchFeatures()
         fetchProducts()
+        fetchtestimonial()
+
     }, [])
+
+    useEffect(() => {
+        if (!testimonial?.length) return;
+
+        const $carousel = $(".testimonial-carousel");
+        const canLoop = testimonial.length > 3;
+
+        $carousel.owlCarousel({
+            autoplay: true,
+            smartSpeed: 1000,
+            center: canLoop,
+            loop: canLoop,
+            margin: 24,
+            dots: true,
+            nav: false,
+            responsive: {
+                0: { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+            },
+        });
+
+        const t = setTimeout(() => $carousel.trigger("refresh.owl.carousel"), 300);
+
+        return () => {
+            clearTimeout(t);
+            $carousel.trigger("destroy.owl.carousel");
+        };
+    }, [testimonial]);
 
     return (
         <div>
@@ -146,7 +178,7 @@ function HomePage() {
                             <div className="tab-content">
                                 <div id="tab-1" className="tab-pane fade show p-0 active">
                                     <div className="row g-4">
-                                        {products && products.slice(0, 4).map((productData, index) => {
+                                        {products && products.map((productData, index) => {
                                             return (
                                                 <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" key={productData.id}>
                                                     <div className="product-item">
@@ -270,50 +302,26 @@ function HomePage() {
                                 <p>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
                             </div>
                             <div className="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                                <div className="testimonial-item position-relative bg-white p-5 mt-4">
-                                    <i className="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5" />
-                                    <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                                    <div className="d-flex align-items-center">
-                                        <img className="flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" alt />
-                                        <div className="ms-3">
-                                            <h5 className="mb-1">Client Name</h5>
-                                            <span>Profession</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="testimonial-item position-relative bg-white p-5 mt-4">
-                                    <i className="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5" />
-                                    <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                                    <div className="d-flex align-items-center">
-                                        <img className="flex-shrink-0 rounded-circle" src="img/testimonial-2.jpg" alt />
-                                        <div className="ms-3">
-                                            <h5 className="mb-1">Client Name</h5>
-                                            <span>Profession</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="testimonial-item position-relative bg-white p-5 mt-4">
-                                    <i className="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5" />
-                                    <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                                    <div className="d-flex align-items-center">
-                                        <img className="flex-shrink-0 rounded-circle" src="img/testimonial-3.jpg" alt />
-                                        <div className="ms-3">
-                                            <h5 className="mb-1">Client Name</h5>
-                                            <span>Profession</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="testimonial-item position-relative bg-white p-5 mt-4">
-                                    <i className="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5" />
-                                    <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                                    <div className="d-flex align-items-center">
-                                        <img className="flex-shrink-0 rounded-circle" src="img/testimonial-4.jpg" alt />
-                                        <div className="ms-3">
-                                            <h5 className="mb-1">Client Name</h5>
-                                            <span>Profession</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                {
+
+                                    testimonial && testimonial.map((test, index) => {
+
+                                        //  console.log("testimonila ---", testimonial)
+                                        return (
+                                            <div className="testimonial-item position-relative bg-white p-5 mt-4">
+                                                <i className="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5" />
+                                                <p className="mb-4 quote-text">{test.quote}</p>
+                                                <div className="d-flex align-items-center">
+                                                    <img className="flex-shrink-0 rounded-circle" src={test.client_img} alt={test.client_name} />
+                                                    <div className="ms-3">
+                                                        <h5 className="mb-1">{test.client_name}</h5>
+                                                        <span>{test.profession}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
