@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+</head>
+
+<body>
+    <script>
+
+        function addToCart(productName, quantity) {
+
+            if (quantity < 0) {
+                console.error("Error: Quantity cannot be negative.");
+            }
+            else if (quantity === 0) {
+                console.warn("Warning: Quantity is zero.");
+            }
+            else {
+                console.log(
+                    `${quantity} ${productName}s added to cart successfully.`
+                );
+            }
+        }
+
+        // Scenario 1: Successful addition
+        addToCart("Pizza", 2);
+
+        // Scenario 2: Quantity is zero
+        addToCart("Burger", 0);
+
+        // Scenario 3: Quantity is negative
+        addToCart("Pasta", -1);
+
+    </script>
+</body>
+
+</html>

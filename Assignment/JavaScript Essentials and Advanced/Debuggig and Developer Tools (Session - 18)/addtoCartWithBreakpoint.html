@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart Breakpoint</title>
+</head>
+
+<body>
+    <h2>Add to Cart Breakpoint</h2>
+
+    <script>
+
+        function addToCart(item, quantity) {
+
+            console.log("Adding item to cart...");
+
+            if (quantity === 0) {
+
+                // Set a breakpoint on the next line in Sources
+                let total = price * quantity;  // price is not defined
+
+                console.log(total);
+            }
+
+            console.log(`${item} added to cart.`);
+        }
+
+        // Test with quantity 0
+        addToCart("Pizza", 10);
+
+    </script>
+</body>
+
+</html>

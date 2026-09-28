@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Stack Trace</title>
+</head>
+
+<body>
+    <h1>Open Console</h1>
+
+    <script>
+
+        const data = '{"name":"niyati"}';
+
+        function getUser() {
+            return fetchUser();
+        }
+
+        function fetchUser() {
+            return JSON.parse(data);
+        }
+
+        console.log(getUser())
+
+    </script>
+</body>
+
+</html>
