@@ -1,0 +1,18 @@
+{
+    "users": [
+        {
+            "user_id": 1,
+            "user_name": "ravi",
+            "user_email": "ravi@gmail.com",
+            "user_password": "ravi@123",
+            "user_status": "unblock"
+        },
+        {
+            "user_id": 2,
+            "user_name": "niya",
+            "user_email": "niya@gmail.com",
+            "user_password": "niya@123",
+            "user_status": "block"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+Redux : 
+
+npm install @reduxjs/toolkit react-redux
+
+steps : 
+1 : first create store (manage gloabl part of context) extension shoud be .js only
+	import { configureStore } from "@reduxjs/toolkit";
+
+	export default configureStore({
+
+	    reducer: {
+	        //declare slice here
+	        //name same as slice name
+	        userDetails : userSlice
+	    }
+	})
+
+2 : add store in main.jsx or app.jsx
+	<Provider store={store}>
+      <App />
+    </Provider>
+
+
+3 : create slice (extension shoud be .js only) (camel case : userSlice.js)
+	
+	import { createSlice } from "@reduxjs/toolkit";
+
+	export const userSlice = createSlice({
+	    name : "userDetails",
+	    initialState : {
+	        //pass value
+	        countValue : "niya"
+	    },
+
+	    reducers :{
+	    	//actions declares here like add view update etc
+	    }
+	})
+
+	//need to declare globally so export slice otherwise will not get suggestion
+	export const {} = userSlice.actions
+	export default userSlice.reducer
+
+4 : declare slice in store
+	export default configureStore({
+
+    reducer: {
+        //declare slice here
+        // userDetails is same as we given to slice in name 
+        userDetails : userSlice
+    	}
+	})
+		
+5 : now create component 
+
+	//to get value :
+	//const slicename(declared in slice name) = useSelector((state) => state.value (initalvalue name))
+    const {countValue} = useSelector((state) => state.userDetails)
+    console.log(countValue)
+
+    //to use actions (actions must be exported in slice)
+    const dispatch = useDispatch()
+
+    //to use that
+    dispatch.functionname()
