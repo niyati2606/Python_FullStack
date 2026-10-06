@@ -1,0 +1,18 @@
+/* Global tweaks to enhance Bootstrap 5 presentation */
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Card hover and smooth elevation */
+.card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Responsive table font adjustment */
+.table th,
+.table td {
+  vertical-align: middle;
+}
