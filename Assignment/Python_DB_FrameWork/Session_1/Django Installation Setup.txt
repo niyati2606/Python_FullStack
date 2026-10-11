@@ -1,0 +1,10 @@
+python -m venv myenv  
+pip install django
+django-admin startproject foodieHub . 
+django-admin startapp doctorFinderapp
+python .\manage.py migrate
+python .\manage.py createsuperuser
+
+python .\ manage.py runserver
+
+
