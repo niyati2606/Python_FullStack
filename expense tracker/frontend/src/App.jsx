@@ -10,22 +10,27 @@ import NotFoundPage from './pages/NotFoundPage';
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    () => Boolean(localStorage.getItem('access_token'))
+    () => Boolean(localStorage.getItem('token'))
+  );
+  const [username, setUsername] = useState(
+    () => localStorage.getItem('username') || ''
   );
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
+    setUsername(localStorage.getItem('username') || '');
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
     setIsLoggedIn(false);
+    setUsername('');
   };
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <Navbar isLoggedIn={isLoggedIn} username={username} onLogout={handleLogout} />
       <main className="flex-grow-1">
         <Routes>
           <Route

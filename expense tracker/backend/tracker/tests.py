@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from .models import Category, Expense
 
 class BackendApiTests(TestCase):
@@ -11,13 +12,13 @@ class BackendApiTests(TestCase):
         self.other_user = User.objects.create_user(username='otheruser', password='password123')
 
     def authenticate(self, user):
-        response = self.client.post('/api/token/', {
+        response = self.client.post('/api/login/', {
             'username': user.username,
             'password': 'password123'
         })
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        token = response.data['access']
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        token = response.data['token']
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {token}')
         return response.data
 
     def test_register_empty_fields(self):
@@ -38,16 +39,21 @@ class BackendApiTests(TestCase):
         res = self.client.post('/api/register/', {'username': 'freshuser', 'password': 'strongpassword'})
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         self.assertTrue(User.objects.filter(username='freshuser').exists())
+        self.assertIn('token', res.data)
 
-    def test_token_obtain_and_refresh(self):
-        tokens = self.authenticate(self.user)
-        self.assertIn('access', tokens)
-        self.assertIn('refresh', tokens)
+    def test_login_and_logout(self):
+        # Invalid login
+        res_fail = self.client.post('/api/login/', {'username': 'testuser', 'password': 'wrongpassword'})
+        self.assertEqual(res_fail.status_code, status.HTTP_400_BAD_REQUEST)
 
-        # Test refresh
-        res = self.client.post('/api/token/refresh/', {'refresh': tokens['refresh']})
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertIn('access', res.data)
+        # Valid login
+        data = self.authenticate(self.user)
+        self.assertIn('token', data)
+
+        # Logout
+        res_logout = self.client.post('/api/logout/')
+        self.assertEqual(res_logout.status_code, status.HTTP_200_OK)
+        self.assertFalse(Token.objects.filter(user=self.user).exists())
 
     def test_category_crud_and_isolation(self):
         self.authenticate(self.user)

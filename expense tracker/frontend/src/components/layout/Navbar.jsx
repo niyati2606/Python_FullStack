@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
-export const Navbar = ({ isLoggedIn, onLogout }) => {
+export const Navbar = ({ isLoggedIn, username, onLogout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -43,6 +43,11 @@ export const Navbar = ({ isLoggedIn, onLogout }) => {
                   </NavLink>
                 </li>
               </ul>
+              {username && (
+                <span className="navbar-text text-white-50 small d-none d-sm-inline">
+                  👤 {username}
+                </span>
+              )}
               <button
                 type="button"
                 className="btn btn-outline-light btn-sm ms-2"

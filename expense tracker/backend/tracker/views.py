@@ -1,8 +1,10 @@
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from rest_framework import status, viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 from .models import Category, Expense
 from .serializers import CategorySerializer, ExpenseSerializer
@@ -32,10 +34,57 @@ class RegisterView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        User.objects.create_user(username=username, password=password)
+        user = User.objects.create_user(username=username, password=password)
+        token, _ = Token.objects.get_or_create(user=user)
         return Response(
-            {'message': 'User registered successfully.'},
+            {
+                'message': 'User registered successfully.',
+                'token': token.key,
+                'username': user.username,
+            },
             status=status.HTTP_201_CREATED
+        )
+
+class LoginView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        username = request.data.get('username', '').strip()
+        password = request.data.get('password', '').strip()
+
+        if not username or not password:
+            return Response(
+                {'error': 'Both username and password are required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        user = authenticate(username=username, password=password)
+        if not user:
+            return Response(
+                {'error': 'Invalid username or password.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response(
+            {
+                'token': token.key,
+                'username': user.username,
+            },
+            status=status.HTTP_200_OK
+        )
+
+class LogoutView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            request.user.auth_token.delete()
+        except Exception:
+            pass
+        return Response(
+            {'message': 'Logged out successfully.'},
+            status=status.HTTP_200_OK
         )
 
 class CategoryViewSet(viewsets.ModelViewSet):

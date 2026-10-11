@@ -3,7 +3,10 @@ import api from '../api/axiosInstance';
 
 export const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(
-    () => Boolean(localStorage.getItem('access_token'))
+    () => Boolean(localStorage.getItem('token'))
+  );
+  const [user, setUser] = useState(
+    () => localStorage.getItem('username') || ''
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -12,9 +15,13 @@ export const useAuth = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.post('token/', { username, password });
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
+      const response = await api.post('login/', { username, password });
+      const { token, username: uname } = response.data;
+      localStorage.setItem('token', token);
+      if (uname) {
+        localStorage.setItem('username', uname);
+        setUser(uname);
+      }
       setIsLoggedIn(true);
       return true;
     } catch (err) {
@@ -47,15 +54,23 @@ export const useAuth = () => {
     }
   }, []);
 
-  const logout = useCallback(() => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    setIsLoggedIn(false);
+  const logout = useCallback(async () => {
+    try {
+      await api.post('logout/');
+    } catch {
+      // Ignore network/server errors during logout
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      setIsLoggedIn(false);
+      setUser('');
+    }
   }, []);
 
   return {
-    data: { isLoggedIn },
+    data: { isLoggedIn, username: user },
     isLoggedIn,
+    user,
     loading,
     error,
     login,
