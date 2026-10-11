@@ -1,11 +1,18 @@
+'''
+dictionary : 
+collection of key-value pairs. 
+Each key is unique, and the associated value can be any data type.
+'''
+
 d = {101:"Diya",345:"Bhavika",909:"Niya",566:"Om",234:"Pralaj",787:"Monik",454:"Parth"}
 
 print(d)
-print(d[909])
-print(d.get(101))
-print(d.items())
-print(d.keys())
-print(d.values())
+print("Print the value of 909 key :",d[909])
+print("Print the value of 101 key :",d.get(101))
+print("Print the dict ",d.items())
+#dict_items([(101, 'Diya'), (345, 'Bhavika'), (909, 'Niya'), (566, 'Om'), (234, 'Pralaj'), (787, 'Monik'), (454, 'Parth')])
+print("Print keys of dict : ",d.keys())
+print("Print values of dict in list",d.values())
 print(d.pop(566))
 print(d)
 d.popitem()

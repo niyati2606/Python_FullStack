@@ -1,11 +1,18 @@
+'''
+list : it is collection/group of different type of data
+
+index starts with 0 and declared in square brackets []
+list is mutable 
+'''
+
 list = [1,5,3,True, 1.1, "Niya", "ABC", 100, 200, 2.9, False, 10, 20]
 
 print("Orignal List : ",list)
-list.append(200)
+list.append(200) #add single element in last
 print("Append 200 at last index in list : ",list)
-#list.clear()
+#list.clear() #cear list
 #print(list)
-list1 = list.copy()
+list1 = list.copy() #create copy of list
 print("Copy of original list : ",list1)
 list1.append(1000)
 print("Append 1000 in last index at list1 : ",list1)
@@ -18,7 +25,7 @@ print("Count 1 in list ",list.count(1)) #count is 2 becuase 1 itself and 2 is Tr
 list3 = [2000,2200,4569]
 print("List 3 : ",list3)
 list.extend(list3)
-print("Exted list3 in list : ",list)
+print("Extend list3 in list : ",list)
 print("Index of 1.1 in list : ",list.index(1.1))
 list.insert(5,101)
 print("Insert value at 5th index in list : ",list)

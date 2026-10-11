@@ -1,3 +1,12 @@
+'''
+lambad functions :
+short function that can have any number of arguments but only one expression
+
+A lambda function is a small anonymous function (no name needed). 
+It can take any number of arguments but contains only one expression, and the result 
+of that expression is returned automatically.
+'''
+
 def cube(x) :
     return x*x*x
 print("Cube of 6 is :", cube(6))

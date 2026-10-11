@@ -29,3 +29,11 @@ add views in views.py
 def index (request) : 
     return render(request,'index.html')
 
+
+
+
+
+Object-Relational Mapper that lets you query the database using Python instead of raw SQL.
+
+Form and ModalForm : 
+Forms handle input and validation; ModelForm auto-generates a form from a model. 

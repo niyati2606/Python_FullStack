@@ -1,4 +1,8 @@
 '''
+variable : data name used to store data value.
+'''
+
+'''
 ASCII :
 
 A-Z = 65 to 90
