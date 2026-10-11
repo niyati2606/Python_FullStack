@@ -5,7 +5,6 @@ export default configureStore({
 
     reducer: {
         //declare slice here
-        //userDetails : slice name which we declare in slice name part
-        userDetails : userSlice
+        user : userSlice
     }
 })

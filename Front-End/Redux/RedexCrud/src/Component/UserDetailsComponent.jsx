@@ -8,10 +8,9 @@ import { useSelector } from 'react-redux'
 
 function UserDetailsComponent() {
 
-    //const slicename(declared in slice name) = useSelector((state) => state.value (initalvalue name))
-    const {countValue} = useSelector((state) => state.userDetails)
-    console.log(countValue)
-
+    //const initial value name(declared slice) = useSelector((state) => state.value (slice name given by us in store))
+    const {countValue} = useSelector((state) => state.user)
+ 
   return (
     <div>UserDetailsComponent</div>
   )

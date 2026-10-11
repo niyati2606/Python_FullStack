@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
     name : "userDetails",
     initialState : {
-        countValue : "niya"
+        
     },
 
     reducers :{
