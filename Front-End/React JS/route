@@ -1,0 +1,36 @@
+route : 
+
+npm i react-router-dom
+
+<Browserroute in app.jsx
+
+<Routes>
+	<Route path="/"> element = "Componenet name"? home
+	Route path="/about"> element = "Componenet name?
+
+
+navbar = navlink apply 
+href not aloow use to
+
+npm install -g json-server
+npm install json-server
+
+//format
+
+{
+  "posts": [
+    { "id": "1", "title": "Getting Started with JSON Server", "author": "Jane Doe" },
+    { "id": "2", "title": "Vue and React Prototyping", "author": "John Doe" }
+  ],
+  "comments": [
+    { "id": "1", "text": "Great tool!", "postId": "1" }
+  ]
+}
+
+
+add this in script : (package.json)
+"server" : "json-server --watch db.json --port 3000",
+
+create database file
+
+npx json-server --watch database.json --port 3000
