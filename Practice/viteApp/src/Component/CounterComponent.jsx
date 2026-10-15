@@ -1,5 +1,6 @@
 import React from 'react'
 import useCounter from '../CustomHook/useCounter'
+import NavBar from '../Common/NavBar'
 
 function CounterComponent() {
 
@@ -7,6 +8,7 @@ function CounterComponent() {
 
   return (
     <div>
+      <NavBar/>
         <h1 className='m-2'> Count : {count}</h1>
         
         <button className='m-2 btn btn-success' onClick={increment}>Increment</button>

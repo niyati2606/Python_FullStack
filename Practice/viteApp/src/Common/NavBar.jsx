@@ -17,6 +17,9 @@ function NavBar() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/fetchdata">Api Call</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/products">Products</NavLink>
+                            </li>
                              <li className="nav-item">
                                 <NavLink className="nav-link" to="/counter">Counter</NavLink>
                             </li>

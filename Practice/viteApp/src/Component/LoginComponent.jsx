@@ -27,9 +27,6 @@ function LoginComponent() {
             return
         }
 
-        if(login == "niyati@")
-        redirect("/")
-
     }
 
     return (
