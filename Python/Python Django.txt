@@ -31,8 +31,6 @@ def index (request) :
 
 
 
-
-
 Object-Relational Mapper that lets you query the database using Python instead of raw SQL.
 
 Form and ModalForm : 
