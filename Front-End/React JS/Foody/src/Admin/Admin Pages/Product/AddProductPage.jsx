@@ -5,11 +5,13 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import AdminSidebar from '../../Admin Common/AdminSideBar'
 import { toast } from 'react-toastify'
+import useAddData from '../../../Custom Hooks/useAddData'
 
 function AddProductPage() {
 
   const redirect = useNavigate()
 
+  
   const [product, setProduct] = useState({
     product_id: "",
     product_name: "",
@@ -17,6 +19,8 @@ function AddProductPage() {
     product_category: "",
     product_img: ""
   })
+
+  const {addData} = useAddData("http://localhost:3000/products",product)
 
   const getProductData = (event) => {
     setProduct({
@@ -34,8 +38,9 @@ function AddProductPage() {
       if (product.product_name == "" || product.product_price == "" || product.product_img == "" || product.product_category == "") {
         toast.error("Please fill all Details")
       } else {
-        const addProductResponse = await axios.post("http://localhost:3000/products", product)
-        console.log(addProductResponse.data)
+        // const addProductResponse = await axios.post("http://localhost:3000/products", product)
+        // console.log(addProductResponse.data)
+        addData()
         setProduct({
           product_id: "",
           product_name: "",

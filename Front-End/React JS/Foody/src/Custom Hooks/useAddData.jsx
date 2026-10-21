@@ -1,11 +1,20 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 
-function useAddData(endpoint) {
+function useAddData(endpoint,body) {
 
-    const [formData, setFormData] = useState()
+    const addData = async() => {
+
+        try {
+            const addResponse = await axios.post(endpoint,body)
+            console.log(addResponse.data)
+        } catch (error) {
+            console.log("Add Error : ", error)
+        }
+    }
 
     return {
-
+         addData
     }
 }
 

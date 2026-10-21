@@ -113,6 +113,22 @@
       "product_category": "fruits",
       "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/28319e0f-9d16-493f-b399-ce672366ff0f.jpg",
       "id": "Zf0BW1Sm2Gk"
+    },
+    {
+      "product_id": "1792596031615",
+      "product_name": "Spring Onion",
+      "product_price": "123",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=450/da/cms-assets/cms/product/1d2f9e6b-138d-4daf-8cd3-8b50b71e917a.png",
+      "id": "lAAsXGXaqLo"
+    },
+    {
+      "product_id": "1792596126241",
+      "product_name": "Red Bell Pepper",
+      "product_price": "50",
+      "product_category": "vegetables",
+      "product_img": "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=85,metadata=none,w=120,h=120/da/cms-assets/cms/product/ef9fd583-7434-4174-ab85-ee5b20fb1e59.jpg",
+      "id": "OE41eQIGrp0"
     }
   ],
   "features": [
